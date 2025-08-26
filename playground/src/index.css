@@ -1,0 +1,9 @@
+/* index.css */
+@import "tailwindcss";
+@source "../node_modules/heroui-vue/dist/index.js";
+@plugin "heroui-vue/plugin";
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --el-color-primary: #73d552;
+}

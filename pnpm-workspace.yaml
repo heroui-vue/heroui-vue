@@ -5,19 +5,20 @@ packages:
 
 catalogs:
   prod:
-    "@heroui/shared-utils": ^2.1.10
-    "@heroui/system": ^2.4.20
-    "@heroui/theme": ^2.4.11
-    "@heroui/use-aria-button": ^2.2.18
-    "@types/node": ^22.15.26
-    "@vue/tsconfig": ^0.7.0
-    "@vueuse/core": ^11.3.0
+    '@heroui/shared-utils': ^2.1.10
+    '@heroui/system': ^2.4.20
+    '@heroui/theme': ^2.4.11
+    '@heroui/use-aria-button': ^2.2.18
+    '@tailwindcss/vite': ^4.1.12
+    '@types/node': ^22.15.26
+    '@vitejs/plugin-vue': ^6.0.1
+    '@vue/tsconfig': ^0.7.0
+    '@vueuse/core': ^11.3.0
+    tailwindcss: ^4.1.12
     unplugin-vue: ^6.0.1
+    vite: ^7.1.2
     vue: ^3.5.13
-    vite: "^7.1.2"
-    "tailwindcss": "^4.1.12"
-    "@tailwindcss/vite": "^4.1.12"
-    "@vitejs/plugin-vue": "^6.0.1"
 
 patchedDependencies:
+  '@vue/repl': patches/@vue__repl.patch
   vitepress: patches/vitepress.patch

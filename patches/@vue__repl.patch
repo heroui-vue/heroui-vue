@@ -1,0 +1,23 @@
+diff --git a/dist/vue-repl.css b/dist/vue-repl.css
+index be1fc37233dc2f19da7b80be619828f0fa597bc2..0c3fb630f69f33c4c355f7fc9b22ea7849292c3a 100644
+--- a/dist/vue-repl.css
++++ b/dist/vue-repl.css
+@@ -434,10 +434,12 @@ button.active[data-v-d8257147] {
+   --color-branding: #42d392;
+   --color-branding-dark: #89ddff;
+ }
+-.vue-repl button {
+-  border: none;
+-  outline: none;
+-  cursor: pointer;
+-  margin: 0;
+-  background-color: transparent;
++@layer __vue_repl {
++    .vue-repl button {
++      border: none;
++      outline: none;
++      cursor: pointer;
++      margin: 0;
++      background-color: transparent;
++    }
+ }

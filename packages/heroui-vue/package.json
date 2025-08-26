@@ -1,7 +1,7 @@
 {
   "name": "heroui-vue",
   "type": "module",
-  "version": "0.0.17",
+  "version": "0.0.18-beta.1",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
@@ -33,7 +33,7 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "pnpm -w build && pnpm build:only",
-    "build:only": "tsdown --minify",
+    "build:only": "tsdown",
     "dev": "tsdown -w",
     "bump": "pnpm build && bumpp --tag v --sign"
   },

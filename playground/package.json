@@ -10,6 +10,7 @@
     "dev": "vite"
   },
   "devDependencies": {
+    "@iconify/vue": "^5.0.0",
     "@tailwindcss/vite": "catalog:prod",
     "@types/node": "catalog:prod",
     "@vitejs/plugin-vue": "catalog:prod",
@@ -17,6 +18,7 @@
     "@vueuse/core": "catalog:prod",
     "tailwindcss": "catalog:prod",
     "vite": "catalog:prod",
-    "vue": "catalog:prod"
+    "vue": "catalog:prod",
+    "heroui-vue": "workspace:*"
   }
 }
