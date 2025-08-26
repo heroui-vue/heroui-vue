@@ -39,8 +39,8 @@ export default defineConfig({
           { text: "Guide", link: "/en/guide/introduction" },
           { text: "Components", link: "/en/components/button" },
           {
-            text: "Playground[WIP]",
-            link: "https://github.com/heroui-vue/heroui-vue/pull/156",
+            text: "Playground",
+            link: "https://play.heroui.hotdogc.org",
           },
           { text: "HeroUI", link: "https://heroui.com/" },
         ],
@@ -51,7 +51,10 @@ export default defineConfig({
             items: [
               { text: "Introduction", link: "/en/guide/introduction" },
               { text: "Installation", link: "/en/guide/installation" },
-              { text: "Custom Installation", link: "/en/guide/custom-installation" },
+              {
+                text: "Custom Installation",
+                link: "/en/guide/custom-installation",
+              },
             ],
           },
           {
@@ -76,8 +79,8 @@ export default defineConfig({
           { text: "指南", link: "/zh/guide/introduction" },
           { text: "组件", link: "/zh/components/button" },
           {
-            text: "演练场[开发中]",
-            link: "https://github.com/heroui-vue/heroui-vue/pull/156",
+            text: "演练场",
+            link: "https://play.heroui.hotdogc.org",
           },
           { text: "HeroUI", link: "https://heroui.com/" },
         ],
