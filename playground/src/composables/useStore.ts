@@ -1,13 +1,18 @@
-import { ref, computed } from "vue";
+import { ref, computed, watchEffect } from "vue";
 import {
   useStore as useReplStore,
   useVueImportMap,
   mergeImportMap,
   type ImportMap,
 } from "@vue/repl";
+import { useMounted } from "@vueuse/core";
+// @ts-ignore
 import welcomeSFCCode from "../template/Welcome.vue?raw";
 
 export function useStore() {
+  const mounted = useMounted();
+  if (!mounted) return;
+  console.log(location);
   const defaultImportMap = ref<ImportMap>({
     imports: {
       "heroui-vue":
@@ -21,11 +26,17 @@ export function useStore() {
   });
   const template = ref({
     welcomeSFC: welcomeSFCCode,
-    // newSFC: "App.vue",
   });
 
-  return useReplStore({
-    builtinImportMap,
-    template,
-  });
+  const store = useReplStore(
+    {
+      builtinImportMap,
+      template,
+    },
+    location.hash,
+  );
+
+  watchEffect(() => history.replaceState({}, "", store.serialize()));
+
+  return store;
 }

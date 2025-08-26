@@ -5,6 +5,9 @@ import path from "node:path";
 
 export default defineConfig({
   plugins: [vue(), tailwindcss()],
+  optimizeDeps: {
+    exclude: ["@vue/repl"],
+  },
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "src"),

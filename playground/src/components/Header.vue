@@ -12,7 +12,7 @@ const toggleDark = useToggle(dark);
 </script>
 
 <template>
-  <div class="vue-repl sticky top-0 z-10 max-h-fit">
+  <div class="vue-repl sticky top-0 z-10 max-h-12">
     <div
       class="border-b border-b-[var(--border)] bg-[var(--bg)] flex justify-between items-center py-2 px-4 dark:text-white"
     >
