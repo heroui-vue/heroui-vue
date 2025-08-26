@@ -7,7 +7,9 @@
   "license": "MIT",
   "packageManager": "pnpm@10.14.0",
   "scripts": {
-    "dev": "vite"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "devDependencies": {
     "@iconify/vue": "^5.0.0",
