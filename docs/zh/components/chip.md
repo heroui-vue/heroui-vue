@@ -1,5 +1,5 @@
 <script setup>
-import { Chip } from '@heroui-vue/core'
+import { Chip } from '@heroui-vue/core/raw'
 import { NotificationIcon, CheckIcon } from '@heroui-vue/icon'
 </script>
 
