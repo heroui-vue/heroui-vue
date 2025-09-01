@@ -1,0 +1,49 @@
+{
+  "name": "@heroui-vue/chip",
+  "type": "module",
+  "version": "1.0.0-beta.1",
+  "author": {
+    "name": "hotdog",
+    "email": "hotdogc1017@gmail.com",
+    "url": "https://github.com/hotdogc1017"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/heroui-vue/heroui-vue",
+  "bugs": {
+    "url": "https://github.com/heroui-vue/heroui-vue/issues"
+  },
+  "keywords": [
+    "heroui",
+    "vue",
+    "ui framework",
+    "tailwindcss",
+    "chip component"
+  ],
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown --minify",
+    "dev": "tsdown -w",
+    "bump": "bumpp --tag @heroui-vue/alert@ --sign"
+  },
+  "devDependencies": {
+    "@heroui/shared-utils": "catalog:prod",
+    "@heroui/theme": "catalog:prod",
+    "@heroui/use-aria-button": "catalog:prod",
+    "@types/node": "catalog:prod",
+    "@heroui-vue/shared": "workspace:*",
+    "@heroui-vue/icon": "workspace:*",
+    "@vue/tsconfig": "catalog:prod",
+    "@vueuse/core": "catalog:prod",
+    "unplugin-vue": "catalog:prod",
+    "vue": "catalog:prod"
+  }
+}
