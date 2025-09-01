@@ -1,0 +1,44 @@
+{
+  "name": "@heroui-vue/icon",
+  "type": "module",
+  "version": "0.0.1",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "author": {
+    "name": "hotdog",
+    "email": "hotdogc1017@gmail.com",
+    "url": "https://github.com/hotdogc1017"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/heroui-vue/heroui-vue",
+  "bugs": {
+    "url": "https://github.com/heroui-vue/heroui-vue/issues"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "keywords": [
+    "heroui",
+    "vue",
+    "ui",
+    "ui framework",
+    "tailwindcss",
+    "icon"
+  ],
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown -w",
+    "bump": "pnpm build && bumpp --tag @heroui-vue/icon@ --sign"
+  },
+  "devDependencies": {
+    "vue": "catalog:prod",
+    "unplugin-vue": "catalog:prod"
+  }
+}
