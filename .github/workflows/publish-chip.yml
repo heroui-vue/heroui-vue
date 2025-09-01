@@ -1,0 +1,16 @@
+name: Publish Chip
+
+permissions:
+  id-token: write
+  contents: read
+
+on:
+  push:
+    tags:
+      - "@heroui-vue/chip@*"
+
+jobs:
+  button:
+    uses: ./.github/workflows/publish.yml
+    with:
+      component: "chip"
