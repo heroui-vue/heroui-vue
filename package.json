@@ -5,7 +5,7 @@
   "private": true,
   "packageManager": "pnpm@10.14.0",
   "scripts": {
-    "dev": "pnpm --parallel --filter \"./packages/components/*\" dev",
+    "dev": "pnpm --parallel --filter \"./packages/components/*\" --filter \"./packages/core\" --filter \"./packages/icon\" dev",
     "dev:docs": "pnpm run -C docs dev",
     "build": "pnpm --filter \"./packages/components/*\"  --filter \"./packages/core\" build",
     "build:core": "pnpm --filter \"./packages/core\" build",

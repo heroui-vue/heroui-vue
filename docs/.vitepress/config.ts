@@ -100,6 +100,7 @@ export default defineConfig({
             items: [
               { text: "Button", link: "/zh/components/button" },
               { text: "Alert", link: "/zh/components/alert" },
+              { text: "Chip", link: "/zh/components/chip" },
             ],
           },
         ],

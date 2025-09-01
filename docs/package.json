@@ -13,6 +13,7 @@
     "@heroui/theme": "catalog:prod",
     "@tailwindcss/vite": "catalog:prod",
     "@heroui-vue/core": "workspace:*",
+    "@heroui-vue/icon": "workspace:*",
     "tailwindcss": "catalog:prod",
     "vitepress": "latest",
     "vitepress-plugin-group-icons": "^1.3.7",
