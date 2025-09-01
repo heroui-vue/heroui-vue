@@ -10,6 +10,7 @@
     "build": "pnpm --filter \"./packages/components/*\"  --filter \"./packages/core\" build",
     "build:core": "pnpm --filter \"./packages/core\" build",
     "build:cmp": "pnpm --filter \"./packages/components/*\" build",
+    "build:icon": "pnpm --filter \"@heroui-vue/icon\" build",
     "build:doc": "pnpm build:cmp && pnpm -C docs build",
     "clean": "rimraf -g **/node_modules **/dist",
     "clean:dist": "rimraf -g **/dist",
