@@ -30,9 +30,9 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsdown --minify",
+    "build": "pnpm --filter \"@heroui-vue/icon\" build && tsdown --minify",
     "dev": "tsdown -w",
-    "bump": "bumpp --tag @heroui-vue/alert@ --sign"
+    "bump": "bumpp --tag @heroui-vue/chip@ --sign"
   },
   "devDependencies": {
     "@heroui/shared-utils": "catalog:prod",
