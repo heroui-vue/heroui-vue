@@ -52,9 +52,9 @@ export interface AlertVariantProps {
   variant?: _AlertVariantProps["variant"];
   color?: _AlertVariantProps["color"];
   radius?: _AlertVariantProps["radius"];
-  hideIcon?: _AlertVariantProps["hideIcon"];
-  hideIconWrapper?: _AlertVariantProps["hideIconWrapper"];
-  hasContent?: _AlertVariantProps["hasContent"];
+  hideIcon?: boolean;
+  hideIconWrapper?: boolean;
+  hasContent?: boolean;
 }
 
 export type AlertProps = AlertDefineProps & AlertVariantProps;

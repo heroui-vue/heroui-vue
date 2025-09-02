@@ -6,7 +6,11 @@ import { useAlert } from "./use-alert";
 import { defaultIconPath, successIconPath, warningIconPath } from "./constant";
 // import { Button } from "@heroui-vue/button";
 
-const props = withDefaults(defineProps<AlertProps>(), {});
+const props = withDefaults(defineProps<AlertProps>(), {
+  hideIcon: undefined,
+  hideIconWrapper: undefined,
+  hasContent: undefined,
+});
 
 const slots = defineSlots();
 
