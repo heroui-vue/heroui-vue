@@ -63,6 +63,7 @@ export default defineConfig({
             items: [
               { text: "Button", link: "/en/components/button" },
               { text: "Alert", link: "/en/components/alert" },
+              { text: "Chip", link: "/en/components/chip" },
             ],
           },
         ],
