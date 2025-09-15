@@ -10,7 +10,7 @@ catalogs:
     '@heroui/theme': ^2.4.11
     '@heroui/use-aria-button': ^2.2.18
     '@tailwindcss/vite': ^4.1.12
-    '@types/node': ^22.15.26
+    '@types/node': ^24.5.0
     '@vitejs/plugin-vue': ^6.0.1
     '@vue/tsconfig': ^0.7.0
     '@vueuse/core': ^11.3.0
