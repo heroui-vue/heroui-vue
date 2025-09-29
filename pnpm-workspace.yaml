@@ -13,7 +13,7 @@ catalogs:
     '@types/node': ^22.15.26
     '@vitejs/plugin-vue': ^6.0.1
     '@vue/tsconfig': ^0.7.0
-    '@vueuse/core': ^11.3.0
+    '@vueuse/core': ^13.9.0
     tailwindcss: ^4.1.12
     unplugin-vue: ^6.0.1
     vite: ^7.1.7
