@@ -16,7 +16,7 @@
     "@tailwindcss/vite": "catalog:prod",
     "@types/node": "catalog:prod",
     "@vitejs/plugin-vue": "catalog:prod",
-    "@vue/repl": "^4.6.3",
+    "@vue/repl": "^4.7.0",
     "@vueuse/core": "catalog:prod",
     "tailwindcss": "catalog:prod",
     "vite": "catalog:prod",
