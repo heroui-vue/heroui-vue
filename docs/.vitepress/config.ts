@@ -15,6 +15,17 @@ export default defineConfig({
   head: [["link", { rel: "icon", href: "/logo.png" }]],
   ignoreDeadLinks: true,
 
+  head: [
+    [
+      'script',
+      {
+        async: '',
+        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2554261089068429',
+        crossorigin: 'anonymous',
+      },
+    ],
+  ],
+
   markdown: {
     config(md) {
       md.use(componentViewMarkdownPlugin);
@@ -63,6 +74,7 @@ export default defineConfig({
             items: [
               { text: "Button", link: "/en/components/button" },
               { text: "Alert", link: "/en/components/alert" },
+              { text: "Chip", link: "/en/components/chip" },
             ],
           },
         ],

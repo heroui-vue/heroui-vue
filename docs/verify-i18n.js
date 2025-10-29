@@ -71,11 +71,13 @@ function checkSourceFiles() {
     "en/guide/installation.md",
     "en/components/button.md",
     "en/components/alert.md",
+    "en/components/chip.md",
     "zh/index.md",
     "zh/guide/introduction.md",
     "zh/guide/installation.md",
     "zh/components/button.md",
     "zh/components/alert.md",
+    "zh/components/chip.md",
   ];
 
   let allValid = true;
@@ -108,11 +110,13 @@ function checkBuildOutput() {
     "en/guide/installation.html",
     "en/components/button.html",
     "en/components/alert.html",
+    "en/components/chip.html",
     "zh/index.html",
     "zh/guide/introduction.html",
     "zh/guide/installation.html",
     "zh/components/button.html",
     "zh/components/alert.html",
+    "zh/components/chip.html",
   ];
 
   let allValid = true;
