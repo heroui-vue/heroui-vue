@@ -24,6 +24,14 @@ export default defineConfig({
         crossorigin: 'anonymous',
       },
     ],
+    [
+      'script',
+      {
+        defer: '',
+        src: 'https://cloud.umami.is/script.js',
+        "data-website-id": 'c0e507dd-81cb-45b1-bba2-b3bd392e2a75',
+      },
+    ],
   ],
 
   markdown: {
