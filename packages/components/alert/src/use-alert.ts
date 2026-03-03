@@ -149,8 +149,9 @@ export function useAlert(originalProps: MaybeRef<AlertProps>) {
   watch(
     originalProps,
     (originalProps) => {
+      const resolvedOriginalProps = toValue(originalProps) ?? {};
       const [props, _variantProps] = mapPropsVariants(
-        toValue(originalProps),
+        resolvedOriginalProps,
         alert.variantKeys,
       );
 
