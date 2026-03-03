@@ -29,7 +29,6 @@ const {
   alertIconProps,
   iconWrapperProps,
   closeButtonProps,
-  closeIconProps,
 } = useAlert(props);
 
 const icon = computed(() => {
@@ -89,7 +88,7 @@ function onClose() {
     <slot name="endContent" />
 
     <button v-if="props.isClosable" v-bind="closeButtonProps" @click="onClose">
-      <span v-bind="closeIconProps">&times;</span>
+      <span>&times;</span>
     </button>
   </div>
 </template>

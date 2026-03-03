@@ -38,7 +38,6 @@ export interface AlertDefineProps extends /* @vue-ignore */ HTMLHeroVueUIProps {
    *    description: "description-classes"
    *    title: "title-classes"
    *    closeButton: "closeButton-classes"
-   *    closeIcon: "closeIcon-classes"
    * }" />
    * ```
    */
@@ -136,9 +135,6 @@ export function useAlert(originalProps: MaybeRef<AlertProps>) {
       type: "button",
       class: slots.closeButton({ class: classNames?.closeButton }),
     };
-    const closeIconProps = {
-      class: slots.closeIcon({ class: classNames?.closeIcon }),
-    };
     return {
       baseProps,
       mainWrapperProps,
@@ -147,7 +143,6 @@ export function useAlert(originalProps: MaybeRef<AlertProps>) {
       alertIconProps,
       iconWrapperProps,
       closeButtonProps,
-      closeIconProps,
     };
   });
 
@@ -186,6 +181,5 @@ export function useAlert(originalProps: MaybeRef<AlertProps>) {
     alertIconProps: computed(() => slotsProps.value.alertIconProps),
     iconWrapperProps: computed(() => slotsProps.value.iconWrapperProps),
     closeButtonProps: computed(() => slotsProps.value.closeButtonProps),
-    closeIconProps: computed(() => slotsProps.value.closeIconProps),
   };
 }
