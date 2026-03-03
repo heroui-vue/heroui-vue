@@ -20,5 +20,6 @@ catalogs:
     vue: ^3.5.13
 
 patchedDependencies:
+  tsdown@0.14.2: patches/tsdown.patch
   '@vue/repl': patches/@vue__repl.patch
   vitepress: patches/vitepress.patch

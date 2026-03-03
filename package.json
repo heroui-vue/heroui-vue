@@ -31,7 +31,7 @@
     "pnpm": "^10.9.0",
     "prettier": "^3.6.2",
     "rimraf": "^6.0.1",
-    "tsdown": "latest",
+    "tsdown": "0.14.2",
     "typescript": "^5.9.2"
   }
 }

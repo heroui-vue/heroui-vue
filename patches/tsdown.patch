@@ -1,0 +1,45 @@
+diff --git a/dist/src-BhIGOkxO.mjs b/dist/src-BhIGOkxO.mjs
+--- a/dist/src-BhIGOkxO.mjs
++++ b/dist/src-BhIGOkxO.mjs
+@@ -1107,6 +1107,16 @@
+ 	}
+ 	if (report && LogLevels[logger.level] >= 3) plugins.push(ReportPlugin(report, logger, cwd, cjsDts, name, isMultiFormat));
+ 	if (!cjsDts) plugins.push(userPlugins);
++	const defineValues = {
++		...define,
++		...Object.keys(env).reduce((acc, key) => {
++			const value = JSON.stringify(env[key]);
++			acc[`process.env.${key}`] = value;
++			acc[`import.meta.env.${key}`] = value;
++			return acc;
++		}, Object.create(null))
++	};
++	const injectValues = { ...shims && !cjsDts && getShimsInject(format, platform) };
+ 	const inputOptions = await mergeUserOptions({
+ 		input: entry,
+ 		cwd,
+@@ -1115,18 +1125,14 @@
+ 		tsconfig: tsconfig || void 0,
+ 		treeshake,
+ 		platform: cjsDts || format === "cjs" ? "node" : platform,
+-		define: {
+-			...define,
+-			...Object.keys(env).reduce((acc, key) => {
+-				const value = JSON.stringify(env[key]);
+-				acc[`process.env.${key}`] = value;
+-				acc[`import.meta.env.${key}`] = value;
+-				return acc;
+-			}, Object.create(null))
+-		},
++		...Object.keys(defineValues).length > 0 ? {
++			define: defineValues
++		} : {},
+ 		transform: { target },
+ 		plugins,
+-		inject: { ...shims && !cjsDts && getShimsInject(format, platform) },
++		...Object.keys(injectValues).length > 0 ? {
++			inject: injectValues
++		} : {},
+ 		moduleTypes: loader,
+ 		onLog: cjsDefault ? (level, log, defaultHandler) => {
+ 			if (log.code === "MIXED_EXPORT") return;
