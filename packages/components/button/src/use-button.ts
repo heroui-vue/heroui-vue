@@ -90,6 +90,8 @@ export function useButton(
         "data-focus-visible": dataAttr(false),
         "data-hover": dataAttr(!!isHovered),
         "data-loading": dataAttr(!!isLoading),
+        "aria-disabled": dataAttr(!!isDisabled),
+        disabled: isDisabled,
         class: styles,
       };
     },
