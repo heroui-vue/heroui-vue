@@ -7,6 +7,7 @@ import type { HTMLHeroVueUIProps } from "@heroui-vue/shared";
 import type { MaybeRef } from "vue";
 
 import {
+  getCurrentInstance,
   ref,
   computed,
   watch,
@@ -59,18 +60,32 @@ export interface AlertVariantProps {
 export type AlertProps = AlertDefineProps & AlertVariantProps;
 
 export function useAlert(originalProps: MaybeRef<AlertProps>) {
+  const instance = getCurrentInstance();
   const children = { ...useSlots() };
   const defineProps = ref<AlertDefineProps>();
   const variantProps = ref<AlertVariantProps>();
   const innerVisible = ref(true);
   const hasInitialVisibility = ref(false);
+  const hasBoundProp = (key: string) => {
+    if (!instance?.vnode.props) {
+      return false;
+    }
+
+    const kebabKey = key.replace(/[A-Z]/g, (char) => `-${char.toLowerCase()}`);
+
+    return key in instance.vnode.props || kebabKey in instance.vnode.props;
+  };
+  const hasControlledVisibility = computed(() => hasBoundProp("isVisible"));
+  const hasDefaultVisibility = computed(() => hasBoundProp("isDefaultVisible"));
 
   const isVisible = computed(() => {
-    return defineProps.value?.isVisible ?? innerVisible.value;
+    return hasControlledVisibility.value
+      ? (defineProps.value?.isVisible ?? false)
+      : innerVisible.value;
   });
 
   function close() {
-    if (defineProps.value?.isVisible === undefined) {
+    if (!hasControlledVisibility.value) {
       innerVisible.value = false;
     }
 
@@ -147,10 +162,12 @@ export function useAlert(originalProps: MaybeRef<AlertProps>) {
       defineProps.value = props;
       variantProps.value = _variantProps;
 
-      if (props.isVisible !== undefined) {
-        innerVisible.value = props.isVisible;
+      if (hasControlledVisibility.value) {
+        innerVisible.value = props.isVisible ?? false;
       } else if (!hasInitialVisibility.value) {
-        innerVisible.value = props.isDefaultVisible ?? true;
+        innerVisible.value = hasDefaultVisibility.value
+          ? (props.isDefaultVisible ?? false)
+          : true;
         hasInitialVisibility.value = true;
       }
     },
