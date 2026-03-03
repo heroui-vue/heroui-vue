@@ -1,5 +1,6 @@
 <script setup>
 import { Chip } from '@heroui-vue/core/raw'
+import { Avatar } from '@heroui-vue/core/raw'
 import { NotificationIcon, CheckIcon } from '@heroui-vue/icon'
 </script>
 
@@ -116,12 +117,19 @@ bun add @heroui-vue/chip
 
 ### With Avatar
 
-::: info
-Depends on the `Avatar` component
-:::
-
-::: warning
-Work in progress
+::: component-view
+<div class="flex gap-4 items-center">
+  <Chip color="secondary" variant="flat">
+    <template #avatar>
+      <Avatar
+        size="sm"
+        name="HV"
+        showFallback
+      />
+    </template>
+    HeroUI Vue
+  </Chip>
+</div>
 :::
 
 ## Style Slots

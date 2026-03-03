@@ -82,6 +82,7 @@ export default defineConfig({
             items: [
               { text: "Button", link: "/en/components/button" },
               { text: "Alert", link: "/en/components/alert" },
+              { text: "Avatar", link: "/en/components/avatar" },
               { text: "Chip", link: "/en/components/chip" },
             ],
           },
@@ -120,6 +121,7 @@ export default defineConfig({
             items: [
               { text: "Button", link: "/zh/components/button" },
               { text: "Alert", link: "/zh/components/alert" },
+              { text: "Avatar", link: "/zh/components/avatar" },
               { text: "Chip", link: "/zh/components/chip" },
             ],
           },
