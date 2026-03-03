@@ -12,8 +12,8 @@ const emit = defineEmits(["close"] as ChipEmits[]);
 defineSlots<Record<ChipSlots, any>>();
 
 const {
-  getChipProps,
-  getCloseButtonProps,
+  chipProps,
+  closeButtonProps,
   classNames,
   isDot,
   isCloseable,
@@ -34,7 +34,7 @@ function onCloseKeydown(event: KeyboardEvent) {
 </script>
 
 <template>
-  <component v-bind="getChipProps()">
+  <component v-bind="chipProps">
     <template v-if="isDot && !hasStartContent">
       <span :class="slots.dot({ class: classNames?.dot })"> </span>
     </template>
@@ -50,7 +50,7 @@ function onCloseKeydown(event: KeyboardEvent) {
 
     <template v-if="isCloseable">
       <span
-        v-bind="getCloseButtonProps()"
+        v-bind="closeButtonProps"
         @click="handleClose"
         @keydown="onCloseKeydown"
       >

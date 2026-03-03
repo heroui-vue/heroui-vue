@@ -3,11 +3,17 @@ import type {
   ChipSlots as _ChipSlots,
   SlotsToClasses,
 } from "@heroui/theme";
-import type { HTMLHeroVueUIProps, ReactMockProps } from "@heroui-vue/shared";
-import type { ComputedRef } from "vue";
+import type { ComputedRef, VNode } from "vue";
 
-import { computed } from "vue";
-import { useMockReact, mapPropsVariants, clsx } from "@heroui-vue/shared";
+import {
+  Comment,
+  Text,
+  computed,
+  getCurrentInstance,
+  useAttrs,
+  useSlots,
+} from "vue";
+import { mapPropsVariants, clsx } from "@heroui-vue/shared";
 import { chip } from "@heroui/theme";
 
 export interface ChipDefineProps {
@@ -33,91 +39,20 @@ export type ChipSlots = "avatar" | "startContent" | "endContent";
 
 export type ChipEmits = "close";
 
-function _chip(originalProps: ReactMockProps<ChipProps, ChipSlots, ChipEmits>) {
-  const [props, variantProps] = mapPropsVariants(
-    originalProps,
-    chip.variantKeys,
-  );
-
-  const {
-    children,
-    avatar,
-    startContent,
-    endContent,
-    onClose,
-    classNames,
-    className,
-    ...otherProps
-  } = props;
-
-  const baseStyles = clsx(classNames?.base, className);
-
-  const isCloseable = !!onClose;
-  const isDotVariant = originalProps.variant === "dot";
-
-  const isOneChar = typeof children === "string" && children?.length === 1;
-
-  const hasStartContent = !!avatar || !!startContent;
-  const hasEndContent = !!endContent || isCloseable;
-
-  const slots = chip({
-    ...variantProps,
-    hasStartContent,
-    hasEndContent,
-    isOneChar,
-    isCloseable,
-  });
-
-  const getChipProps = ():
-    | ChipProps
-    | {
-        class: string;
-      } => {
-    return {
-      class: slots.base({ class: baseStyles }),
-      as: "div",
-      ...otherProps,
-    };
-  };
-
-  const getCloseButtonProps = (): {
-    role: string;
-    tabIndex: number;
-    class: string;
-    "aria-label": string;
-  } => {
-    return {
-      role: "button",
-      tabIndex: 0,
-      class: slots.closeButton({ class: classNames?.closeButton }),
-      "aria-label": "close chip",
-    };
-  };
-
-  return {
-    slots,
-    classNames,
-    isDot: isDotVariant,
-    isCloseable,
-    getCloseButtonProps,
-    getChipProps,
-    hasStartContent,
-  };
-}
-
 export type UseChip = {
   slots: ReturnType<typeof chip>;
   classNames: ChipProps["classNames"];
   isDot: boolean;
   isCloseable: boolean;
-  getCloseButtonProps: () => {
+  closeButtonProps: {
     role: string;
     tabIndex: number;
     class: string;
     "aria-label": string;
   };
-  getChipProps: () => ChipProps & {
+  chipProps: ChipProps & {
     class: string;
+    as: "div";
   };
   hasStartContent: boolean;
 };
@@ -126,17 +61,84 @@ export type UseChipRefs = {
   [K in keyof UseChip]: ComputedRef<UseChip[K]>;
 };
 
+function extractTextContent(nodes: VNode[] | undefined) {
+  if (!nodes?.length) {
+    return "";
+  }
+
+  if (nodes.length === 1) {
+    const vnode = nodes[0];
+
+    if (vnode.type === Comment) {
+      return "";
+    }
+
+    if (vnode.type === Text) {
+      return String(vnode.children ?? "");
+    }
+  }
+
+  if (nodes.every((node) => node.type === Text)) {
+    return nodes.map((node) => String(node.children ?? "")).join("");
+  }
+
+  return "";
+}
+
 export function useChip(props: ChipProps): UseChipRefs {
-  const mockProps = useMockReact<ChipProps, ChipSlots, ChipEmits>(props);
-  const chipReturn = computed(() => _chip(mockProps.value));
+  const attrs = useAttrs();
+  const slots = useSlots();
+  const instance = getCurrentInstance();
+
+  const chipState = computed(() => {
+    const [chipProps, variantProps] = mapPropsVariants(props, chip.variantKeys);
+    const { classNames, ...otherProps } = chipProps;
+    const className = attrs.class;
+    const onClose = instance?.vnode.props?.onClose;
+
+    const defaultSlot = slots.default?.();
+    const children = extractTextContent(defaultSlot);
+    const isCloseable = typeof onClose === "function";
+    const isDot = props.variant === "dot";
+    const hasStartContent = !!slots.avatar || !!slots.startContent;
+    const hasEndContent = !!slots.endContent || isCloseable;
+    const isOneChar = children.length === 1;
+
+    const slotStyles = chip({
+      ...variantProps,
+      hasStartContent,
+      hasEndContent,
+      isOneChar,
+      isCloseable,
+    });
+
+    return {
+      slots: slotStyles,
+      classNames,
+      isDot,
+      isCloseable,
+      closeButtonProps: {
+        role: "button",
+        tabIndex: 0,
+        class: slotStyles.closeButton({ class: classNames?.closeButton }),
+        "aria-label": "close chip",
+      },
+      chipProps: {
+        class: slotStyles.base({ class: clsx(classNames?.base, className) }),
+        as: "div" as const,
+        ...otherProps,
+      },
+      hasStartContent,
+    };
+  });
 
   return {
-    slots: computed(() => chipReturn.value.slots),
-    classNames: computed(() => chipReturn.value.classNames),
-    isDot: computed(() => chipReturn.value.isDot),
-    isCloseable: computed(() => chipReturn.value.isCloseable),
-    getCloseButtonProps: computed(() => chipReturn.value.getCloseButtonProps),
-    getChipProps: computed(() => chipReturn.value.getChipProps),
-    hasStartContent: computed(() => chipReturn.value.hasStartContent),
+    slots: computed(() => chipState.value.slots),
+    classNames: computed(() => chipState.value.classNames),
+    isDot: computed(() => chipState.value.isDot),
+    isCloseable: computed(() => chipState.value.isCloseable),
+    closeButtonProps: computed(() => chipState.value.closeButtonProps),
+    chipProps: computed(() => chipState.value.chipProps),
+    hasStartContent: computed(() => chipState.value.hasStartContent),
   };
 }
