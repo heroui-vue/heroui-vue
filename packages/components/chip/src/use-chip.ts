@@ -4,8 +4,9 @@ import type {
   SlotsToClasses,
 } from "@heroui/theme";
 import type { HTMLHeroVueUIProps, ReactMockProps } from "@heroui-vue/shared";
+import type { ComputedRef } from "vue";
 
-import { ref, toRefs, watchEffect, type Reactive, type ToRefs } from "vue";
+import { computed } from "vue";
 import { useMockReact, mapPropsVariants, clsx } from "@heroui-vue/shared";
 import { chip } from "@heroui/theme";
 
@@ -121,15 +122,21 @@ export type UseChip = {
   hasStartContent: boolean;
 };
 
-export function useChip(props: ChipProps): ToRefs<UseChip> {
+export type UseChipRefs = {
+  [K in keyof UseChip]: ComputedRef<UseChip[K]>;
+};
+
+export function useChip(props: ChipProps): UseChipRefs {
   const mockProps = useMockReact<ChipProps, ChipSlots, ChipEmits>(props);
-  const chipReturn = ref<UseChip>({} as any);
+  const chipReturn = computed(() => _chip(mockProps.value));
 
-  watchEffect(() => {
-    // @ts-ignore
-    chipReturn.value = _chip(mockProps.value);
-    chipReturn.value.classNames;
-  });
-
-  return toRefs(chipReturn.value);
+  return {
+    slots: computed(() => chipReturn.value.slots),
+    classNames: computed(() => chipReturn.value.classNames),
+    isDot: computed(() => chipReturn.value.isDot),
+    isCloseable: computed(() => chipReturn.value.isCloseable),
+    getCloseButtonProps: computed(() => chipReturn.value.getCloseButtonProps),
+    getChipProps: computed(() => chipReturn.value.getChipProps),
+    hasStartContent: computed(() => chipReturn.value.hasStartContent),
+  };
 }
