@@ -12,24 +12,23 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   title: "HeroUI Vue",
   description: "Vue 3 Component Library based on HeroUI Theme",
-  head: [["link", { rel: "icon", href: "/logo.png" }]],
   ignoreDeadLinks: true,
-
   head: [
+    ["link", { rel: "icon", href: "/logo.png" }],
     [
-      'script',
+      "script",
       {
-        async: '',
-        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2554261089068429',
-        crossorigin: 'anonymous',
+        async: "",
+        src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2554261089068429",
+        crossorigin: "anonymous",
       },
     ],
     [
-      'script',
+      "script",
       {
-        defer: '',
-        src: 'https://cloud.umami.is/script.js',
-        "data-website-id": 'c0e507dd-81cb-45b1-bba2-b3bd392e2a75',
+        defer: "",
+        src: "https://cloud.umami.is/script.js",
+        "data-website-id": "c0e507dd-81cb-45b1-bba2-b3bd392e2a75",
       },
     ],
   ],
@@ -144,7 +143,7 @@ export default defineConfig({
       },
       {
         icon: "npm",
-        link: "https://www.npmjs.com/package/heroui-vue",
+        link: "https://npmx.dev/package/heroui-vue",
       },
     ],
 

@@ -36,29 +36,29 @@ import { Avatar } from 'heroui-vue'
 
 ## 使用
 
-```vue
+::: component-view
 <Avatar name="HeroUI Vue" showFallback />
-```
+:::
 
 ### 图片头像
 
-```vue
+::: component-view
 <Avatar name="Hotdog" src="https://i.pravatar.cc/150?u=heroui-vue-avatar" />
-```
+:::
 
 ### 尺寸
 
-```vue
+::: component-view
 <div class="flex items-center gap-4">
   <Avatar size="sm" name="小" showFallback />
   <Avatar size="md" name="中" showFallback />
   <Avatar size="lg" name="大" showFallback />
 </div>
-```
+:::
 
 ### 颜色
 
-```vue
+::: component-view
 <div class="flex items-center gap-4">
   <Avatar color="default" name="默" showFallback />
   <Avatar color="primary" name="主" showFallback />
@@ -67,11 +67,11 @@ import { Avatar } from 'heroui-vue'
   <Avatar color="warning" name="警" showFallback />
   <Avatar color="danger" name="危" showFallback />
 </div>
-```
+:::
 
 ### 圆角
 
-```vue
+::: component-view
 <div class="flex items-center gap-4">
   <Avatar radius="none" name="无" showFallback />
   <Avatar radius="sm" name="小" showFallback />
@@ -79,11 +79,11 @@ import { Avatar } from 'heroui-vue'
   <Avatar radius="lg" name="大" showFallback />
   <Avatar radius="full" name="圆" showFallback />
 </div>
-```
+:::
 
 ### 边框
 
-```vue
+::: component-view
 <div class="flex items-center gap-4">
   <Avatar isBordered color="primary" name="HV" showFallback />
   <Avatar
@@ -92,13 +92,13 @@ import { Avatar } from 'heroui-vue'
     src="https://i.pravatar.cc/150?u=heroui-vue-avatar-bordered"
   />
 </div>
-```
+:::
 
 ### 自定义回退内容
 
-```vue
+::: component-view
 <Avatar fallback="HV" showFallback />
-```
+:::
 
 ## 样式插槽 Slots
 - **base**：根容器。
@@ -111,31 +111,31 @@ import { Avatar } from 'heroui-vue'
 
 AvatarGroup 用于将多个头像组合成紧凑的头像组。
 
-```vue
+::: component-view
 <AvatarGroup>
   <Avatar name="Ada Lovelace" showFallback />
   <Avatar name="Grace Hopper" showFallback />
   <Avatar name="Linus Torvalds" showFallback />
 </AvatarGroup>
-```
+:::
 
 ### 带数量
 
-```vue
+::: component-view
 <AvatarGroup :max="3" :total="5">
   <Avatar name="Ada Lovelace" showFallback />
   <Avatar name="Grace Hopper" showFallback />
   <Avatar name="Linus Torvalds" showFallback />
 </AvatarGroup>
-```
+:::
 
 ### 网格布局
 
-```vue
+::: component-view
 <AvatarGroup isGrid>
   <Avatar name="Ada Lovelace" showFallback />
   <Avatar name="Grace Hopper" showFallback />
   <Avatar name="Linus Torvalds" showFallback />
   <Avatar name="Margaret Hamilton" showFallback />
 </AvatarGroup>
-```
+:::

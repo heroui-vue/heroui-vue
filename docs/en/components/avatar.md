@@ -36,29 +36,29 @@ import { Avatar } from 'heroui-vue'
 
 ## Usage
 
-```vue
+::: component-view
 <Avatar name="HeroUI Vue" showFallback />
-```
+:::
 
 ### With Image
 
-```vue
+::: component-view
 <Avatar name="Hotdog" src="https://i.pravatar.cc/150?u=heroui-vue-avatar" />
-```
+:::
 
 ### Sizes
 
-```vue
+::: component-view
 <div class="flex items-center gap-4">
   <Avatar size="sm" name="S" showFallback />
   <Avatar size="md" name="M" showFallback />
   <Avatar size="lg" name="L" showFallback />
 </div>
-```
+:::
 
 ### Colors
 
-```vue
+::: component-view
 <div class="flex items-center gap-4">
   <Avatar color="default" name="D" showFallback />
   <Avatar color="primary" name="P" showFallback />
@@ -67,11 +67,11 @@ import { Avatar } from 'heroui-vue'
   <Avatar color="warning" name="W" showFallback />
   <Avatar color="danger" name="D" showFallback />
 </div>
-```
+:::
 
 ### Radius
 
-```vue
+::: component-view
 <div class="flex items-center gap-4">
   <Avatar radius="none" name="N" showFallback />
   <Avatar radius="sm" name="S" showFallback />
@@ -79,11 +79,11 @@ import { Avatar } from 'heroui-vue'
   <Avatar radius="lg" name="L" showFallback />
   <Avatar radius="full" name="F" showFallback />
 </div>
-```
+:::
 
 ### Bordered
 
-```vue
+::: component-view
 <div class="flex items-center gap-4">
   <Avatar isBordered color="primary" name="HV" showFallback />
   <Avatar
@@ -92,13 +92,13 @@ import { Avatar } from 'heroui-vue'
     src="https://i.pravatar.cc/150?u=heroui-vue-avatar-bordered"
   />
 </div>
-```
+:::
 
 ### Custom Fallback
 
-```vue
+::: component-view
 <Avatar fallback="HV" showFallback />
-```
+:::
 
 ## Style Slots
 - **base**: The root container.
@@ -111,31 +111,31 @@ import { Avatar } from 'heroui-vue'
 
 AvatarGroup arranges multiple avatars into a compact cluster.
 
-```vue
+::: component-view
 <AvatarGroup>
   <Avatar name="Ada Lovelace" showFallback />
   <Avatar name="Grace Hopper" showFallback />
   <Avatar name="Linus Torvalds" showFallback />
 </AvatarGroup>
-```
+:::
 
 ### With Count
 
-```vue
+::: component-view
 <AvatarGroup :max="3" :total="5">
   <Avatar name="Ada Lovelace" showFallback />
   <Avatar name="Grace Hopper" showFallback />
   <Avatar name="Linus Torvalds" showFallback />
 </AvatarGroup>
-```
+:::
 
 ### Grid Layout
 
-```vue
+::: component-view
 <AvatarGroup isGrid>
   <Avatar name="Ada Lovelace" showFallback />
   <Avatar name="Grace Hopper" showFallback />
   <Avatar name="Linus Torvalds" showFallback />
   <Avatar name="Margaret Hamilton" showFallback />
 </AvatarGroup>
-```
+:::
