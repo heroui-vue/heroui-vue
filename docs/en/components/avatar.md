@@ -1,5 +1,5 @@
 <script setup>
-import { Avatar } from '@heroui-vue/core/raw'
+import { Avatar, AvatarGroup } from '@heroui-vue/core/raw'
 </script>
 
 # Avatar
@@ -36,35 +36,29 @@ import { Avatar } from 'heroui-vue'
 
 ## Usage
 
-::: component-view
-<Avatar
-  name="HeroUI Vue"
-  showFallback
-/>
-:::
+```vue
+<Avatar name="HeroUI Vue" showFallback />
+```
 
 ### With Image
 
-::: component-view
-<Avatar
-  name="Hotdog"
-  src="https://i.pravatar.cc/150?u=heroui-vue-avatar"
-/>
-:::
+```vue
+<Avatar name="Hotdog" src="https://i.pravatar.cc/150?u=heroui-vue-avatar" />
+```
 
 ### Sizes
 
-::: component-view
+```vue
 <div class="flex items-center gap-4">
   <Avatar size="sm" name="S" showFallback />
   <Avatar size="md" name="M" showFallback />
   <Avatar size="lg" name="L" showFallback />
 </div>
-:::
+```
 
 ### Colors
 
-::: component-view
+```vue
 <div class="flex items-center gap-4">
   <Avatar color="default" name="D" showFallback />
   <Avatar color="primary" name="P" showFallback />
@@ -73,11 +67,11 @@ import { Avatar } from 'heroui-vue'
   <Avatar color="warning" name="W" showFallback />
   <Avatar color="danger" name="D" showFallback />
 </div>
-:::
+```
 
 ### Radius
 
-::: component-view
+```vue
 <div class="flex items-center gap-4">
   <Avatar radius="none" name="N" showFallback />
   <Avatar radius="sm" name="S" showFallback />
@@ -85,26 +79,26 @@ import { Avatar } from 'heroui-vue'
   <Avatar radius="lg" name="L" showFallback />
   <Avatar radius="full" name="F" showFallback />
 </div>
-:::
+```
 
 ### Bordered
 
-::: component-view
+```vue
 <div class="flex items-center gap-4">
   <Avatar isBordered color="primary" name="HV" showFallback />
-  <Avatar isBordered color="secondary" src="https://i.pravatar.cc/150?u=heroui-vue-avatar-bordered" />
+  <Avatar
+    isBordered
+    color="secondary"
+    src="https://i.pravatar.cc/150?u=heroui-vue-avatar-bordered"
+  />
 </div>
-:::
+```
 
 ### Custom Fallback
 
-::: component-view
-<Avatar showFallback>
-  <template #fallback>
-    <span class="text-xs font-semibold">HV</span>
-  </template>
-</Avatar>
-:::
+```vue
+<Avatar fallback="HV" showFallback />
+```
 
 ## Style Slots
 - **base**: The root container.
@@ -112,3 +106,36 @@ import { Avatar } from 'heroui-vue'
 - **fallback**: The fallback wrapper.
 - **name**: The initials content.
 - **icon**: The icon fallback content.
+
+## AvatarGroup
+
+AvatarGroup arranges multiple avatars into a compact cluster.
+
+```vue
+<AvatarGroup>
+  <Avatar name="Ada Lovelace" showFallback />
+  <Avatar name="Grace Hopper" showFallback />
+  <Avatar name="Linus Torvalds" showFallback />
+</AvatarGroup>
+```
+
+### With Count
+
+```vue
+<AvatarGroup :max="3" :total="5">
+  <Avatar name="Ada Lovelace" showFallback />
+  <Avatar name="Grace Hopper" showFallback />
+  <Avatar name="Linus Torvalds" showFallback />
+</AvatarGroup>
+```
+
+### Grid Layout
+
+```vue
+<AvatarGroup isGrid>
+  <Avatar name="Ada Lovelace" showFallback />
+  <Avatar name="Grace Hopper" showFallback />
+  <Avatar name="Linus Torvalds" showFallback />
+  <Avatar name="Margaret Hamilton" showFallback />
+</AvatarGroup>
+```

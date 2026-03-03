@@ -1,7 +1,14 @@
 import type { HTMLHeroVueUIProps } from "@heroui-vue/shared";
-import type { ComputedRef, ImgHTMLAttributes } from "vue";
+import type { ComputedRef, ImgHTMLAttributes, InjectionKey, Ref } from "vue";
 
-import { computed, mergeProps, ref, useAttrs, watch } from "vue";
+import {
+  computed,
+  inject,
+  mergeProps,
+  ref,
+  useAttrs,
+  watch,
+} from "vue";
 import { useElementHover, useFocus } from "@vueuse/core";
 import { dataAttr, mapPropsVariants } from "@heroui-vue/shared";
 import { avatar } from "@heroui/theme";
@@ -40,6 +47,14 @@ export interface AvatarVariantProps {
 
 export type AvatarProps = AvatarDefineProps & AvatarVariantProps;
 
+export type AvatarGroupContext = {
+  isInGroup: Ref<boolean>;
+  isInGridGroup: Ref<boolean>;
+};
+
+export const avatarGroupContextKey: InjectionKey<AvatarGroupContext> =
+  Symbol("avatar-group-context");
+
 export type UseAvatar = {
   tag: ComputedRef<string | object>;
   baseProps: ComputedRef<Record<string, unknown>>;
@@ -76,6 +91,7 @@ function getInitials(name?: string) {
 
 export function useAvatar(props: AvatarProps): UseAvatar {
   const attrs = useAttrs();
+  const groupContext = inject(avatarGroupContextKey, null);
   const baseRef = ref<HTMLElement | null>(null);
   const hasError = ref(false);
   const isLoaded = ref(false);
@@ -109,6 +125,8 @@ export function useAvatar(props: AvatarProps): UseAvatar {
 
     const styles = avatar({
       ...variantProps,
+      isInGroup: groupContext?.isInGroup.value,
+      isInGridGroup: groupContext?.isInGridGroup.value,
       className,
     });
     const tag = as ?? (isFocusable ? "button" : "span");
