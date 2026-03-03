@@ -16,6 +16,7 @@
     "clean:dist": "rimraf -g **/dist",
     "lint": "eslint . --cache",
     "lint:fix": "eslint . --cache --fix",
+    "bump": "pnpm -C packages/heroui-vue run bump",
     "bump:button": "pnpm -C packages/components/button run bump",
     "bump:alert": "pnpm -C packages/components/alert run bump",
     "bump:chip": "pnpm -C packages/components/chip run bump",
