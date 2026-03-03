@@ -20,12 +20,16 @@ const emits = defineEmits<{
 }>();
 
 const {
+  isVisible,
+  close,
   baseProps,
   mainWrapperProps,
   titleProps,
   descriptionProps,
   alertIconProps,
   iconWrapperProps,
+  closeButtonProps,
+  closeIconProps,
 } = useAlert(props);
 
 const icon = computed(() => {
@@ -43,12 +47,14 @@ const icon = computed(() => {
 });
 
 function onClose() {
+  close();
   emits("close");
+  emits("visibleChange", false);
 }
 </script>
 
 <template>
-  <div v-bind="baseProps">
+  <div v-if="isVisible" v-bind="baseProps">
     <slot name="startContent" />
 
     <div v-if="!props.hideIcon" v-bind="iconWrapperProps">
@@ -82,7 +88,9 @@ function onClose() {
 
     <slot name="endContent" />
 
-    <!-- <Button v-if="props.isClosable" @click="onClose">close</Button> -->
+    <button v-if="props.isClosable" v-bind="closeButtonProps" @click="onClose">
+      <span v-bind="closeIconProps">&times;</span>
+    </button>
   </div>
 </template>
 

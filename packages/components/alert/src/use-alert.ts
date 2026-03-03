@@ -4,14 +4,13 @@ import type {
   SlotsToClasses,
 } from "@heroui/theme";
 import type { HTMLHeroVueUIProps } from "@heroui-vue/shared";
-import type { MaybeRef, Reactive } from "vue";
+import type { MaybeRef } from "vue";
 
 import {
   ref,
   computed,
   watch,
   toValue,
-  toRefs,
   mergeProps,
   useSlots,
 } from "vue";
@@ -63,19 +62,29 @@ export function useAlert(originalProps: MaybeRef<AlertProps>) {
   const children = { ...useSlots() };
   const defineProps = ref<AlertDefineProps>();
   const variantProps = ref<AlertVariantProps>();
+  const innerVisible = ref(true);
+  const hasInitialVisibility = ref(false);
+
+  const isVisible = computed(() => {
+    return defineProps.value?.isVisible ?? innerVisible.value;
+  });
+
+  function close() {
+    if (defineProps.value?.isVisible === undefined) {
+      innerVisible.value = false;
+    }
+
+    return false;
+  }
 
   const slotsProps = computed(() => {
     const {
       title,
       description,
       isClosable,
-      isVisible: isVisibleProp,
-      isDefaultVisible,
       class: className,
       classNames,
     } = defineProps.value ?? {};
-
-    const isVisible = isVisibleProp ?? isDefaultVisible ?? true;
 
     const slots = alert({
       hasContent: !isEmpty(description) || !isEmpty(children),
@@ -83,7 +92,7 @@ export function useAlert(originalProps: MaybeRef<AlertProps>) {
     });
 
     const baseProps = {
-      "data-visible": dataAttr(isVisible),
+      "data-visible": dataAttr(isVisible.value),
       "data-closeable": dataAttr(isClosable),
       "data-has-title": dataAttr(!isEmpty(title)),
       "data-has-description": dataAttr(!isEmpty(description)),
@@ -108,6 +117,13 @@ export function useAlert(originalProps: MaybeRef<AlertProps>) {
     const iconWrapperProps = {
       class: slots.iconWrapper({ class: classNames?.iconWrapper }),
     };
+    const closeButtonProps = {
+      type: "button",
+      class: slots.closeButton({ class: classNames?.closeButton }),
+    };
+    const closeIconProps = {
+      class: slots.closeIcon({ class: classNames?.closeIcon }),
+    };
     return {
       baseProps,
       mainWrapperProps,
@@ -115,6 +131,8 @@ export function useAlert(originalProps: MaybeRef<AlertProps>) {
       titleProps,
       alertIconProps,
       iconWrapperProps,
+      closeButtonProps,
+      closeIconProps,
     };
   });
 
@@ -128,11 +146,29 @@ export function useAlert(originalProps: MaybeRef<AlertProps>) {
 
       defineProps.value = props;
       variantProps.value = _variantProps;
+
+      if (props.isVisible !== undefined) {
+        innerVisible.value = props.isVisible;
+      } else if (!hasInitialVisibility.value) {
+        innerVisible.value = props.isDefaultVisible ?? true;
+        hasInitialVisibility.value = true;
+      }
     },
     {
       immediate: true,
     },
   );
 
-  return { ...toRefs(toValue(slotsProps)) };
+  return {
+    isVisible,
+    close,
+    baseProps: computed(() => slotsProps.value.baseProps),
+    mainWrapperProps: computed(() => slotsProps.value.mainWrapperProps),
+    descriptionProps: computed(() => slotsProps.value.descriptionProps),
+    titleProps: computed(() => slotsProps.value.titleProps),
+    alertIconProps: computed(() => slotsProps.value.alertIconProps),
+    iconWrapperProps: computed(() => slotsProps.value.iconWrapperProps),
+    closeButtonProps: computed(() => slotsProps.value.closeButtonProps),
+    closeIconProps: computed(() => slotsProps.value.closeIconProps),
+  };
 }
