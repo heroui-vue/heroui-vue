@@ -1,0 +1,4 @@
+interface:
+  display_name: "HeroUI Doc Parity"
+  short_description: "Strict HeroUI doc parity workflow"
+  default_prompt: "Mirror HeroUI docs exactly: same section order, same demo counts/patterns, include all upstream points, remove non-upstream additions."
