@@ -44,6 +44,7 @@
     "@heroui-vue/avatar": "workspace: *",
     "@heroui-vue/badge": "workspace: *",
     "@heroui-vue/button": "workspace: *",
+    "@heroui-vue/checkbox": "workspace: *",
     "@heroui-vue/chip": "workspace: *"
   }
 }

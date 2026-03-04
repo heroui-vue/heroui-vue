@@ -22,6 +22,7 @@
     "bump:chip": "pnpm -C packages/components/chip run bump",
     "bump:avatar": "pnpm -C packages/components/avatar run bump",
     "bump:badge": "pnpm -C packages/components/badge run bump",
+    "bump:checkbox": "pnpm -C packages/components/checkbox run bump",
     "nvc": "heroui-vue-create",
     "pub:view": "pnpm publish -r --dry-run --registry=https://registry.npmjs.org/"
   },
