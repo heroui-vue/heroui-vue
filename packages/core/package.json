@@ -40,6 +40,7 @@
   },
   "devDependencies": {
     "unplugin-vue": "catalog:prod",
+    "@heroui-vue/accordion": "workspace: *",
     "@heroui-vue/alert": "workspace: *",
     "@heroui-vue/avatar": "workspace: *",
     "@heroui-vue/badge": "workspace: *",

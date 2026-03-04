@@ -168,6 +168,30 @@ importers:
         specifier: ^3.5.13
         version: 3.5.18(typescript@5.9.2)
 
+  packages/components/accordion:
+    devDependencies:
+      '@heroui-vue/shared':
+        specifier: workspace:*
+        version: link:../shared
+      '@heroui/shared-utils':
+        specifier: catalog:prod
+        version: 2.1.10
+      '@heroui/theme':
+        specifier: catalog:prod
+        version: 2.4.20(tailwindcss@4.1.12)
+      '@types/node':
+        specifier: catalog:prod
+        version: 22.17.0
+      '@vue/tsconfig':
+        specifier: catalog:prod
+        version: 0.7.0(typescript@5.9.2)(vue@3.5.18(typescript@5.9.2))
+      unplugin-vue:
+        specifier: catalog:prod
+        version: 6.0.1(@types/node@22.17.0)(jiti@2.5.1)(lightningcss@1.30.1)(terser@5.43.1)(vue@3.5.18(typescript@5.9.2))(yaml@2.8.0)
+      vue:
+        specifier: catalog:prod
+        version: 3.5.18(typescript@5.9.2)
+
   packages/components/alert:
     devDependencies:
       '@heroui-vue/shared':
@@ -357,6 +381,9 @@ importers:
 
   packages/core:
     devDependencies:
+      '@heroui-vue/accordion':
+        specifier: 'workspace: *'
+        version: link:../components/accordion
       '@heroui-vue/alert':
         specifier: 'workspace: *'
         version: link:../components/alert
