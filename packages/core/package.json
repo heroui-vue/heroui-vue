@@ -42,6 +42,7 @@
     "unplugin-vue": "catalog:prod",
     "@heroui-vue/alert": "workspace: *",
     "@heroui-vue/avatar": "workspace: *",
+    "@heroui-vue/badge": "workspace: *",
     "@heroui-vue/button": "workspace: *",
     "@heroui-vue/chip": "workspace: *"
   }
