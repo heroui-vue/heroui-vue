@@ -1,8 +1,5 @@
 <script lang="ts" setup>
-import {
-  useAccordionItem,
-  type AccordionItemProps,
-} from "./use-accordion";
+import { useAccordionItem, type AccordionItemProps } from "./use-accordion";
 
 const props = withDefaults(defineProps<AccordionItemProps>(), {
   isDisabled: false,

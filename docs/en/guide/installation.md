@@ -1,19 +1,24 @@
 # Installation
+
 Quick installation configuration and usage
 
 ## Global Installation
+
 You can use all components under the `heroui-vue` namespace.
 
 ::: code-group
 ```bash [npm]
 npm install heroui-vue tailwindcss
 ```
+
 ```bash [pnpm]
 pnpm install heroui-vue tailwindcss
 ```
+
 ```bash [yarn]
 yarn install heroui-vue tailwindcss
 ```
+
 ```bash [bun]
 bun install heroui-vue tailwindcss
 ```
@@ -22,9 +27,11 @@ bun install heroui-vue tailwindcss
 HeroUI Vue has a built-in `@heroui/theme` with default configuration and exports plugins for configuring TailwindCSS.
 
 ## On-Demand Installation
+
 You can also install only the components you need. Please refer to each component's documentation to learn how to install them. But make sure you have completed the [Configuration](#configuration) before using on-demand installation.
 
 ## Configuration
+
 HeroUI Vue supports TailwindCSS V4 by default and also provides limited support for V3.
 
 ::: tip
@@ -34,9 +41,11 @@ Here is a [template project](https://github.com/heroui-vue/template-heroui-vue) 
 :::
 
 ### TailwindCSS
+
 TailwindCSS can be configured in two different ways: **with** a `tailwind.config.js` file and **without** a `tailwind.config.js` file.
 
 #### With tailwind.config.js file
+
 If you prefer to configure TailwindCSS through a `tailwind.config.js` file, you can configure it like this:
 
 ```js{2,6,7,8,9,10}
@@ -62,6 +71,7 @@ Configuring TailwindCSS through a `tailwind.config.js` file has several benefits
 :::
 
 #### Without tailwind.config.js file
+
 If your entry file contains a CSS import, assuming the name is `index.css`, configure it as follows:
 
 ```css
@@ -73,14 +83,17 @@ If your entry file contains a CSS import, assuming the name is `index.css`, conf
 ```
 
 ### Vite
+
 If your project uses Vite, you need to install the official `@tailwindcss/vite` plugin and use it in your vite configuration file.
 
 #### Install plugin
+
 ```sh
 npm install @tailwindcss/vite // [!=npm auto]
 ```
 
 #### Configure vite
+
 ```ts{3,6}
 // vite.config.ts
 import { defineConfig } from "vite";

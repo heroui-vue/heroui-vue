@@ -1,24 +1,24 @@
 {
   "name": "@heroui-vue/docs",
-  "type": "module",
   "version": "0.0.12",
   "private": true,
-  "packageManager": "pnpm@9.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vitepress dev",
     "build": "pnpm -w build:core && pnpm -w build:icon && vitepress build",
     "preview": "pnpm build && vitepress preview"
   },
   "devDependencies": {
-    "@heroui/theme": "catalog:prod",
-    "@tailwindcss/vite": "catalog:prod",
     "@heroui-vue/core": "workspace:*",
     "@heroui-vue/icon": "workspace:*",
+    "@heroui/theme": "catalog:prod",
+    "@tailwindcss/vite": "catalog:prod",
     "tailwindcss": "catalog:prod",
     "vitepress": "latest",
+    "vitepress-plugin-component": "^1.1.1",
     "vitepress-plugin-group-icons": "^1.3.7",
     "vitepress-plugin-npm-commands": "^0.8.1",
-    "vitepress-plugin-tabs": "^0.7.1",
-    "vitepress-plugin-component": "^1.1.1"
-  }
+    "vitepress-plugin-tabs": "^0.7.1"
+  },
+  "packageManager": "pnpm@9.0.0"
 }

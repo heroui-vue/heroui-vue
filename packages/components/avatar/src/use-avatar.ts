@@ -7,19 +7,12 @@ import { dataAttr, mapPropsVariants } from "@heroui-vue/shared";
 import { avatar } from "@heroui/theme";
 
 export type AvatarSize = "sm" | "md" | "lg";
-export type AvatarColor =
-  | "default"
-  | "primary"
-  | "secondary"
-  | "success"
-  | "warning"
-  | "danger";
+export type AvatarColor = "default" | "primary" | "secondary" | "success" | "warning" | "danger";
 export type AvatarRadius = "none" | "sm" | "md" | "lg" | "full";
 export type AvatarSlots = "base" | "img" | "fallback" | "name" | "icon";
 export type AvatarClassNames = Partial<Record<AvatarSlots, string>>;
 
-export interface AvatarDefineProps
-  extends /* @vue-ignore */ HTMLHeroVueUIProps {
+export interface AvatarDefineProps extends /* @vue-ignore */ HTMLHeroVueUIProps {
   src?: string;
   name?: string;
   icon?: any;
@@ -46,9 +39,8 @@ export type AvatarGroupContext = {
   isInGridGroup: Ref<boolean>;
 };
 
-export const avatarGroupContextKey: InjectionKey<AvatarGroupContext> = Symbol(
-  "avatar-group-context",
-);
+export const avatarGroupContextKey: InjectionKey<AvatarGroupContext> =
+  Symbol("avatar-group-context");
 
 export type UseAvatar = {
   tag: ComputedRef<string | object>;

@@ -7,19 +7,24 @@ const customSelected = ref(true)
 </script>
 
 # Checkbox
+
 Checkboxes allow users to select multiple items from a list of individual items, or to mark one individual item as selected.
 
 ## Installation
+
 ::: code-group
 ```sh [npm]
 npm add @heroui-vue/checkbox
 ```
+
 ```sh [pnpm]
 pnpm add @heroui-vue/checkbox
 ```
+
 ```sh [yarn]
 yarn add @heroui-vue/checkbox
 ```
+
 ```sh [bun]
 bun add @heroui-vue/checkbox
 ```
@@ -29,12 +34,14 @@ bun add @heroui-vue/checkbox
 > If you use [global installation](/en/guide/installation#global-installation), you can skip this installation step
 
 ## Import
+
 ::: code-group
 ```js [On-demand import]
-import { Checkbox } from '@heroui-vue/checkbox'
+import { Checkbox } from "@heroui-vue/checkbox";
 ```
+
 ```js [Global import]
-import { Checkbox } from 'heroui-vue'
+import { Checkbox } from "heroui-vue";
 ```
 :::
 
@@ -153,13 +160,15 @@ You can customize the `Checkbox` component by passing custom Tailwind CSS classe
 
 ::: component-view
 <Checkbox
-  v-model="customSelected"
-  aria-label="custom checkbox"
-  :classNames="{
-    base: 'inline-flex w-full max-w-md bg-content1 hover:bg-content2 items-center justify-start cursor-pointer rounded-lg gap-2 p-4 border-2 border-transparent data-[selected=true]:border-primary',
-    label: 'w-full',
-  }"
+v-model="customSelected"
+aria-label="custom checkbox"
+:classNames="{
+base: 'inline-flex w-full max-w-md bg-content1 hover:bg-content2 items-center justify-start cursor-pointer rounded-lg gap-2 p-4 border-2 border-transparent data-[selected=true]:border-primary',
+label: 'w-full',
+}"
+
 >
+
   <div class="w-full flex justify-between gap-2">
     <div class="flex flex-col">
       <span class="font-medium">Junior Garcia</span>
@@ -211,33 +220,33 @@ In case you need to customize the checkbox even further, HeroUI React offers `us
 
 ### Checkbox Props
 
-| Attribute | Type | Description | Default |
-| --- | --- | --- | --- |
-| children | `VNodeChild` | The label of the checkbox. | `-` |
-| icon | `CheckboxIconProps` | Upstream React prop. In Vue, use `#icon` slot. | `-` |
-| value | `string \| number` | The value of the checkbox element, used when submitting an HTML form. | `-` |
-| name | `string` | The name of the checkbox element, used when submitting an HTML form. | `-` |
-| size | `sm \| md \| lg` | The size of the checkbox. | `md` |
-| color | `default \| primary \| secondary \| success \| warning \| danger` | The color of the checkbox. | `primary` |
-| radius | `none \| sm \| md \| lg \| full` | The radius of the checkbox. | `-` |
-| lineThrough | `boolean` | Whether the label should be crossed out. | `false` |
-| isSelected | `boolean` | Whether the element should be selected (controlled). | `-` |
-| defaultSelected | `boolean` | Whether the element should be selected (uncontrolled). | `-` |
-| isRequired | `boolean` | Upstream React prop. Not yet implemented in Vue checkbox. | `false` |
-| isReadOnly | `boolean` | Whether the checkbox can be selected but not changed by the user. | `-` |
-| isDisabled | `boolean` | Whether the checkbox is disabled. | `false` |
-| isIndeterminate | `boolean` | Indeterminate visual representation remains regardless of user interaction. | `-` |
-| isInvalid | `boolean` | Whether the checkbox is invalid. | `false` |
-| validationState | `valid \| invalid` | Upstream deprecated prop. Use `isInvalid`. | `-` |
-| disableAnimation | `boolean` | Whether the animation should be disabled. | `false` |
-| classNames | `Partial<Record<"base" \| "wrapper" \| "icon" \| "label", string>>` | Allows setting custom classes for checkbox slots. | `-` |
+| Attribute        | Type                                                                | Description                                                                 | Default   |
+| ---------------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------- |
+| children         | `VNodeChild`                                                        | The label of the checkbox.                                                  | `-`       |
+| icon             | `CheckboxIconProps`                                                 | Upstream React prop. In Vue, use `#icon` slot.                              | `-`       |
+| value            | `string \| number`                                                  | The value of the checkbox element, used when submitting an HTML form.       | `-`       |
+| name             | `string`                                                            | The name of the checkbox element, used when submitting an HTML form.        | `-`       |
+| size             | `sm \| md \| lg`                                                    | The size of the checkbox.                                                   | `md`      |
+| color            | `default \| primary \| secondary \| success \| warning \| danger`   | The color of the checkbox.                                                  | `primary` |
+| radius           | `none \| sm \| md \| lg \| full`                                    | The radius of the checkbox.                                                 | `-`       |
+| lineThrough      | `boolean`                                                           | Whether the label should be crossed out.                                    | `false`   |
+| isSelected       | `boolean`                                                           | Whether the element should be selected (controlled).                        | `-`       |
+| defaultSelected  | `boolean`                                                           | Whether the element should be selected (uncontrolled).                      | `-`       |
+| isRequired       | `boolean`                                                           | Upstream React prop. Not yet implemented in Vue checkbox.                   | `false`   |
+| isReadOnly       | `boolean`                                                           | Whether the checkbox can be selected but not changed by the user.           | `-`       |
+| isDisabled       | `boolean`                                                           | Whether the checkbox is disabled.                                           | `false`   |
+| isIndeterminate  | `boolean`                                                           | Indeterminate visual representation remains regardless of user interaction. | `-`       |
+| isInvalid        | `boolean`                                                           | Whether the checkbox is invalid.                                            | `false`   |
+| validationState  | `valid \| invalid`                                                  | Upstream deprecated prop. Use `isInvalid`.                                  | `-`       |
+| disableAnimation | `boolean`                                                           | Whether the animation should be disabled.                                   | `false`   |
+| classNames       | `Partial<Record<"base" \| "wrapper" \| "icon" \| "label", string>>` | Allows setting custom classes for checkbox slots.                           | `-`       |
 
 ### Checkbox Events
 
-| Attribute | Type | Description | Default |
-| --- | --- | --- | --- |
-| onChange | `(isSelected: boolean) => void` | Called when selection changes. In Vue, use `@change`. | `-` |
-| onValueChange | `(isSelected: boolean) => void` | Called when selection changes. In Vue, use `@valueChange`. | `-` |
+| Attribute     | Type                            | Description                                                | Default |
+| ------------- | ------------------------------- | ---------------------------------------------------------- | ------- |
+| onChange      | `(isSelected: boolean) => void` | Called when selection changes. In Vue, use `@change`.      | `-`     |
+| onValueChange | `(isSelected: boolean) => void` | Called when selection changes. In Vue, use `@valueChange`. | `-`     |
 
 ### Types
 

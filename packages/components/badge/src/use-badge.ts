@@ -71,15 +71,12 @@ export function useBadge(props: BadgeProps): UseBadgeRefs {
     } = { ...componentProps, ...attrs };
 
     const contentText =
-      typeof content === "string" || typeof content === "number"
-        ? String(content)
-        : "";
+      typeof content === "string" || typeof content === "number" ? String(content) : "";
     const hasContentSlot = !!slots.content;
     const autoIsOneChar = !isDot && contentText.length === 1 && !hasContentSlot;
     const isOneChar = variantProps.isOneChar ?? autoIsOneChar;
     const isReallyInvisible = !!isInvisible;
-    const showOutline =
-      disableOutline === true ? false : (variantProps.showOutline ?? true);
+    const showOutline = disableOutline === true ? false : (variantProps.showOutline ?? true);
 
     const slotStyles = badge({
       ...variantProps,
@@ -111,9 +108,7 @@ export function useBadge(props: BadgeProps): UseBadgeRefs {
     tag: computed(() => badgeState.value.tag),
     baseProps: computed(() => badgeState.value.baseProps),
     badgeProps: computed(() => badgeState.value.badgeProps),
-    shouldRenderBadgeContent: computed(
-      () => badgeState.value.shouldRenderBadgeContent,
-    ),
+    shouldRenderBadgeContent: computed(() => badgeState.value.shouldRenderBadgeContent),
     isDot: computed(() => badgeState.value.isDot),
     content: computed(() => badgeState.value.content),
   };

@@ -6,19 +6,24 @@ const isVisible = ref(true)
 </script>
 
 # Badge
+
 Badges are used as a small numerical value or status descriptor for UI elements.
 
 ## Installation
+
 ::: code-group
 ```sh [npm]
 npm add @heroui-vue/badge
 ```
+
 ```sh [pnpm]
 pnpm add @heroui-vue/badge
 ```
+
 ```sh [yarn]
 yarn add @heroui-vue/badge
 ```
+
 ```sh [bun]
 bun add @heroui-vue/badge
 ```
@@ -28,12 +33,14 @@ bun add @heroui-vue/badge
 > If you use [global installation](/en/guide/installation#global-installation), you can skip this installation step
 
 ## Import
+
 ::: code-group
 ```js [On-demand import]
-import { Badge } from '@heroui-vue/badge'
+import { Badge } from "@heroui-vue/badge";
 ```
+
 ```js [Global import]
-import { Badge } from 'heroui-vue'
+import { Badge } from "heroui-vue";
 ```
 :::
 
@@ -206,21 +213,21 @@ The Badge component has two slots:
 
 ### Badge Props
 
-| Attribute | Type | Description | Default |
-| --- | --- | --- | --- |
-| children | `VNodeChild` | The wrapped component. | `-` |
-| content | `string \| number \| VNodeChild` | The content of the badge. The badge will be rendered relative to its children. | `-` |
-| variant | `solid \| flat \| faded \| shadow` | The variant style of the badge. | `solid` |
-| color | `default \| primary \| secondary \| success \| warning \| danger` | The color of the badge. | `default` |
-| size | `sm \| md \| lg` | The size of the badge. | `md` |
-| shape | `circle \| rectangle` | The shape of the badge. | `rectangle` |
-| placement | `top-right \| top-left \| bottom-right \| bottom-left` | The placement of the badge. | `top-right` |
-| showOutline | `boolean` | If `true`, the badge will have an outline. | `true` |
-| disableOutline | `boolean` | If `true`, the badge will not have an outline. Deprecated, use `showOutline` instead. | `false` |
-| disableAnimation | `boolean` | If `true`, the badge will not have an animation. | `false` |
-| isInvisible | `boolean` | If `true`, the badge will be invisible. | `false` |
-| isOneChar | `boolean` | If `true`, the badge will have the same width and height. | `false` |
-| isDot | `boolean` | If `true`, the badge will have smaller dimensions. | `false` |
-| classNames | `Partial<Record<"base" \| "badge", string>>` | Allows to set custom class names for the badge slots. | `-` |
+| Attribute        | Type                                                              | Description                                                                           | Default     |
+| ---------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ----------- |
+| children         | `VNodeChild`                                                      | The wrapped component.                                                                | `-`         |
+| content          | `string \| number \| VNodeChild`                                  | The content of the badge. The badge will be rendered relative to its children.        | `-`         |
+| variant          | `solid \| flat \| faded \| shadow`                                | The variant style of the badge.                                                       | `solid`     |
+| color            | `default \| primary \| secondary \| success \| warning \| danger` | The color of the badge.                                                               | `default`   |
+| size             | `sm \| md \| lg`                                                  | The size of the badge.                                                                | `md`        |
+| shape            | `circle \| rectangle`                                             | The shape of the badge.                                                               | `rectangle` |
+| placement        | `top-right \| top-left \| bottom-right \| bottom-left`            | The placement of the badge.                                                           | `top-right` |
+| showOutline      | `boolean`                                                         | If `true`, the badge will have an outline.                                            | `true`      |
+| disableOutline   | `boolean`                                                         | If `true`, the badge will not have an outline. Deprecated, use `showOutline` instead. | `false`     |
+| disableAnimation | `boolean`                                                         | If `true`, the badge will not have an animation.                                      | `false`     |
+| isInvisible      | `boolean`                                                         | If `true`, the badge will be invisible.                                               | `false`     |
+| isOneChar        | `boolean`                                                         | If `true`, the badge will have the same width and height.                             | `false`     |
+| isDot            | `boolean`                                                         | If `true`, the badge will have smaller dimensions.                                    | `false`     |
+| classNames       | `Partial<Record<"base" \| "badge", string>>`                      | Allows to set custom class names for the badge slots.                                 | `-`         |
 
 ###

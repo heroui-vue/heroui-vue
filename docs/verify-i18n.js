@@ -41,14 +41,7 @@ function checkFileExists(filePath, description) {
 function checkDirectoryStructure() {
   log("\n📁 Checking directory structure...", "blue");
 
-  const requiredDirs = [
-    "en",
-    "en/guide",
-    "en/components",
-    "zh",
-    "zh/guide",
-    "zh/components",
-  ];
+  const requiredDirs = ["en", "en/guide", "en/components", "zh", "zh/guide", "zh/components"];
 
   let allValid = true;
 
@@ -98,10 +91,7 @@ function checkBuildOutput() {
   log("\n🏗️ Checking build output...", "blue");
 
   if (!fs.existsSync(DIST_DIR)) {
-    log(
-      '✗ Build output directory not found. Run "npm run build" first.',
-      "red",
-    );
+    log('✗ Build output directory not found. Run "npm run build" first.', "red");
     return false;
   }
 
@@ -231,9 +221,7 @@ function checkUrlStructure() {
     const filePath = path.join(DOCS_DIR, check.file);
     if (fs.existsSync(filePath)) {
       const content = fs.readFileSync(filePath, "utf8");
-      const hasCorrectLinks = check.expectedLinks.some((link) =>
-        content.includes(link),
-      );
+      const hasCorrectLinks = check.expectedLinks.some((link) => content.includes(link));
 
       if (hasCorrectLinks) {
         log(`✓ Correct locale links in ${check.file}`, "green");

@@ -1,1 +1,1 @@
-export { default as $NAME } from './src/$NAME.vue'
+export { default as $NAME } from "./src/$NAME.vue";

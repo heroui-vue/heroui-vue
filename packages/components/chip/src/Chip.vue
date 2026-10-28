@@ -1,25 +1,13 @@
 <script lang="ts" setup>
-import {
-  useChip,
-  type ChipProps,
-  type ChipSlots,
-  type ChipEmits,
-} from "./use-chip";
+import { useChip, type ChipProps, type ChipSlots, type ChipEmits } from "./use-chip";
 import { CloseFilledIcon } from "@heroui-vue/icon";
 
 const props = defineProps<ChipProps>();
 const emit = defineEmits(["close"] as ChipEmits[]);
 defineSlots<Record<ChipSlots, any>>();
 
-const {
-  chipProps,
-  closeButtonProps,
-  classNames,
-  isDot,
-  isCloseable,
-  slots,
-  hasStartContent,
-} = useChip(props as ChipProps);
+const { chipProps, closeButtonProps, classNames, isDot, isCloseable, slots, hasStartContent } =
+  useChip(props as ChipProps);
 
 function handleClose() {
   emit("close");
@@ -49,11 +37,7 @@ function onCloseKeydown(event: KeyboardEvent) {
     </span>
 
     <template v-if="isCloseable">
-      <span
-        v-bind="closeButtonProps"
-        @click="handleClose"
-        @keydown="onCloseKeydown"
-      >
+      <span v-bind="closeButtonProps" @click="handleClose" @keydown="onCloseKeydown">
         <slot name="endContent">
           <CloseFilledIcon :size="18" />
         </slot>

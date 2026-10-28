@@ -6,19 +6,24 @@ const isVisible = ref(true)
 </script>
 
 # Badge
+
 Badge 用于在界面元素上展示小型数字或状态说明。
 
 ## 安装
+
 ::: code-group
 ```sh [npm]
 npm add @heroui-vue/badge
 ```
+
 ```sh [pnpm]
 pnpm add @heroui-vue/badge
 ```
+
 ```sh [yarn]
 yarn add @heroui-vue/badge
 ```
+
 ```sh [bun]
 bun add @heroui-vue/badge
 ```
@@ -28,12 +33,14 @@ bun add @heroui-vue/badge
 > 如果你使用[全局安装](/guide/installation#全局安装)的方式，可忽略此安装步骤
 
 ## 导入
+
 ::: code-group
 ```js [按需导入]
-import { Badge } from '@heroui-vue/badge'
+import { Badge } from "@heroui-vue/badge";
 ```
+
 ```js [全局导入]
-import { Badge } from 'heroui-vue'
+import { Badge } from "heroui-vue";
 ```
 :::
 
@@ -206,21 +213,21 @@ Badge 组件包含两个 slot：
 
 ### Badge 属性
 
-| 属性 | 类型 | 说明 | 默认值 |
-| --- | --- | --- | --- |
-| children | `VNodeChild` | 被包裹的组件。 | `-` |
-| content | `string \| number \| VNodeChild` | Badge 的内容。Badge 会相对其子元素进行定位渲染。 | `-` |
-| variant | `solid \| flat \| faded \| shadow` | Badge 的样式变体。 | `solid` |
-| color | `default \| primary \| secondary \| success \| warning \| danger` | Badge 的颜色。 | `default` |
-| size | `sm \| md \| lg` | Badge 的尺寸。 | `md` |
-| shape | `circle \| rectangle` | Badge 的形状。 | `rectangle` |
-| placement | `top-right \| top-left \| bottom-right \| bottom-left` | Badge 的位置。 | `top-right` |
-| showOutline | `boolean` | 为 `true` 时，Badge 会显示描边。 | `true` |
-| disableOutline | `boolean` | 为 `true` 时，Badge 不显示描边。已废弃，请使用 `showOutline`。 | `false` |
-| disableAnimation | `boolean` | 为 `true` 时，Badge 不使用动画。 | `false` |
-| isInvisible | `boolean` | 为 `true` 时，Badge 不可见。 | `false` |
-| isOneChar | `boolean` | 为 `true` 时，Badge 会保持等宽高。 | `false` |
-| isDot | `boolean` | 为 `true` 时，Badge 以更小圆点尺寸显示。 | `false` |
-| classNames | `Partial<Record<"base" \| "badge", string>>` | 允许为 Badge 各 slot 设置自定义类名。 | `-` |
+| 属性             | 类型                                                              | 说明                                                           | 默认值      |
+| ---------------- | ----------------------------------------------------------------- | -------------------------------------------------------------- | ----------- |
+| children         | `VNodeChild`                                                      | 被包裹的组件。                                                 | `-`         |
+| content          | `string \| number \| VNodeChild`                                  | Badge 的内容。Badge 会相对其子元素进行定位渲染。               | `-`         |
+| variant          | `solid \| flat \| faded \| shadow`                                | Badge 的样式变体。                                             | `solid`     |
+| color            | `default \| primary \| secondary \| success \| warning \| danger` | Badge 的颜色。                                                 | `default`   |
+| size             | `sm \| md \| lg`                                                  | Badge 的尺寸。                                                 | `md`        |
+| shape            | `circle \| rectangle`                                             | Badge 的形状。                                                 | `rectangle` |
+| placement        | `top-right \| top-left \| bottom-right \| bottom-left`            | Badge 的位置。                                                 | `top-right` |
+| showOutline      | `boolean`                                                         | 为 `true` 时，Badge 会显示描边。                               | `true`      |
+| disableOutline   | `boolean`                                                         | 为 `true` 时，Badge 不显示描边。已废弃，请使用 `showOutline`。 | `false`     |
+| disableAnimation | `boolean`                                                         | 为 `true` 时，Badge 不使用动画。                               | `false`     |
+| isInvisible      | `boolean`                                                         | 为 `true` 时，Badge 不可见。                                   | `false`     |
+| isOneChar        | `boolean`                                                         | 为 `true` 时，Badge 会保持等宽高。                             | `false`     |
+| isDot            | `boolean`                                                         | 为 `true` 时，Badge 以更小圆点尺寸显示。                       | `false`     |
+| classNames       | `Partial<Record<"base" \| "badge", string>>`                      | 允许为 Badge 各 slot 设置自定义类名。                          | `-`         |
 
 ###

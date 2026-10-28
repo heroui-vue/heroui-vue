@@ -6,15 +6,7 @@ import type {
 import type { HTMLHeroVueUIProps } from "@heroui-vue/shared";
 import type { MaybeRef } from "vue";
 
-import {
-  getCurrentInstance,
-  ref,
-  computed,
-  watch,
-  toValue,
-  mergeProps,
-  useSlots,
-} from "vue";
+import { getCurrentInstance, ref, computed, watch, toValue, mergeProps, useSlots } from "vue";
 import { pureObject } from "@heroui-vue/shared";
 import { alert } from "@heroui/theme";
 import { mapPropsVariants } from "@heroui-vue/shared";
@@ -110,9 +102,7 @@ export function useAlert(originalProps: MaybeRef<AlertProps>) {
       "data-closeable": dataAttr(isClosable),
       "data-has-title": dataAttr(!isEmpty(title)),
       "data-has-description": dataAttr(!isEmpty(description)),
-      class: slots.base(
-        mergeProps({ class: classNames?.base }, { class: className }),
-      ),
+      class: slots.base(mergeProps({ class: classNames?.base }, { class: className })),
     };
 
     const mainWrapperProps = {
@@ -150,10 +140,7 @@ export function useAlert(originalProps: MaybeRef<AlertProps>) {
     originalProps,
     (originalProps) => {
       const resolvedOriginalProps = toValue(originalProps) ?? {};
-      const [props, _variantProps] = mapPropsVariants(
-        resolvedOriginalProps,
-        alert.variantKeys,
-      );
+      const [props, _variantProps] = mapPropsVariants(resolvedOriginalProps, alert.variantKeys);
 
       defineProps.value = props;
       variantProps.value = _variantProps;
@@ -161,9 +148,7 @@ export function useAlert(originalProps: MaybeRef<AlertProps>) {
       if (hasControlledVisibility.value) {
         innerVisible.value = props.isVisible ?? false;
       } else if (!hasInitialVisibility.value) {
-        innerVisible.value = hasDefaultVisibility.value
-          ? (props.isDefaultVisible ?? false)
-          : true;
+        innerVisible.value = hasDefaultVisibility.value ? (props.isDefaultVisible ?? false) : true;
         hasInitialVisibility.value = true;
       }
     },

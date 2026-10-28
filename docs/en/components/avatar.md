@@ -7,16 +7,20 @@ import { Avatar, AvatarGroup } from '@heroui-vue/core/raw'
 The Avatar component is used to represent a user, and displays the profile picture, initials or fallback icon.
 
 ## Installation
+
 ::: code-group
 ```sh [npm]
 npm add @heroui-vue/avatar
 ```
+
 ```sh [pnpm]
 pnpm add @heroui-vue/avatar
 ```
+
 ```sh [yarn]
 yarn add @heroui-vue/avatar
 ```
+
 ```sh [bun]
 bun add @heroui-vue/avatar
 ```
@@ -36,10 +40,11 @@ HeroUI Vue currently exports 2 avatar-related components:
 
 ::: code-group
 ```js [On-demand import]
-import { Avatar, AvatarGroup } from '@heroui-vue/avatar'
+import { Avatar, AvatarGroup } from "@heroui-vue/avatar";
 ```
+
 ```js [Global import]
-import { Avatar, AvatarGroup } from 'heroui-vue'
+import { Avatar, AvatarGroup } from "heroui-vue";
 ```
 :::
 
@@ -270,19 +275,21 @@ You can customize any part of the avatar by using the `classNames` prop.
 
 ::: component-view
 <Avatar
-  showFallback
-  :class-names="{
-    base: 'bg-linear-to-br from-[#FFB457] to-[#FF705B]',
-    icon: 'text-black/80'
-  }"
+showFallback
+:class-names="{
+base: 'bg-linear-to-br from-[#FFB457] to-[#FF705B]',
+icon: 'text-black/80'
+}"
+
 >
-  <template #icon>
-    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-      <path
+
+<template #icon>
+<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+<path
         d="M11.845 21.662C8.153 21.662 5 21.088 5 18.787s3.133-4.425 6.845-4.425c3.692 0 6.845 2.1 6.845 4.4s-3.134 2.9-6.845 2.9z M11.837 11.174a4.372 4.372 0 10-.031 0z"
       />
-    </svg>
-  </template>
+</svg>
+</template>
 </Avatar>
 :::
 
@@ -298,28 +305,28 @@ You can customize any part of the avatar by using the `classNames` prop.
 
 ### Avatar Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| src | `string` | - | The source URL of the image to be displayed. |
-| color | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | Sets the avatar background color. |
-| radius | `"none" \| "sm" \| "md" \| "lg" \| "full"` | `"full"` | Sets the avatar border radius. |
-| size | `"sm" \| "md" \| "lg"` | `"md"` | Sets the avatar size. |
-| name | `string` | - | Displays initials if the image is not provided or fails to load. |
-| icon | `any` | - | Displays a custom icon inside the avatar fallback. |
-| fallback | `any` | - | A custom fallback component to display when the image fails to load. |
-| isBordered | `boolean` | `false` | If true, adds a border around the avatar. |
-| isDisabled | `boolean` | `false` | If true, disables the avatar and applies disabled styling. |
-| isFocusable | `boolean` | `false` | If true, makes the avatar focusable for keyboard navigation. |
-| showFallback | `boolean` | `false` | If true, shows fallback icon/initials when image fails to load. |
-| imgProps | `ImgHTMLAttributes` | - | Props passed to the internal image element. |
-| classNames | `Partial<Record<"base" \| "img" \| "fallback" \| "name" \| "icon", string>>` | - | Custom class names for avatar slots. |
+| Name         | Type                                                                          | Default     | Description                                                          |
+| ------------ | ----------------------------------------------------------------------------- | ----------- | -------------------------------------------------------------------- |
+| src          | `string`                                                                      | -           | The source URL of the image to be displayed.                         |
+| color        | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | Sets the avatar background color.                                    |
+| radius       | `"none" \| "sm" \| "md" \| "lg" \| "full"`                                    | `"full"`    | Sets the avatar border radius.                                       |
+| size         | `"sm" \| "md" \| "lg"`                                                        | `"md"`      | Sets the avatar size.                                                |
+| name         | `string`                                                                      | -           | Displays initials if the image is not provided or fails to load.     |
+| icon         | `any`                                                                         | -           | Displays a custom icon inside the avatar fallback.                   |
+| fallback     | `any`                                                                         | -           | A custom fallback component to display when the image fails to load. |
+| isBordered   | `boolean`                                                                     | `false`     | If true, adds a border around the avatar.                            |
+| isDisabled   | `boolean`                                                                     | `false`     | If true, disables the avatar and applies disabled styling.           |
+| isFocusable  | `boolean`                                                                     | `false`     | If true, makes the avatar focusable for keyboard navigation.         |
+| showFallback | `boolean`                                                                     | `false`     | If true, shows fallback icon/initials when image fails to load.      |
+| imgProps     | `ImgHTMLAttributes`                                                           | -           | Props passed to the internal image element.                          |
+| classNames   | `Partial<Record<"base" \| "img" \| "fallback" \| "name" \| "icon", string>>`  | -           | Custom class names for avatar slots.                                 |
 
 ### Avatar Group Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| max | `number` | - | The maximum number of visible avatars. |
-| total | `number` | - | Controls the number of avatars not visible. |
-| isGrid | `boolean` | `false` | Whether avatars should be displayed in a grid. |
-| renderCount | `boolean` | `true` | Whether to render the built-in count badge. |
-| classNames | `Partial<Record<"base" \| "count", string>>` | - | Custom class names for avatar group slots. |
+| Name        | Type                                         | Default | Description                                    |
+| ----------- | -------------------------------------------- | ------- | ---------------------------------------------- |
+| max         | `number`                                     | -       | The maximum number of visible avatars.         |
+| total       | `number`                                     | -       | Controls the number of avatars not visible.    |
+| isGrid      | `boolean`                                    | `false` | Whether avatars should be displayed in a grid. |
+| renderCount | `boolean`                                    | `true`  | Whether to render the built-in count badge.    |
+| classNames  | `Partial<Record<"base" \| "count", string>>` | -       | Custom class names for avatar group slots.     |

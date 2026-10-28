@@ -1,18 +1,18 @@
 {
   "name": "heroui-vue-create",
-  "type": "module",
   "version": "1.0.0",
   "private": true,
-  "exports": {
-    ".": "./dist/index.mjs"
-  },
-  "main": "./dist/index.mjs",
   "bin": {
     "heroui-vue-create": "index.js"
   },
   "files": [
     "template"
   ],
+  "type": "module",
+  "main": "./dist/index.mjs",
+  "exports": {
+    ".": "./dist/index.mjs"
+  },
   "scripts": {
     "dev": "unbuild --stub",
     "build": "unbuild"

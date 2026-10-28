@@ -5,14 +5,7 @@ import type {
 } from "@heroui/theme";
 import type { ComputedRef, VNode } from "vue";
 
-import {
-  Comment,
-  Text,
-  computed,
-  getCurrentInstance,
-  useAttrs,
-  useSlots,
-} from "vue";
+import { Comment, Text, computed, getCurrentInstance, useAttrs, useSlots } from "vue";
 import { mapPropsVariants, clsx } from "@heroui-vue/shared";
 import { chip } from "@heroui/theme";
 

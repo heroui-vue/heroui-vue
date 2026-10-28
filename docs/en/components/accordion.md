@@ -13,16 +13,20 @@ const selectedKey = ref('1')
 Accordion display a list of high-level options that can expand/collapse to reveal more information.
 
 ## Installation
+
 ::: code-group
 ```sh [npm]
 npm add @heroui-vue/accordion
 ```
+
 ```sh [pnpm]
 pnpm add @heroui-vue/accordion
 ```
+
 ```sh [yarn]
 yarn add @heroui-vue/accordion
 ```
+
 ```sh [bun]
 bun add @heroui-vue/accordion
 ```
@@ -40,10 +44,11 @@ HeroUI exports 2 accordion-related components:
 
 ::: code-group
 ```js [On-demand import]
-import { Accordion, AccordionItem } from '@heroui-vue/accordion'
+import { Accordion, AccordionItem } from "@heroui-vue/accordion";
 ```
+
 ```js [Global import]
-import { Accordion, AccordionItem } from 'heroui-vue'
+import { Accordion, AccordionItem } from "heroui-vue";
 ```
 :::
 
@@ -289,16 +294,18 @@ Here's an example of how to customize the accordion styles:
 
 ::: component-view
 <Accordion
-  className="p-2 flex flex-col gap-1 w-full max-w-[300px]"
-  :itemClasses="{
-    base: 'py-0 w-full',
-    title: 'font-normal text-medium',
-    trigger: 'px-2 py-0 data-[hover=true]:bg-default-100 rounded-lg h-14 flex items-center',
-    indicator: 'text-medium',
-    content: 'text-small px-2',
-  }"
-  variant="shadow"
+className="p-2 flex flex-col gap-1 w-full max-w-[300px]"
+:itemClasses="{
+base: 'py-0 w-full',
+title: 'font-normal text-medium',
+trigger: 'px-2 py-0 data-[hover=true]:bg-default-100 rounded-lg h-14 flex items-center',
+indicator: 'text-medium',
+content: 'text-small px-2',
+}"
+variant="shadow"
+
 >
+
   <AccordionItem itemKey="1" title="Connected devices">
     <template #startContent><span class="text-primary">◉</span></template>
     <template #subtitle><p class="flex">2 issues to <span class="text-primary ml-1">fix now</span></p></template>
@@ -345,68 +352,68 @@ Here's an example of how to customize the accordion styles:
 
 ### Accordion Props
 
-| Attribute | Type | Description | Default |
-| --- | --- | --- | --- |
-| children | `VNodeChild \| VNodeChild[]` | The contents of the collection. Usually the array of AccordionItem | `-` |
-| variant | `light \| shadow \| bordered \| splitted` | The accordion appearance style. | `light` |
-| selectionMode | `none \| single \| multiple` | The type of selection that is allowed in the collection. | `single` |
-| selectionBehavior | `toggle \| replace` | The accordion selection behavior. | `toggle` |
-| isCompact | `boolean` | Whether all Accordion items should be smaller. | `false` |
-| isDisabled | `boolean` | Whether the Accordion items are disabled. | `false` |
-| showDivider | `boolean` | Whether to display a divider at the bottom of the each accordion item. | `true` |
-| dividerProps | `DividerProps` | The divider component props. | `-` |
-| hideIndicator | `boolean` | Whether the Accordion items indicator is hidden. | `false` |
-| disableAnimation | `boolean` | Whether the Accordion items open/close animation is disabled. | `false` |
-| disableIndicatorAnimation | `boolean` | Whether the Accordion items indicator animation is disabled. | `false` |
-| disallowEmptySelection | `boolean` | Whether the collection allows empty selection. | `false` |
-| keepContentMounted | `boolean` | Whether the Accordion items content should be always mounted. | `false` |
-| fullWidth | `boolean` | Whether the accordion should take up the full width of its parent container. | `true` |
-| motionProps | `MotionProps` | The motion properties of the Accordion. | `-` |
-| disabledKeys | `string[]` | The item keys that are disabled. These items cannot be selected, focused, or otherwise interacted with. | `-` |
-| itemClasses | `AccordionItemClassnames` | The accordion items classNames. | `-` |
-| selectedKeys | `string[] \| string` | The currently selected keys in the collection (controlled). | `-` |
-| defaultSelectedKeys | `string[] \| string` | The initial selected keys in the collection (uncontrolled). | `-` |
+| Attribute                 | Type                                      | Description                                                                                             | Default  |
+| ------------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------- | -------- |
+| children                  | `VNodeChild \| VNodeChild[]`              | The contents of the collection. Usually the array of AccordionItem                                      | `-`      |
+| variant                   | `light \| shadow \| bordered \| splitted` | The accordion appearance style.                                                                         | `light`  |
+| selectionMode             | `none \| single \| multiple`              | The type of selection that is allowed in the collection.                                                | `single` |
+| selectionBehavior         | `toggle \| replace`                       | The accordion selection behavior.                                                                       | `toggle` |
+| isCompact                 | `boolean`                                 | Whether all Accordion items should be smaller.                                                          | `false`  |
+| isDisabled                | `boolean`                                 | Whether the Accordion items are disabled.                                                               | `false`  |
+| showDivider               | `boolean`                                 | Whether to display a divider at the bottom of the each accordion item.                                  | `true`   |
+| dividerProps              | `DividerProps`                            | The divider component props.                                                                            | `-`      |
+| hideIndicator             | `boolean`                                 | Whether the Accordion items indicator is hidden.                                                        | `false`  |
+| disableAnimation          | `boolean`                                 | Whether the Accordion items open/close animation is disabled.                                           | `false`  |
+| disableIndicatorAnimation | `boolean`                                 | Whether the Accordion items indicator animation is disabled.                                            | `false`  |
+| disallowEmptySelection    | `boolean`                                 | Whether the collection allows empty selection.                                                          | `false`  |
+| keepContentMounted        | `boolean`                                 | Whether the Accordion items content should be always mounted.                                           | `false`  |
+| fullWidth                 | `boolean`                                 | Whether the accordion should take up the full width of its parent container.                            | `true`   |
+| motionProps               | `MotionProps`                             | The motion properties of the Accordion.                                                                 | `-`      |
+| disabledKeys              | `string[]`                                | The item keys that are disabled. These items cannot be selected, focused, or otherwise interacted with. | `-`      |
+| itemClasses               | `AccordionItemClassnames`                 | The accordion items classNames.                                                                         | `-`      |
+| selectedKeys              | `string[] \| string`                      | The currently selected keys in the collection (controlled).                                             | `-`      |
+| defaultSelectedKeys       | `string[] \| string`                      | The initial selected keys in the collection (uncontrolled).                                             | `-`      |
 
 ### Accordion Events
 
-| Attribute | Type | Description | Default |
-| --- | --- | --- | --- |
-| onSelectionChange | `(keys: string[] \| string) => any` | Handler that is called when the selection changes. In Vue, use `@change` or `v-model`. | `-` |
+| Attribute         | Type                                | Description                                                                            | Default |
+| ----------------- | ----------------------------------- | -------------------------------------------------------------------------------------- | ------- |
+| onSelectionChange | `(keys: string[] \| string) => any` | Handler that is called when the selection changes. In Vue, use `@change` or `v-model`. | `-`     |
 
 ### Accordion Item Props
 
-| Attribute | Type | Description | Default |
-| --- | --- | --- | --- |
-| children | `VNodeChild` | The content of the component. | `-` |
-| title | `VNodeChild` | The accordion item title. | `-` |
-| subtitle | `VNodeChild` | The accordion item subtitle. | `-` |
-| indicator | `IndicatorProps` | The accordion item expanded indicator, usually an arrow icon. | `-` |
-| startContent | `VNodeChild` | The accordion item start content, usually an icon or avatar. | `-` |
-| motionProps | `MotionProps` | The props to modify the framer motion animation. Use the variants API to create your own animation. | `-` |
-| isCompact | `boolean` | Whether the AccordionItem is compact. | `false` |
-| isDisabled | `boolean` | The current disabled status. | `false` |
-| keepContentMounted | `boolean` | Whether the AccordionItem content is kept mounted when closed. | `false` |
-| hideIndicator | `boolean` | Whether the AccordionItem indicator is hidden. | `false` |
-| disableAnimation | `boolean` | Whether the AccordionItem animation is disabled. | `false` |
-| disableIndicatorAnimation | `boolean` | Whether the AccordionItem indicator animation is disabled. | `false` |
-| HeadingComponent | `string` | Customizable heading tag for Web accessibility. | `h2` |
-| classNames | `AccordionItemClassnames` | Allows to set custom class names for the accordion item slots. | `-` |
+| Attribute                 | Type                      | Description                                                                                         | Default |
+| ------------------------- | ------------------------- | --------------------------------------------------------------------------------------------------- | ------- |
+| children                  | `VNodeChild`              | The content of the component.                                                                       | `-`     |
+| title                     | `VNodeChild`              | The accordion item title.                                                                           | `-`     |
+| subtitle                  | `VNodeChild`              | The accordion item subtitle.                                                                        | `-`     |
+| indicator                 | `IndicatorProps`          | The accordion item expanded indicator, usually an arrow icon.                                       | `-`     |
+| startContent              | `VNodeChild`              | The accordion item start content, usually an icon or avatar.                                        | `-`     |
+| motionProps               | `MotionProps`             | The props to modify the framer motion animation. Use the variants API to create your own animation. | `-`     |
+| isCompact                 | `boolean`                 | Whether the AccordionItem is compact.                                                               | `false` |
+| isDisabled                | `boolean`                 | The current disabled status.                                                                        | `false` |
+| keepContentMounted        | `boolean`                 | Whether the AccordionItem content is kept mounted when closed.                                      | `false` |
+| hideIndicator             | `boolean`                 | Whether the AccordionItem indicator is hidden.                                                      | `false` |
+| disableAnimation          | `boolean`                 | Whether the AccordionItem animation is disabled.                                                    | `false` |
+| disableIndicatorAnimation | `boolean`                 | Whether the AccordionItem indicator animation is disabled.                                          | `false` |
+| HeadingComponent          | `string`                  | Customizable heading tag for Web accessibility.                                                     | `h2`    |
+| classNames                | `AccordionItemClassnames` | Allows to set custom class names for the accordion item slots.                                      | `-`     |
 
 ### Accordion Item Events
 
-| Attribute | Type | Description | Default |
-| --- | --- | --- | --- |
-| onFocus | `(e: FocusEvent) => void` | Handler that is called when the element receives focus. | `-` |
-| onBlur | `(e: FocusEvent) => void` | Handler that is called when the element loses focus. | `-` |
-| onFocusChange | `(isFocused: boolean) => void` | Handler that is called when the element's focus status changes. | `-` |
-| onKeyDown | `(e: KeyboardEvent) => void` | Handler that is called when a key is pressed. | `-` |
-| onKeyUp | `(e: KeyboardEvent) => void` | Handler that is called when a key is released. | `-` |
-| onPress | `(e: PressEvent) => void` | Handler called when the press is released over the target. | `-` |
-| onPressStart | `(e: PressEvent) => void` | Handler called when a press interaction starts. | `-` |
-| onPressEnd | `(e: PressEvent) => void` | Handler called when a press interaction ends. | `-` |
-| onPressChange | `(isPressed: boolean) => void` | Handler called when the press state changes. | `-` |
-| onPressUp | `(e: PressEvent) => void` | Handler called when a press is released over the target. | `-` |
-| onClick | `MouseEventHandler` | The native button click event handler (Deprecated) use onPress instead. | `-` |
+| Attribute     | Type                           | Description                                                             | Default |
+| ------------- | ------------------------------ | ----------------------------------------------------------------------- | ------- |
+| onFocus       | `(e: FocusEvent) => void`      | Handler that is called when the element receives focus.                 | `-`     |
+| onBlur        | `(e: FocusEvent) => void`      | Handler that is called when the element loses focus.                    | `-`     |
+| onFocusChange | `(isFocused: boolean) => void` | Handler that is called when the element's focus status changes.         | `-`     |
+| onKeyDown     | `(e: KeyboardEvent) => void`   | Handler that is called when a key is pressed.                           | `-`     |
+| onKeyUp       | `(e: KeyboardEvent) => void`   | Handler that is called when a key is released.                          | `-`     |
+| onPress       | `(e: PressEvent) => void`      | Handler called when the press is released over the target.              | `-`     |
+| onPressStart  | `(e: PressEvent) => void`      | Handler called when a press interaction starts.                         | `-`     |
+| onPressEnd    | `(e: PressEvent) => void`      | Handler called when a press interaction ends.                           | `-`     |
+| onPressChange | `(isPressed: boolean) => void` | Handler called when the press state changes.                            | `-`     |
+| onPressUp     | `(e: PressEvent) => void`      | Handler called when a press is released over the target.                | `-`     |
+| onClick       | `MouseEventHandler`            | The native button click event handler (Deprecated) use onPress instead. | `-`     |
 
 ### Types
 

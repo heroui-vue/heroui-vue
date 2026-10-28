@@ -15,8 +15,7 @@ export function useStore() {
   console.log(location);
   const defaultImportMap = ref<ImportMap>({
     imports: {
-      "heroui-vue":
-        "https://cdn.jsdelivr.net/npm/heroui-vue@0.0.17/dist/index.js",
+      "heroui-vue": "https://cdn.jsdelivr.net/npm/heroui-vue@0.0.17/dist/index.js",
     },
   });
   const { importMap } = useVueImportMap();

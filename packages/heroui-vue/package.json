@@ -1,36 +1,36 @@
 {
   "name": "heroui-vue",
-  "type": "module",
   "version": "0.0.18",
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
+  "keywords": [
+    "heroui",
+    "tailwindcss",
+    "ui",
+    "ui framework",
+    "vue"
+  ],
+  "bugs": {
+    "url": "https://github.com/heroui-vue/heroui-vue/issues"
   },
+  "license": "MIT",
   "author": {
     "name": "hotdog",
     "email": "hotdogc1017@gmail.com",
     "url": "https://github.com/hotdogc1017"
   },
-  "license": "MIT",
   "repository": "https://github.com/heroui-vue/heroui-vue",
-  "bugs": {
-    "url": "https://github.com/heroui-vue/heroui-vue/issues"
-  },
   "files": [
     "dist"
   ],
-  "keywords": [
-    "heroui",
-    "vue",
-    "ui",
-    "ui framework",
-    "tailwindcss"
-  ],
+  "type": "module",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": "./dist/index.js",
     "./plugin": "./dist/heroui.js"
   },
-  "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "build": "pnpm -w build && pnpm build:only",
     "build:only": "tsdown",
@@ -38,13 +38,13 @@
     "bump": "pnpm build && bumpp --tag v --sign"
   },
   "devDependencies": {
+    "@heroui-vue/core": "workspace:*",
     "@heroui/theme": "catalog:prod",
     "@tailwindcss/vite": "catalog:prod",
     "@vitejs/plugin-vue": "catalog:prod",
-    "@heroui-vue/core": "workspace: *",
     "tailwindcss": "catalog:prod",
-    "vite": "catalog:prod",
     "unplugin-vue": "catalog:prod",
+    "vite": "catalog:prod",
     "vite-plugin-dts": "^4.5.4"
   }
 }

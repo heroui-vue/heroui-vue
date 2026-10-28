@@ -1,8 +1,5 @@
 import { defineConfig } from "vitepress";
-import {
-  groupIconMdPlugin,
-  groupIconVitePlugin,
-} from "vitepress-plugin-group-icons";
+import { groupIconMdPlugin, groupIconVitePlugin } from "vitepress-plugin-group-icons";
 import { componentViewMarkdownPlugin } from "vitepress-plugin-component";
 import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 import { npmCommandsMarkdownPlugin } from "vitepress-plugin-npm-commands";

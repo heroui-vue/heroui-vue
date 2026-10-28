@@ -52,10 +52,7 @@ export interface AccordionItemProps {
   classNames?: SlotsToClasses<_AccordionItemSlots>;
 }
 
-export type AccordionEmits =
-  | "update:modelValue"
-  | "update:selectedKeys"
-  | "change";
+export type AccordionEmits = "update:modelValue" | "update:selectedKeys" | "change";
 
 type AccordionContext = {
   variant: Ref<AccordionProps["variant"]>;
@@ -71,11 +68,11 @@ type AccordionContext = {
   toggle: (key: string) => void;
 };
 
-export const accordionContextKey: InjectionKey<AccordionContext> = Symbol(
-  "accordion-context",
-);
+export const accordionContextKey: InjectionKey<AccordionContext> = Symbol("accordion-context");
 
-function normalizeKeys(value: AccordionProps["modelValue"] | AccordionProps["defaultExpandedKeys"]) {
+function normalizeKeys(
+  value: AccordionProps["modelValue"] | AccordionProps["defaultExpandedKeys"],
+) {
   if (value === undefined || value === null) {
     return [];
   }
@@ -235,8 +232,7 @@ export function useAccordionItem(props: MaybeRef<AccordionItemProps>) {
       hideIndicator: resolved.hideIndicator ?? context?.hideIndicator.value,
       disableAnimation: resolved.disableAnimation ?? context?.disableAnimation.value,
       disableIndicatorAnimation:
-        resolved.disableIndicatorAnimation ??
-        context?.disableIndicatorAnimation.value,
+        resolved.disableIndicatorAnimation ?? context?.disableIndicatorAnimation.value,
     });
 
     const classNames = {
@@ -249,8 +245,7 @@ export function useAccordionItem(props: MaybeRef<AccordionItemProps>) {
       isOpen,
       isDisabled,
       keepContentMounted: context?.keepContentMounted.value ?? false,
-      hideIndicator:
-        resolved.hideIndicator ?? context?.hideIndicator.value ?? false,
+      hideIndicator: resolved.hideIndicator ?? context?.hideIndicator.value ?? false,
       hasSubtitle: !!resolved.subtitle || !!slots.subtitle,
       baseProps: {
         class: styles.base({ class: clsx(classNames.base, attrs.class) }),

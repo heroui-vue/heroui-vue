@@ -1,9 +1,5 @@
 <script lang="ts" setup>
-import {
-  useAccordion,
-  type AccordionEmits,
-  type AccordionProps,
-} from "./use-accordion";
+import { useAccordion, type AccordionEmits, type AccordionProps } from "./use-accordion";
 
 const props = withDefaults(defineProps<AccordionProps>(), {
   selectionMode: "single",

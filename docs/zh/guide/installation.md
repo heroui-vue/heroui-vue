@@ -1,19 +1,24 @@
 # 安装
+
 快速安装配置并使用
 
 ## 全局安装
+
 你可以在 `heroui-vue` 命名空间下使用所有组件。
 
 ::: code-group
 ```bash [npm]
 npm install heroui-vue tailwindcss
 ```
+
 ```bash [pnpm]
 pnpm install heroui-vue tailwindcss
 ```
+
 ```bash [yarn]
 yarn install heroui-vue tailwindcss
 ```
+
 ```bash [bun]
 bun install heroui-vue tailwindcss
 ```
@@ -22,9 +27,11 @@ bun install heroui-vue tailwindcss
 HeroUI Vue内置了一个具有默认配置的 `@heroui/theme`，并导出了用于配置TailwindCSS的插件。
 
 ## 按需安装
+
 你也可以仅安装你需要的组件，请参考每个组件的文档以了解如何安装。但使用按需安装前请确保你已经完成了[配置](#配置)。
 
 ## 配置
+
 Heroui Vue默认支持TailwindCSS V4，且对V3也提供有限的支持。
 
 ::: tip
@@ -34,9 +41,11 @@ Heroui Vue默认支持TailwindCSS V4，且对V3也提供有限的支持。
 :::
 
 ### TailwindCSS
+
 可通过两种不同的方式来配置TailwindCSS，即**有** `tailwind.config.js` 文件和**无** `tailwind.config.js`文件。
 
 #### 有tailwind.config.js文件
+
 如果你更喜欢通过 `tailwind.config.js` 文件来配置TailwindCSS，可以这样配置：
 
 ```js{2,6,7,8,9,10}
@@ -62,6 +71,7 @@ module.exports = {
 :::
 
 #### 无tailwind.config.js文件
+
 如果你的入口文件中包含了一个css导入，假设名称是`index.css`，则按如下配置:
 
 ```css
@@ -73,14 +83,17 @@ module.exports = {
 ```
 
 ### Vite
+
 如果你的项目使用Vite，需要安装官方的`@tailwindcss/vite`插件，然后在你的vite配置文件使用它。
 
 #### 安装插件
+
 ```sh
 npm install @tailwindcss/vite // [!=npm auto]
 ```
 
 #### 配置vite
+
 ```ts{3,6}
 // vite.config.ts
 import { defineConfig } from "vite";

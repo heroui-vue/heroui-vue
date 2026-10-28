@@ -3,19 +3,24 @@ import { Button } from '@heroui-vue/core/raw'
 </script>
 
 # Button
+
 允许用户通过单次轻触执行操作和选择。
 
 ## 安装
+
 ::: code-group
 ```sh [npm]
 npm add @heroui-vue/button
 ```
+
 ```sh [pnpm]
 pnpm add @heroui-vue/button
 ```
+
 ```sh [yarn]
 yarn add @heroui-vue/button
 ```
+
 ```sh [bun]
 bun add @heroui-vue/button
 ```
@@ -25,12 +30,14 @@ bun add @heroui-vue/button
 > 如果你使用[全局安装](/zh/guide/installation#全局安装)的方式，可忽略此安装步骤
 
 ## 导入
+
 ::: code-group
 ```js [按需导入]
-import { Button } from '@heroui-vue/button'
+import { Button } from "@heroui-vue/button";
 ```
+
 ```js [全局导入]
-import { Button } from 'heroui-vue'
+import { Button } from "heroui-vue";
 ```
 :::
 
@@ -41,14 +48,15 @@ import { Button } from 'heroui-vue'
 :::
 
 ### 禁用
+
 按钮将无法点击
 
 ::: component-view
 <Button color="primary" isDisabled>Button</Button>
 :::
 
-
 ### 大小
+
 显示不同尺寸的按钮
 
 ::: component-view
@@ -60,6 +68,7 @@ import { Button } from 'heroui-vue'
 :::
 
 ### 半径
+
 显示不同角度的按钮
 
 ::: component-view
@@ -73,6 +82,7 @@ import { Button } from 'heroui-vue'
 :::
 
 ### 颜色
+
 显示不同颜色的按钮
 
 ::: component-view
@@ -87,6 +97,7 @@ import { Button } from 'heroui-vue'
 :::
 
 ### 变体
+
 显示不同种类的按钮
 
 ::: component-view
@@ -116,6 +127,7 @@ import { Button } from 'heroui-vue'
 :::
 
 ### 加载
+
 传递 `isLoading` 属性以在按钮内显示 `Spinner` 组件。
 
 :::warning
@@ -183,6 +195,7 @@ import { Button } from 'heroui-vue'
 :::
 
 ### 带图标
+
 你可以通过传递`startContent`或`endContent`插槽来添加图标。
 
 ::: component-view
@@ -235,6 +248,7 @@ import { Button } from 'heroui-vue'
 :::
 
 ### 仅图标
+
 你还可以通过将`isIconOnly`属性和所需的图标作为默认子元素传递来显示不带文本的按钮。
 
 ::: component-view
@@ -276,18 +290,22 @@ import { Button } from 'heroui-vue'
 :::
 
 ### 自定义样式
+
 你可以通过将自定义 Tailwind CSS 类传递给组件槽来自定义 Button 组件。
 
 ::: component-view
 <Button
-  class="bg-gradient-to-tr from-pink-500 to-yellow-500 bg-sky-500 text-white shadow-lg"
-  radius="full"
+class="bg-gradient-to-tr from-pink-500 to-yellow-500 bg-sky-500 text-white shadow-lg"
+radius="full"
+
 >
-  Button
+
+Button
 </Button>
 :::
 
 ### 禁用Ripple
+
 按钮按下时将不会出现涟漪效果
 
 ::: component-view
@@ -297,6 +315,7 @@ import { Button } from 'heroui-vue'
 :::
 
 ### 禁用动画
+
 按钮按下时将不会出现动画效果
 
 ::: component-view
@@ -338,36 +357,37 @@ import { Button } from 'heroui-vue'
 
 ### Button 属性
 
-| 名称 | 类型 | 默认值 | 描述 |
-| --- | --- | --- | --- |
-| variant | `"solid" \| "bordered" \| "light" \| "flat" \| "faded" \| "shadow" \| "ghost"` | `"solid"` | 按钮外观样式。 |
-| color | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | 按钮颜色主题。 |
-| size | `"sm" \| "md" \| "lg"` | `"md"` | 按钮大小 |
-| radius | `"none" \| "sm" \| "md" \| "lg" \| "full"` | `"md"` | 按钮边框圆角。 |
-| spinnerPlacement | `"start" \| "end"` | `"start"` | 加载器位置。 |
-| fullWidth | `boolean` | `false` | 按钮是否应占据其父元素的全宽。 |
-| isIconOnly | `boolean` | `false` | 按钮是否应具有相同的宽度和高度。 |
-| isDisabled | `boolean` | `false` | 按钮是否被禁用。 |
-| isLoading | `boolean` | `false` | 按钮是否正在加载。 |
-| disableRipple | `boolean` | `false` | 按钮是否应在按下时显示涟漪效果。 |
-| disableAnimation | `boolean` | `false` | 按钮是否应显示动画。 |
-
+| 名称             | 类型                                                                           | 默认值      | 描述                             |
+| ---------------- | ------------------------------------------------------------------------------ | ----------- | -------------------------------- |
+| variant          | `"solid" \| "bordered" \| "light" \| "flat" \| "faded" \| "shadow" \| "ghost"` | `"solid"`   | 按钮外观样式。                   |
+| color            | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"`  | `"default"` | 按钮颜色主题。                   |
+| size             | `"sm" \| "md" \| "lg"`                                                         | `"md"`      | 按钮大小                         |
+| radius           | `"none" \| "sm" \| "md" \| "lg" \| "full"`                                     | `"md"`      | 按钮边框圆角。                   |
+| spinnerPlacement | `"start" \| "end"`                                                             | `"start"`   | 加载器位置。                     |
+| fullWidth        | `boolean`                                                                      | `false`     | 按钮是否应占据其父元素的全宽。   |
+| isIconOnly       | `boolean`                                                                      | `false`     | 按钮是否应具有相同的宽度和高度。 |
+| isDisabled       | `boolean`                                                                      | `false`     | 按钮是否被禁用。                 |
+| isLoading        | `boolean`                                                                      | `false`     | 按钮是否正在加载。               |
+| disableRipple    | `boolean`                                                                      | `false`     | 按钮是否应在按下时显示涟漪效果。 |
+| disableAnimation | `boolean`                                                                      | `false`     | 按钮是否应显示动画。             |
 
 ### Button 插槽
-| 名称 | 作用域 | 描述 |
-| --- | --- | --- |
-| default | - | 默认插槽。 |
-| startContent | - | 开始内容插槽。 |
-| endContent | - | 结束内容插槽。 |
-| spinner | - | 加载器插槽。 |
+
+| 名称         | 作用域 | 描述           |
+| ------------ | ------ | -------------- |
+| default      | -      | 默认插槽。     |
+| startContent | -      | 开始内容插槽。 |
+| endContent   | -      | 结束内容插槽。 |
+| spinner      | -      | 加载器插槽。   |
 
 ### Button 事件 (开发中)
-| 名称 | 类型 | 默认值 |
-| --- | --- | --- |
-| press | `(e: PressEvent) => void` | - |
-| pressStart | `(e: PressEvent) => void` | - |
-| pressEnd | `(e: PressEvent) => void` | - |
-| pressChange | `(isPressed: boolean) => void` | - |
-| pressUp | `(e: PressEvent) => void` | - |
-| keyDown | `(e: KeyboardEvent) => void` | - |
-| keyUp | `(e: KeyboardEvent) => void` | - |
+
+| 名称        | 类型                           | 默认值 |
+| ----------- | ------------------------------ | ------ |
+| press       | `(e: PressEvent) => void`      | -      |
+| pressStart  | `(e: PressEvent) => void`      | -      |
+| pressEnd    | `(e: PressEvent) => void`      | -      |
+| pressChange | `(isPressed: boolean) => void` | -      |
+| pressUp     | `(e: PressEvent) => void`      | -      |
+| keyDown     | `(e: KeyboardEvent) => void`   | -      |
+| keyUp       | `(e: KeyboardEvent) => void`   | -      |

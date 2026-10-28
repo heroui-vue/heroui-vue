@@ -27,9 +27,7 @@ export interface ButtonVariantProps {
 
 export interface ButtonAriaProps {}
 
-export type ButtonProps = ButtonDefineProps &
-  ButtonVariantProps &
-  ButtonAriaProps;
+export type ButtonProps = ButtonDefineProps & ButtonVariantProps & ButtonAriaProps;
 
 export function useButton(
   originalProps: MaybeRef<ButtonProps>,
@@ -45,12 +43,7 @@ export function useButton(
   useRipple(buttonRef, { disabled: disableRipple });
 
   watch(
-    [
-      originalProps as WatchSource<ButtonProps>,
-      isFocused,
-      isPressed,
-      isHovered,
-    ],
+    [originalProps as WatchSource<ButtonProps>, isFocused, isPressed, isHovered],
     ([originalProps = {}, isFocused, isPressed, isHovered]) => {
       const {
         class: className,

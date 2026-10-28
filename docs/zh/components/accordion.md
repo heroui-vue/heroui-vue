@@ -13,16 +13,20 @@ const selectedKey = ref('1')
 Accordion 用于展示可展开/折叠的高层级信息列表。
 
 ## 安装
+
 ::: code-group
 ```sh [npm]
 npm add @heroui-vue/accordion
 ```
+
 ```sh [pnpm]
 pnpm add @heroui-vue/accordion
 ```
+
 ```sh [yarn]
 yarn add @heroui-vue/accordion
 ```
+
 ```sh [bun]
 bun add @heroui-vue/accordion
 ```
@@ -40,10 +44,11 @@ HeroUI 提供 2 个 Accordion 相关组件：
 
 ::: code-group
 ```js [按需导入]
-import { Accordion, AccordionItem } from '@heroui-vue/accordion'
+import { Accordion, AccordionItem } from "@heroui-vue/accordion";
 ```
+
 ```js [全局导入]
-import { Accordion, AccordionItem } from 'heroui-vue'
+import { Accordion, AccordionItem } from "heroui-vue";
 ```
 :::
 
@@ -289,16 +294,18 @@ Accordion 是受控组件，你需要自行控制 `selectedKeys`。
 
 ::: component-view
 <Accordion
-  className="p-2 flex flex-col gap-1 w-full max-w-[300px]"
-  :itemClasses="{
-    base: 'py-0 w-full',
-    title: 'font-normal text-medium',
-    trigger: 'px-2 py-0 data-[hover=true]:bg-default-100 rounded-lg h-14 flex items-center',
-    indicator: 'text-medium',
-    content: 'text-small px-2',
-  }"
-  variant="shadow"
+className="p-2 flex flex-col gap-1 w-full max-w-[300px]"
+:itemClasses="{
+base: 'py-0 w-full',
+title: 'font-normal text-medium',
+trigger: 'px-2 py-0 data-[hover=true]:bg-default-100 rounded-lg h-14 flex items-center',
+indicator: 'text-medium',
+content: 'text-small px-2',
+}"
+variant="shadow"
+
 >
+
   <AccordionItem itemKey="1" title="Connected devices">
     <template #startContent><span class="text-primary">◉</span></template>
     <template #subtitle><p class="flex">2 issues to <span class="text-primary ml-1">fix now</span></p></template>
@@ -345,68 +352,68 @@ Accordion 是受控组件，你需要自行控制 `selectedKeys`。
 
 ### Accordion 属性
 
-| 属性 | 类型 | 说明 | 默认值 |
-| --- | --- | --- | --- |
-| children | `VNodeChild \| VNodeChild[]` | 集合内容，一般是 AccordionItem 数组。 | `-` |
-| variant | `light \| shadow \| bordered \| splitted` | Accordion 视觉风格。 | `light` |
-| selectionMode | `none \| single \| multiple` | 集合允许的选择模式。 | `single` |
-| selectionBehavior | `toggle \| replace` | 选择行为。 | `toggle` |
-| isCompact | `boolean` | 是否让所有 AccordionItem 更紧凑。 | `false` |
-| isDisabled | `boolean` | 是否禁用 AccordionItem。 | `false` |
-| showDivider | `boolean` | 是否显示每个项目底部分割线。 | `true` |
-| dividerProps | `DividerProps` | Divider 组件属性。 | `-` |
-| hideIndicator | `boolean` | 是否隐藏 AccordionItem 指示器。 | `false` |
-| disableAnimation | `boolean` | 是否禁用 AccordionItem 展开/收起动画。 | `false` |
-| disableIndicatorAnimation | `boolean` | 是否禁用指示器动画。 | `false` |
-| disallowEmptySelection | `boolean` | 是否不允许空选择。 | `false` |
-| keepContentMounted | `boolean` | 是否始终挂载 AccordionItem 内容。 | `false` |
-| fullWidth | `boolean` | 是否占满父容器宽度。 | `true` |
-| motionProps | `MotionProps` | Accordion 动画属性。 | `-` |
-| disabledKeys | `string[]` | 禁用项键集合，这些项不可交互。 | `-` |
-| itemClasses | `AccordionItemClassnames` | AccordionItem 插槽类名集合。 | `-` |
-| selectedKeys | `string[] \| string` | 当前选中键（受控）。 | `-` |
-| defaultSelectedKeys | `string[] \| string` | 初始选中键（非受控）。 | `-` |
+| 属性                      | 类型                                      | 说明                                   | 默认值   |
+| ------------------------- | ----------------------------------------- | -------------------------------------- | -------- |
+| children                  | `VNodeChild \| VNodeChild[]`              | 集合内容，一般是 AccordionItem 数组。  | `-`      |
+| variant                   | `light \| shadow \| bordered \| splitted` | Accordion 视觉风格。                   | `light`  |
+| selectionMode             | `none \| single \| multiple`              | 集合允许的选择模式。                   | `single` |
+| selectionBehavior         | `toggle \| replace`                       | 选择行为。                             | `toggle` |
+| isCompact                 | `boolean`                                 | 是否让所有 AccordionItem 更紧凑。      | `false`  |
+| isDisabled                | `boolean`                                 | 是否禁用 AccordionItem。               | `false`  |
+| showDivider               | `boolean`                                 | 是否显示每个项目底部分割线。           | `true`   |
+| dividerProps              | `DividerProps`                            | Divider 组件属性。                     | `-`      |
+| hideIndicator             | `boolean`                                 | 是否隐藏 AccordionItem 指示器。        | `false`  |
+| disableAnimation          | `boolean`                                 | 是否禁用 AccordionItem 展开/收起动画。 | `false`  |
+| disableIndicatorAnimation | `boolean`                                 | 是否禁用指示器动画。                   | `false`  |
+| disallowEmptySelection    | `boolean`                                 | 是否不允许空选择。                     | `false`  |
+| keepContentMounted        | `boolean`                                 | 是否始终挂载 AccordionItem 内容。      | `false`  |
+| fullWidth                 | `boolean`                                 | 是否占满父容器宽度。                   | `true`   |
+| motionProps               | `MotionProps`                             | Accordion 动画属性。                   | `-`      |
+| disabledKeys              | `string[]`                                | 禁用项键集合，这些项不可交互。         | `-`      |
+| itemClasses               | `AccordionItemClassnames`                 | AccordionItem 插槽类名集合。           | `-`      |
+| selectedKeys              | `string[] \| string`                      | 当前选中键（受控）。                   | `-`      |
+| defaultSelectedKeys       | `string[] \| string`                      | 初始选中键（非受控）。                 | `-`      |
 
 ### Accordion 事件
 
-| 属性 | 类型 | 说明 | 默认值 |
-| --- | --- | --- | --- |
-| onSelectionChange | `(keys: string[] \| string) => any` | 选择变化时触发。Vue 中使用 `@change` 或 `v-model`。 | `-` |
+| 属性              | 类型                                | 说明                                                | 默认值 |
+| ----------------- | ----------------------------------- | --------------------------------------------------- | ------ |
+| onSelectionChange | `(keys: string[] \| string) => any` | 选择变化时触发。Vue 中使用 `@change` 或 `v-model`。 | `-`    |
 
 ### Accordion Item 属性
 
-| 属性 | 类型 | 说明 | 默认值 |
-| --- | --- | --- | --- |
-| children | `VNodeChild` | 组件内容。 | `-` |
-| title | `VNodeChild` | 折叠项标题。 | `-` |
-| subtitle | `VNodeChild` | 折叠项副标题。 | `-` |
-| indicator | `IndicatorProps` | 展开指示器，通常为箭头图标。 | `-` |
-| startContent | `VNodeChild` | 前置内容，通常为图标或头像。 | `-` |
-| motionProps | `MotionProps` | 用于修改动画的属性。 | `-` |
-| isCompact | `boolean` | 是否为紧凑模式。 | `false` |
-| isDisabled | `boolean` | 是否禁用。 | `false` |
-| keepContentMounted | `boolean` | 关闭时是否仍保留内容挂载。 | `false` |
-| hideIndicator | `boolean` | 是否隐藏指示器。 | `false` |
-| disableAnimation | `boolean` | 是否禁用动画。 | `false` |
-| disableIndicatorAnimation | `boolean` | 是否禁用指示器动画。 | `false` |
-| HeadingComponent | `string` | 自定义标题标签（可访问性）。 | `h2` |
-| classNames | `AccordionItemClassnames` | 自定义 AccordionItem 插槽类名。 | `-` |
+| 属性                      | 类型                      | 说明                            | 默认值  |
+| ------------------------- | ------------------------- | ------------------------------- | ------- |
+| children                  | `VNodeChild`              | 组件内容。                      | `-`     |
+| title                     | `VNodeChild`              | 折叠项标题。                    | `-`     |
+| subtitle                  | `VNodeChild`              | 折叠项副标题。                  | `-`     |
+| indicator                 | `IndicatorProps`          | 展开指示器，通常为箭头图标。    | `-`     |
+| startContent              | `VNodeChild`              | 前置内容，通常为图标或头像。    | `-`     |
+| motionProps               | `MotionProps`             | 用于修改动画的属性。            | `-`     |
+| isCompact                 | `boolean`                 | 是否为紧凑模式。                | `false` |
+| isDisabled                | `boolean`                 | 是否禁用。                      | `false` |
+| keepContentMounted        | `boolean`                 | 关闭时是否仍保留内容挂载。      | `false` |
+| hideIndicator             | `boolean`                 | 是否隐藏指示器。                | `false` |
+| disableAnimation          | `boolean`                 | 是否禁用动画。                  | `false` |
+| disableIndicatorAnimation | `boolean`                 | 是否禁用指示器动画。            | `false` |
+| HeadingComponent          | `string`                  | 自定义标题标签（可访问性）。    | `h2`    |
+| classNames                | `AccordionItemClassnames` | 自定义 AccordionItem 插槽类名。 | `-`     |
 
 ### Accordion Item 事件
 
-| 属性 | 类型 | 说明 | 默认值 |
-| --- | --- | --- | --- |
-| onFocus | `(e: FocusEvent) => void` | 获取焦点时触发。 | `-` |
-| onBlur | `(e: FocusEvent) => void` | 失去焦点时触发。 | `-` |
-| onFocusChange | `(isFocused: boolean) => void` | 焦点状态变化时触发。 | `-` |
-| onKeyDown | `(e: KeyboardEvent) => void` | 按键按下时触发。 | `-` |
-| onKeyUp | `(e: KeyboardEvent) => void` | 按键抬起时触发。 | `-` |
-| onPress | `(e: PressEvent) => void` | 按压释放并命中目标时触发。 | `-` |
-| onPressStart | `(e: PressEvent) => void` | 按压开始时触发。 | `-` |
-| onPressEnd | `(e: PressEvent) => void` | 按压结束时触发。 | `-` |
-| onPressChange | `(isPressed: boolean) => void` | 按压状态变化时触发。 | `-` |
-| onPressUp | `(e: PressEvent) => void` | 按压释放时触发。 | `-` |
-| onClick | `MouseEventHandler` | 原生按钮点击事件（已废弃，建议用 onPress）。 | `-` |
+| 属性          | 类型                           | 说明                                         | 默认值 |
+| ------------- | ------------------------------ | -------------------------------------------- | ------ |
+| onFocus       | `(e: FocusEvent) => void`      | 获取焦点时触发。                             | `-`    |
+| onBlur        | `(e: FocusEvent) => void`      | 失去焦点时触发。                             | `-`    |
+| onFocusChange | `(isFocused: boolean) => void` | 焦点状态变化时触发。                         | `-`    |
+| onKeyDown     | `(e: KeyboardEvent) => void`   | 按键按下时触发。                             | `-`    |
+| onKeyUp       | `(e: KeyboardEvent) => void`   | 按键抬起时触发。                             | `-`    |
+| onPress       | `(e: PressEvent) => void`      | 按压释放并命中目标时触发。                   | `-`    |
+| onPressStart  | `(e: PressEvent) => void`      | 按压开始时触发。                             | `-`    |
+| onPressEnd    | `(e: PressEvent) => void`      | 按压结束时触发。                             | `-`    |
+| onPressChange | `(isPressed: boolean) => void` | 按压状态变化时触发。                         | `-`    |
+| onPressUp     | `(e: PressEvent) => void`      | 按压释放时触发。                             | `-`    |
+| onClick       | `MouseEventHandler`            | 原生按钮点击事件（已废弃，建议用 onPress）。 | `-`    |
 
 ### 类型
 

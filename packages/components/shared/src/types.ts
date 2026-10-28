@@ -5,10 +5,9 @@ import type { Component, HTMLAttributes } from "vue";
 //     as?: Component | T | (string & {});
 //   } & /* @vue-ignore */ HTMLAttributes;
 
-export type HTMLHeroVueUIProps<T extends keyof HTMLElementTagNameMap = "div"> =
-  {
-    as?: Component | T | (string & {});
-  };
+export type HTMLHeroVueUIProps<T extends keyof HTMLElementTagNameMap = "div"> = {
+  as?: Component | T | (string & {});
+};
 
 /**
  * Flattens a complex intersection type into a single object type for better readability.

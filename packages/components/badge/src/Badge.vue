@@ -20,8 +20,7 @@ defineSlots<{
   content(): any;
 }>();
 
-const { tag, baseProps, badgeProps, shouldRenderBadgeContent, content } =
-  useBadge(props);
+const { tag, baseProps, badgeProps, shouldRenderBadgeContent, content } = useBadge(props);
 </script>
 
 <template>

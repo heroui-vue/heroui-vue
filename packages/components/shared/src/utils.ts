@@ -10,10 +10,7 @@ export function pureObject(obj: Record<string, any>): Record<string, any> {
 /**
  * This function is copied from heroui souce code
  */
-export const mapPropsVariants = <
-  T extends Record<string, any>,
-  K extends keyof T,
->(
+export const mapPropsVariants = <T extends Record<string, any>, K extends keyof T>(
   props: T,
   variantKeys?: K[],
   removeVariantProps = true,

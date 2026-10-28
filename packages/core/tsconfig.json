@@ -4,7 +4,7 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     // See https://www.typescriptlang.org/tsconfig/#allowSyntheticDefaultImports
-    "allowSyntheticDefaultImports": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": ["./src/**/*"]
 }

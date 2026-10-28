@@ -3,19 +3,24 @@ import { Alert } from '@heroui-vue/core/raw'
 </script>
 
 # Alert
+
 提供关于操作或事件的简洁反馈的临时通知
 
 ## 安装
+
 ::: code-group
 ```sh [npm]
 npm add @heroui-vue/alert
 ```
+
 ```sh [pnpm]
 pnpm add @heroui-vue/alert
 ```
+
 ```sh [yarn]
 yarn add @heroui-vue/alert
 ```
+
 ```sh [bun]
 bun add @heroui-vue/alert
 ```
@@ -25,12 +30,14 @@ bun add @heroui-vue/alert
 > 如果你使用[全局安装](/guide/installation#全局安装)的方式，可忽略此安装步骤
 
 ## 导入
+
 ::: code-group
 ```js [按需导入]
-import { Alert } from '@heroui-vue/alert'
+import { Alert } from "@heroui-vue/alert";
 ```
+
 ```js [全局导入]
-import { Alert } from 'heroui-vue'
+import { Alert } from "heroui-vue";
 ```
 :::
 
@@ -44,6 +51,7 @@ import { Alert } from 'heroui-vue'
 :::
 
 ### 颜色
+
 Alert有6种颜色变体，用以传达不同的含义。
 
 ::: component-view

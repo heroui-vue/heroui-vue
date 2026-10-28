@@ -5,19 +5,24 @@ import { NotificationIcon, CheckIcon } from '@heroui-vue/icon'
 </script>
 
 # Chip
+
 A small block of information that displays input information, attributes, or actions.
 
 ## Installation
+
 ::: code-group
 ```sh [npm]
 npm add @heroui-vue/chip
 ```
+
 ```sh [pnpm]
 pnpm add @heroui-vue/chip
 ```
+
 ```sh [yarn]
 yarn add @heroui-vue/chip
 ```
+
 ```sh [bun]
 bun add @heroui-vue/chip
 ```
@@ -36,7 +41,6 @@ bun add @heroui-vue/chip
 :::
 
 ### Sizes
-
 
 ::: component-view
 <div class="flex gap-4">
@@ -58,7 +62,6 @@ bun add @heroui-vue/chip
     <Chip color="danger">Danger</Chip>
 </div>
 :::
-
 
 ### Radius
 
@@ -133,6 +136,7 @@ bun add @heroui-vue/chip
 :::
 
 ## Style Slots
+
 - **base**: The base slot of the Chip, which is the container of the Chip.
 - **content**: The content slot of the Chip, which is the container of the Chip's children.
 - **dot**: The dot on the left side of the Chip. Visible when the `variant="dot"` property is set.
@@ -143,13 +147,15 @@ bun add @heroui-vue/chip
 
 ::: component-view
 <Chip
-  :classNames="{
-    base: 'bg-linear-to-br from-indigo-500 to-pink-500 border-small border-white/50 shadow-pink-500/30',
-    content: 'drop-shadow-xs shadow-black text-white',
-  }"
-  variant="shadow"
+:classNames="{
+base: 'bg-linear-to-br from-indigo-500 to-pink-500 border-small border-white/50 shadow-pink-500/30',
+content: 'drop-shadow-xs shadow-black text-white',
+}"
+variant="shadow"
+
 >
-  New
+
+New
 </Chip>
 :::
 

@@ -1,16 +1,7 @@
 <script lang="ts">
 import type { VNode } from "vue";
 
-import {
-  Comment,
-  cloneVNode,
-  computed,
-  defineComponent,
-  h,
-  provide,
-  toRef,
-  useAttrs,
-} from "vue";
+import { Comment, cloneVNode, computed, defineComponent, h, provide, toRef, useAttrs } from "vue";
 import { avatarGroup } from "@heroui/theme";
 import { avatarGroupContextKey } from "./use-avatar";
 
@@ -95,9 +86,7 @@ export default defineComponent({
         {
           ...attrs,
           class: styles.value.base({
-            class:
-              [props.classNames?.base, attrs.class].filter(Boolean).join(" ") ||
-              undefined,
+            class: [props.classNames?.base, attrs.class].filter(Boolean).join(" ") || undefined,
           }),
         },
         children,

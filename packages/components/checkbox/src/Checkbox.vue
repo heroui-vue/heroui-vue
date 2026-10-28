@@ -1,9 +1,5 @@
 <script lang="ts" setup>
-import {
-  useCheckbox,
-  type CheckboxEmits,
-  type CheckboxProps,
-} from "./use-checkbox";
+import { useCheckbox, type CheckboxEmits, type CheckboxProps } from "./use-checkbox";
 
 const props = withDefaults(defineProps<CheckboxProps>(), {
   color: "primary",

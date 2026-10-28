@@ -3,19 +3,24 @@ import { Button } from '@heroui-vue/core/raw'
 </script>
 
 # Button
+
 Allows users to perform actions and make choices with a single tap
 
 ## Installation
+
 ::: code-group
 ```sh [npm]
 npm add @heroui-vue/button
 ```
+
 ```sh [pnpm]
 pnpm add @heroui-vue/button
 ```
+
 ```sh [yarn]
 yarn add @heroui-vue/button
 ```
+
 ```sh [bun]
 bun add @heroui-vue/button
 ```
@@ -25,12 +30,14 @@ bun add @heroui-vue/button
 > If you use [global installation](/en/guide/installation#global-installation), you can skip this installation step
 
 ## Import
+
 ::: code-group
 ```js [On-demand import]
-import { Button } from '@heroui-vue/button'
+import { Button } from "@heroui-vue/button";
 ```
+
 ```js [Global import]
-import { Button } from 'heroui-vue'
+import { Button } from "heroui-vue";
 ```
 :::
 
@@ -41,6 +48,7 @@ import { Button } from 'heroui-vue'
 :::
 
 ### Disabled
+
 Button will be unclickable
 
 ::: component-view
@@ -48,6 +56,7 @@ Button will be unclickable
 :::
 
 ### Sizes
+
 Display buttons in different sizes
 
 ::: component-view
@@ -59,6 +68,7 @@ Display buttons in different sizes
 :::
 
 ### Radius
+
 Display buttons with different border radius
 
 ::: component-view
@@ -72,6 +82,7 @@ Display buttons with different border radius
 :::
 
 ### Colors
+
 Display buttons in different colors
 
 ::: component-view
@@ -86,6 +97,7 @@ Display buttons in different colors
 :::
 
 ### Variants
+
 Display different types of buttons
 
 ::: component-view
@@ -115,6 +127,7 @@ Display different types of buttons
 :::
 
 ### Loading
+
 Pass the `isLoading` prop to show a `Spinner` component inside the button.
 
 :::warning
@@ -182,6 +195,7 @@ The `spinner` slot is displayed at the start position of the button by default, 
 :::
 
 ### With Icons
+
 You can add icons by passing the `startContent` or `endContent` slots.
 
 ::: component-view
@@ -234,6 +248,7 @@ You can add icons by passing the `startContent` or `endContent` slots.
 :::
 
 ### Icon Only
+
 You can also display a button without text by passing the `isIconOnly` prop and the desired icon as the default child.
 
 ::: component-view
@@ -275,18 +290,22 @@ You can also display a button without text by passing the `isIconOnly` prop and 
 :::
 
 ### Custom Styles
+
 You can customize the Button component by passing custom Tailwind CSS classes to the component slots.
 
 ::: component-view
 <Button
-  class="bg-gradient-to-tr from-pink-500 to-yellow-500 bg-sky-500 text-white shadow-lg"
-  radius="full"
+class="bg-gradient-to-tr from-pink-500 to-yellow-500 bg-sky-500 text-white shadow-lg"
+radius="full"
+
 >
-  Button
+
+Button
 </Button>
 :::
 
 ### Disable Ripple
+
 Button will not show ripple effect when pressed
 
 ::: component-view
@@ -296,6 +315,7 @@ Button will not show ripple effect when pressed
 :::
 
 ### Disable Animation
+
 Button will not show animation effect when pressed
 
 ::: component-view
@@ -338,36 +358,37 @@ building buttons that work well across devices and interaction methods.
 
 ### Button Props
 
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| variant | `"solid" \| "bordered" \| "light" \| "flat" \| "faded" \| "shadow" \| "ghost"` | `"solid"` | The button appearance style. |
-| color | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | The button color theme. |
-| size | `"sm" \| "md" \| "lg"` | `"md"` | The Button size |
-| radius | `"none" \| "sm" \| "md" \| "lg" \| "full"` | `"md"` | The button border radius. |
-| spinnerPlacement | `"start" \| "end"` | `"start"` | The spinner placement. |
-| fullWidth | `boolean` | `false` | Whether the button should take the full width of its parent. |
-| isIconOnly | `boolean` | `false` | Whether the button should have the same width and height. |
-| isDisabled | `boolean` | `false` | Whether the button is disabled. |
-| isLoading | `boolean` | `false` | Whether the button is loading. |
-| disableRipple | `boolean` | `false` | Whether the button should display a ripple effect on press. |
-| disableAnimation | `boolean` | `false` | Whether the button should display animations. |
-
+| Name             | Type                                                                           | Default     | Description                                                  |
+| ---------------- | ------------------------------------------------------------------------------ | ----------- | ------------------------------------------------------------ |
+| variant          | `"solid" \| "bordered" \| "light" \| "flat" \| "faded" \| "shadow" \| "ghost"` | `"solid"`   | The button appearance style.                                 |
+| color            | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"`  | `"default"` | The button color theme.                                      |
+| size             | `"sm" \| "md" \| "lg"`                                                         | `"md"`      | The Button size                                              |
+| radius           | `"none" \| "sm" \| "md" \| "lg" \| "full"`                                     | `"md"`      | The button border radius.                                    |
+| spinnerPlacement | `"start" \| "end"`                                                             | `"start"`   | The spinner placement.                                       |
+| fullWidth        | `boolean`                                                                      | `false`     | Whether the button should take the full width of its parent. |
+| isIconOnly       | `boolean`                                                                      | `false`     | Whether the button should have the same width and height.    |
+| isDisabled       | `boolean`                                                                      | `false`     | Whether the button is disabled.                              |
+| isLoading        | `boolean`                                                                      | `false`     | Whether the button is loading.                               |
+| disableRipple    | `boolean`                                                                      | `false`     | Whether the button should display a ripple effect on press.  |
+| disableAnimation | `boolean`                                                                      | `false`     | Whether the button should display animations.                |
 
 ### Button Slots
-| Name | Scope | Description |
-| --- | --- | --- |
-| default | - | The default slot. |
-| startContent | - | The start content slot. |
-| endContent | - | The end content slot. |
-| spinner | - | The spinner slot. |
+
+| Name         | Scope | Description             |
+| ------------ | ----- | ----------------------- |
+| default      | -     | The default slot.       |
+| startContent | -     | The start content slot. |
+| endContent   | -     | The end content slot.   |
+| spinner      | -     | The spinner slot.       |
 
 ### Button Events (WIP)
-| Name | Type | Default |
-| --- | --- | --- |
-| press | `(e: PressEvent) => void` | - |
-| pressStart | `(e: PressEvent) => void` | - |
-| pressEnd | `(e: PressEvent) => void` | - |
-| pressChange | `(isPressed: boolean) => void` | - |
-| pressUp | `(e: PressEvent) => void` | - |
-| keyDown | `(e: KeyboardEvent) => void` | - |
-| keyUp | `(e: KeyboardEvent) => void` | - |
+
+| Name        | Type                           | Default |
+| ----------- | ------------------------------ | ------- |
+| press       | `(e: PressEvent) => void`      | -       |
+| pressStart  | `(e: PressEvent) => void`      | -       |
+| pressEnd    | `(e: PressEvent) => void`      | -       |
+| pressChange | `(isPressed: boolean) => void` | -       |
+| pressUp     | `(e: PressEvent) => void`      | -       |
+| keyDown     | `(e: KeyboardEvent) => void`   | -       |
+| keyUp       | `(e: KeyboardEvent) => void`   | -       |

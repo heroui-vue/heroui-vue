@@ -1,37 +1,37 @@
 {
   "name": "@heroui-vue/core",
-  "type": "module",
   "version": "0.0.17",
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
+  "keywords": [
+    "heroui",
+    "tailwindcss",
+    "ui",
+    "ui framework",
+    "vue"
+  ],
+  "bugs": {
+    "url": "https://github.com/heroui-vue/heroui-vue/issues"
   },
+  "license": "MIT",
   "author": {
     "name": "hotdog",
     "email": "hotdogc1017@gmail.com",
     "url": "https://github.com/hotdogc1017"
   },
-  "license": "MIT",
   "repository": "https://github.com/heroui-vue/heroui-vue",
-  "bugs": {
-    "url": "https://github.com/heroui-vue/heroui-vue/issues"
-  },
   "files": [
     "dist",
     "src"
   ],
-  "keywords": [
-    "heroui",
-    "vue",
-    "ui",
-    "ui framework",
-    "tailwindcss"
-  ],
+  "type": "module",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": "./dist/index.js",
     "./raw": "./src/index.ts"
   },
-  "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "build": "pnpm -w build:cmp && pnpm build:only",
     "build:only": "tsdown --minify",
@@ -39,13 +39,13 @@
     "bump": "pnpm build && bumpp --tag @heroui-vue/core@ --sign"
   },
   "devDependencies": {
-    "unplugin-vue": "catalog:prod",
-    "@heroui-vue/accordion": "workspace: *",
-    "@heroui-vue/alert": "workspace: *",
-    "@heroui-vue/avatar": "workspace: *",
-    "@heroui-vue/badge": "workspace: *",
-    "@heroui-vue/button": "workspace: *",
-    "@heroui-vue/checkbox": "workspace: *",
-    "@heroui-vue/chip": "workspace: *"
+    "@heroui-vue/accordion": "workspace:*",
+    "@heroui-vue/alert": "workspace:*",
+    "@heroui-vue/avatar": "workspace:*",
+    "@heroui-vue/badge": "workspace:*",
+    "@heroui-vue/button": "workspace:*",
+    "@heroui-vue/checkbox": "workspace:*",
+    "@heroui-vue/chip": "workspace:*",
+    "unplugin-vue": "catalog:prod"
   }
 }

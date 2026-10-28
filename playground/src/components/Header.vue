@@ -17,12 +17,7 @@ const toggleDark = useToggle(dark);
       class="border-b border-b-[var(--border)] bg-[var(--bg)] flex justify-between items-center py-2 px-4 dark:text-white"
     >
       <header class="flex items-center gap-x-4">
-        <img
-          src="../assets/logo.png"
-          width="40"
-          height="40"
-          alt="NextUI Vue Logo"
-        />
+        <img src="../assets/logo.png" width="40" height="40" alt="NextUI Vue Logo" />
         <h1 class="text-xl font-bold">HeroUI Vue Playground</h1>
       </header>
 
@@ -51,11 +46,7 @@ const toggleDark = useToggle(dark);
           <Icon v-if="dark" icon="tdesign:mode-dark" width="24" height="24" />
           <Icon v-else icon="iconamoon:mode-light" width="24" height="24"
         /></Button>
-        <a
-          href="https://github.com/heroui-vue/heroui-vue"
-          target="_blank"
-          title="View on github"
-        >
+        <a href="https://github.com/heroui-vue/heroui-vue" target="_blank" title="View on github">
           <Icon icon="mdi:github" width="24" height="24" />
         </a>
       </section>

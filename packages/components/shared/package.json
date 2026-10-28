@@ -1,37 +1,37 @@
 {
   "name": "@heroui-vue/shared",
-  "type": "module",
   "version": "0.0.12",
+  "keywords": [
+    "button component",
+    "heroui",
+    "tailwindcss",
+    "ui",
+    "ui framework",
+    "vue"
+  ],
+  "bugs": {
+    "url": "https://github.com/heroui-vue/heroui-vue/issues"
+  },
+  "license": "MIT",
   "author": {
     "name": "hotdog",
     "email": "hotdogc1017@gmail.com",
     "url": "https://github.com/hotdogc1017"
   },
-  "publishConfig": {
-    "access": "public"
-  },
-  "license": "MIT",
   "repository": {
     "url": "git+https://github.com/heroui-vue/heroui-vue.git"
   },
-  "bugs": {
-    "url": "https://github.com/heroui-vue/heroui-vue/issues"
-  },
-  "keywords": [
-    "heroui",
-    "vue",
-    "ui",
-    "ui framework",
-    "tailwindcss",
-    "button component"
-  ],
+  "type": "module",
   "exports": {
     ".": "./src/index.ts"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
+    "@heroui/shared-utils": "catalog:prod",
     "@vue/tsconfig": "catalog:prod",
-    "vue": "catalog:prod",
     "@vueuse/core": "catalog:prod",
-    "@heroui/shared-utils": "catalog:prod"
+    "vue": "catalog:prod"
   }
 }

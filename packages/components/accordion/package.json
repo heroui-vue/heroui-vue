@@ -1,44 +1,44 @@
 {
   "name": "@heroui-vue/accordion",
-  "type": "module",
   "version": "1.0.0-beta.1",
+  "keywords": [
+    "accordion component",
+    "heroui",
+    "tailwindcss",
+    "ui framework",
+    "vue"
+  ],
+  "bugs": {
+    "url": "https://github.com/heroui-vue/heroui-vue/issues"
+  },
+  "license": "MIT",
   "author": {
     "name": "hotdog",
     "email": "hotdogc1017@gmail.com",
     "url": "https://github.com/hotdogc1017"
   },
+  "repository": "https://github.com/heroui-vue/heroui-vue",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    ".": "./dist/index.js"
+  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "license": "MIT",
-  "repository": "https://github.com/heroui-vue/heroui-vue",
-  "bugs": {
-    "url": "https://github.com/heroui-vue/heroui-vue/issues"
-  },
-  "keywords": [
-    "heroui",
-    "vue",
-    "ui framework",
-    "tailwindcss",
-    "accordion component"
-  ],
-  "exports": {
-    ".": "./dist/index.js"
-  },
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "build": "tsdown --minify",
     "dev": "tsdown -w",
     "bump": "bumpp --tag @heroui-vue/accordion@ --sign"
   },
   "devDependencies": {
+    "@heroui-vue/shared": "workspace:*",
     "@heroui/shared-utils": "catalog:prod",
     "@heroui/theme": "catalog:prod",
     "@types/node": "catalog:prod",
-    "@heroui-vue/shared": "workspace:*",
     "@vue/tsconfig": "catalog:prod",
     "unplugin-vue": "catalog:prod",
     "vue": "catalog:prod"

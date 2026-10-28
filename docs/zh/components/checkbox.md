@@ -7,19 +7,24 @@ const customSelected = ref(true)
 </script>
 
 # Checkbox
+
 Checkbox 用于从独立选项列表中选择多个项目，或将单个项目标记为选中。
 
 ## 安装
+
 ::: code-group
 ```sh [npm]
 npm add @heroui-vue/checkbox
 ```
+
 ```sh [pnpm]
 pnpm add @heroui-vue/checkbox
 ```
+
 ```sh [yarn]
 yarn add @heroui-vue/checkbox
 ```
+
 ```sh [bun]
 bun add @heroui-vue/checkbox
 ```
@@ -29,12 +34,14 @@ bun add @heroui-vue/checkbox
 > 如果你使用[全局安装](/guide/installation#全局安装)的方式，可忽略此安装步骤
 
 ## 导入
+
 ::: code-group
 ```js [按需导入]
-import { Checkbox } from '@heroui-vue/checkbox'
+import { Checkbox } from "@heroui-vue/checkbox";
 ```
+
 ```js [全局导入]
-import { Checkbox } from 'heroui-vue'
+import { Checkbox } from "heroui-vue";
 ```
 :::
 
@@ -153,13 +160,15 @@ import { Checkbox } from 'heroui-vue'
 
 ::: component-view
 <Checkbox
-  v-model="customSelected"
-  aria-label="custom checkbox"
-  :classNames="{
-    base: 'inline-flex w-full max-w-md bg-content1 hover:bg-content2 items-center justify-start cursor-pointer rounded-lg gap-2 p-4 border-2 border-transparent data-[selected=true]:border-primary',
-    label: 'w-full',
-  }"
+v-model="customSelected"
+aria-label="custom checkbox"
+:classNames="{
+base: 'inline-flex w-full max-w-md bg-content1 hover:bg-content2 items-center justify-start cursor-pointer rounded-lg gap-2 p-4 border-2 border-transparent data-[selected=true]:border-primary',
+label: 'w-full',
+}"
+
 >
+
   <div class="w-full flex justify-between gap-2">
     <div class="flex flex-col">
       <span class="font-medium">Junior Garcia</span>
@@ -211,33 +220,33 @@ import { Checkbox } from 'heroui-vue'
 
 ### Checkbox 属性
 
-| 属性 | 类型 | 说明 | 默认值 |
-| --- | --- | --- | --- |
-| children | `VNodeChild` | Checkbox 标签内容。 | `-` |
-| icon | `CheckboxIconProps` | 上游 React 的属性。Vue 中请使用 `#icon` 插槽。 | `-` |
-| value | `string \| number` | Checkbox 的表单值。 | `-` |
-| name | `string` | Checkbox 的表单字段名。 | `-` |
-| size | `sm \| md \| lg` | Checkbox 尺寸。 | `md` |
-| color | `default \| primary \| secondary \| success \| warning \| danger` | Checkbox 颜色。 | `primary` |
-| radius | `none \| sm \| md \| lg \| full` | Checkbox 圆角。 | `-` |
-| lineThrough | `boolean` | 是否对标签应用删除线。 | `false` |
-| isSelected | `boolean` | 受控选中状态。 | `-` |
-| defaultSelected | `boolean` | 非受控初始选中状态。 | `-` |
-| isRequired | `boolean` | 上游 React 属性，Vue 版暂未实现。 | `false` |
-| isReadOnly | `boolean` | 是否只读（可选中但不可修改）。 | `-` |
-| isDisabled | `boolean` | 是否禁用。 | `false` |
-| isIndeterminate | `boolean` | 半选展示状态。 | `-` |
-| isInvalid | `boolean` | 是否无效。 | `false` |
-| validationState | `valid \| invalid` | 上游已废弃属性，建议使用 `isInvalid`。 | `-` |
-| disableAnimation | `boolean` | 是否禁用动画。 | `false` |
-| classNames | `Partial<Record<"base" \| "wrapper" \| "icon" \| "label", string>>` | 为各插槽设置自定义类名。 | `-` |
+| 属性             | 类型                                                                | 说明                                           | 默认值    |
+| ---------------- | ------------------------------------------------------------------- | ---------------------------------------------- | --------- |
+| children         | `VNodeChild`                                                        | Checkbox 标签内容。                            | `-`       |
+| icon             | `CheckboxIconProps`                                                 | 上游 React 的属性。Vue 中请使用 `#icon` 插槽。 | `-`       |
+| value            | `string \| number`                                                  | Checkbox 的表单值。                            | `-`       |
+| name             | `string`                                                            | Checkbox 的表单字段名。                        | `-`       |
+| size             | `sm \| md \| lg`                                                    | Checkbox 尺寸。                                | `md`      |
+| color            | `default \| primary \| secondary \| success \| warning \| danger`   | Checkbox 颜色。                                | `primary` |
+| radius           | `none \| sm \| md \| lg \| full`                                    | Checkbox 圆角。                                | `-`       |
+| lineThrough      | `boolean`                                                           | 是否对标签应用删除线。                         | `false`   |
+| isSelected       | `boolean`                                                           | 受控选中状态。                                 | `-`       |
+| defaultSelected  | `boolean`                                                           | 非受控初始选中状态。                           | `-`       |
+| isRequired       | `boolean`                                                           | 上游 React 属性，Vue 版暂未实现。              | `false`   |
+| isReadOnly       | `boolean`                                                           | 是否只读（可选中但不可修改）。                 | `-`       |
+| isDisabled       | `boolean`                                                           | 是否禁用。                                     | `false`   |
+| isIndeterminate  | `boolean`                                                           | 半选展示状态。                                 | `-`       |
+| isInvalid        | `boolean`                                                           | 是否无效。                                     | `false`   |
+| validationState  | `valid \| invalid`                                                  | 上游已废弃属性，建议使用 `isInvalid`。         | `-`       |
+| disableAnimation | `boolean`                                                           | 是否禁用动画。                                 | `false`   |
+| classNames       | `Partial<Record<"base" \| "wrapper" \| "icon" \| "label", string>>` | 为各插槽设置自定义类名。                       | `-`       |
 
 ### Checkbox 事件
 
-| 属性 | 类型 | 说明 | 默认值 |
-| --- | --- | --- | --- |
-| onChange | `(isSelected: boolean) => void` | 选中状态变化时触发。Vue 中使用 `@change`。 | `-` |
-| onValueChange | `(isSelected: boolean) => void` | 选中状态变化时触发。Vue 中使用 `@valueChange`。 | `-` |
+| 属性          | 类型                            | 说明                                            | 默认值 |
+| ------------- | ------------------------------- | ----------------------------------------------- | ------ |
+| onChange      | `(isSelected: boolean) => void` | 选中状态变化时触发。Vue 中使用 `@change`。      | `-`    |
+| onValueChange | `(isSelected: boolean) => void` | 选中状态变化时触发。Vue 中使用 `@valueChange`。 | `-`    |
 
 ### 类型
 

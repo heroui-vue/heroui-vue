@@ -3,19 +3,24 @@ import { Alert } from '@heroui-vue/core/raw'
 </script>
 
 # Alert
+
 Temporary notifications that provide concise feedback about actions or events
 
 ## Installation
+
 ::: code-group
 ```sh [npm]
 npm add @heroui-vue/alert
 ```
+
 ```sh [pnpm]
 pnpm add @heroui-vue/alert
 ```
+
 ```sh [yarn]
 yarn add @heroui-vue/alert
 ```
+
 ```sh [bun]
 bun add @heroui-vue/alert
 ```
@@ -25,12 +30,14 @@ bun add @heroui-vue/alert
 > If you use [global installation](/en/guide/installation#global-installation), you can skip this installation step
 
 ## Import
+
 ::: code-group
 ```js [On-demand import]
-import { Alert } from '@heroui-vue/alert'
+import { Alert } from "@heroui-vue/alert";
 ```
+
 ```js [Global import]
-import { Alert } from 'heroui-vue'
+import { Alert } from "heroui-vue";
 ```
 :::
 
@@ -44,6 +51,7 @@ import { Alert } from 'heroui-vue'
 :::
 
 ### Colors
+
 Alert has 6 color variants to convey different meanings.
 
 ::: component-view

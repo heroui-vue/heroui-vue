@@ -37,12 +37,7 @@ const defaultIconPath =
 
 <template>
   <component :is="tag" v-bind="baseProps">
-    <img
-      v-if="showImage"
-      v-bind="imgProps"
-      @load="handleLoad"
-      @error="handleError"
-    />
+    <img v-if="showImage" v-bind="imgProps" @load="handleLoad" @error="handleError" />
 
     <template v-if="showFallbackContent">
       <slot name="fallback">

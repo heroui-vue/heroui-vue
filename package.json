@@ -1,9 +1,8 @@
 {
   "name": "heroui-vue-project",
-  "type": "module",
   "version": "0.0.12",
   "private": true,
-  "packageManager": "pnpm@10.30.3",
+  "type": "module",
   "scripts": {
     "dev": "pnpm --parallel --filter \"./packages/components/*\" --filter \"./packages/core\" --filter \"./packages/icon\" dev",
     "dev:docs": "pnpm run -C docs dev",
@@ -14,8 +13,10 @@
     "build:doc": "pnpm build:cmp && pnpm -C docs build",
     "clean": "rimraf -g **/node_modules **/dist",
     "clean:dist": "rimraf -g **/dist",
-    "lint": "eslint . --cache",
-    "lint:fix": "eslint . --cache --fix",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
     "bump": "pnpm -C packages/core run bump && pnpm -C packages/heroui-vue run bump",
     "bump:button": "pnpm -C packages/components/button run bump",
     "bump:alert": "pnpm -C packages/components/alert run bump",
@@ -27,15 +28,17 @@
     "nvc": "heroui-vue-create",
     "pub:view": "pnpm publish -r --dry-run --registry=https://registry.npmjs.org/"
   },
+  "dependencies": {
+    "oxfmt": "^0.75.0"
+  },
   "devDependencies": {
-    "@prettier/plugin-oxc": "^0.0.4",
-    "bumpp": "^10.1.0",
-    "heroui-vue-create": "workspace: *",
-    "oxlint": "^1.9.0",
-    "pnpm": "^10.9.0",
-    "prettier": "^3.6.2",
-    "rimraf": "^6.0.1",
-    "tsdown": "0.14.2",
-    "typescript": "^5.9.2"
-  }
+    "bumpp": "^12.3.0",
+    "heroui-vue-create": "workspace:*",
+    "oxlint": "^1.90.0",
+    "pnpm": "^12.15.0",
+    "rimraf": "^6.1.3",
+    "tsdown": "^0.23.2",
+    "typescript": "^7.0.2"
+  },
+  "packageManager": "pnpm@12.15.0"
 }

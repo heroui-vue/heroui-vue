@@ -59,10 +59,7 @@ export type UseCheckboxRefs = {
 
 export function useCheckbox(
   props: CheckboxProps,
-  emit: (
-    event: CheckboxEmits,
-    payload: boolean,
-  ) => void,
+  emit: (event: CheckboxEmits, payload: boolean) => void,
 ): UseCheckboxRefs {
   const attrs = useAttrs();
   const slots = useSlots();

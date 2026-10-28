@@ -1,11 +1,10 @@
 {
   "name": "heroui-vue-playground",
-  "type": "module",
   "private": true,
-  "author": "hotdogc1017@gmail.com",
   "description": "HeroUI Vue Playground",
   "license": "MIT",
-  "packageManager": "pnpm@10.14.0",
+  "author": "hotdogc1017@gmail.com",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "pnpm -C \"../packages/heroui-vue\" build && vite build",
@@ -18,9 +17,10 @@
     "@vitejs/plugin-vue": "catalog:prod",
     "@vue/repl": "^4.6.3",
     "@vueuse/core": "catalog:prod",
+    "heroui-vue": "workspace:*",
     "tailwindcss": "catalog:prod",
     "vite": "catalog:prod",
-    "vue": "catalog:prod",
-    "heroui-vue": "workspace:*"
-  }
+    "vue": "catalog:prod"
+  },
+  "packageManager": "pnpm@10.14.0"
 }

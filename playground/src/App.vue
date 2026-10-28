@@ -80,8 +80,8 @@ watch(autoSave, setAutoSaveState);
 body {
   --at-apply: m-none text-13px;
   font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
-    Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
   --base: #444;
   --nav-height: 50px;
 }

@@ -2,25 +2,16 @@ import { ref, watchEffect, type VNode, type Ref } from "vue";
 import { useSlotsVNode } from "./useSlotsVNode";
 import { useReactiveAttrs } from "./useReactiveAttrs";
 import { useRawChildren, type Children } from "./useRawChildren";
-import {
-  useRegisteredListeners,
-  type OnEventName,
-} from "./useRegisteredListeners";
+import { useRegisteredListeners, type OnEventName } from "./useRegisteredListeners";
 
-export type ReactMockProps<
-  Props,
-  Slots extends string,
-  Emits extends string,
-> = {
+export type ReactMockProps<Props, Slots extends string, Emits extends string> = {
   children?: Children;
   className?: string;
 } & Props &
   Record<Slots, VNode> &
   Record<OnEventName<Emits>, Function>;
 
-export function useMockReact<Props, Slots extends string, Emits extends string>(
-  props: Props,
-) {
+export function useMockReact<Props, Slots extends string, Emits extends string>(props: Props) {
   const mock = ref({} as any);
 
   const slotsVNode = useSlotsVNode();

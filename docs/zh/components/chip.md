@@ -5,19 +5,24 @@ import { NotificationIcon, CheckIcon } from '@heroui-vue/icon'
 </script>
 
 # Chip
+
 Chip是一个呈现输入信息、属性或操作的小型信息块。
 
 ## 安装
+
 ::: code-group
 ```sh [npm]
 npm add @heroui-vue/chip
 ```
+
 ```sh [pnpm]
 pnpm add @heroui-vue/chip
 ```
+
 ```sh [yarn]
 yarn add @heroui-vue/chip
 ```
+
 ```sh [bun]
 bun add @heroui-vue/chip
 ```
@@ -36,7 +41,6 @@ bun add @heroui-vue/chip
 :::
 
 ### 尺寸
-
 
 ::: component-view
 <div class="flex gap-4">
@@ -58,7 +62,6 @@ bun add @heroui-vue/chip
     <Chip color="danger">Danger</Chip>
 </div>
 :::
-
 
 ### 半径
 
@@ -133,6 +136,7 @@ bun add @heroui-vue/chip
 :::
 
 ## 样式插槽Slots
+
 - **base**：Chip的基座插槽，它是Chip的容器。
 - **content**：Chip的内容插槽，它是Chip子项的容器。
 - **dot**：Chip左侧的小圆点。设置 `variant="dot"` 属性时可见。
@@ -143,13 +147,15 @@ bun add @heroui-vue/chip
 
 ::: component-view
 <Chip
-  :classNames="{
-    base: 'bg-linear-to-br from-indigo-500 to-pink-500 border-small border-white/50 shadow-pink-500/30',
-    content: 'drop-shadow-xs shadow-black text-white',
-  }"
-  variant="shadow"
+:classNames="{
+base: 'bg-linear-to-br from-indigo-500 to-pink-500 border-small border-white/50 shadow-pink-500/30',
+content: 'drop-shadow-xs shadow-black text-white',
+}"
+variant="shadow"
+
 >
-  New
+
+New
 </Chip>
 :::
 

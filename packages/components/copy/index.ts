@@ -1,3 +1,3 @@
-import Copy from './Copy.vue'
+import Copy from "./Copy.vue";
 
-export default Copy
+export default Copy;

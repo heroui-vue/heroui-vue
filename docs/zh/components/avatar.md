@@ -7,16 +7,20 @@ import { Avatar, AvatarGroup } from '@heroui-vue/core/raw'
 Avatar 组件用于表示一个用户，并显示头像图片、姓名缩写或回退图标。
 
 ## 安装
+
 ::: code-group
 ```sh [npm]
 npm add @heroui-vue/avatar
 ```
+
 ```sh [pnpm]
 pnpm add @heroui-vue/avatar
 ```
+
 ```sh [yarn]
 yarn add @heroui-vue/avatar
 ```
+
 ```sh [bun]
 bun add @heroui-vue/avatar
 ```
@@ -36,10 +40,11 @@ HeroUI Vue 暂时没有独立导出 `AvatarIcon` 组件。你可以使用内置�
 
 ::: code-group
 ```js [按需导入]
-import { Avatar, AvatarGroup } from '@heroui-vue/avatar'
+import { Avatar, AvatarGroup } from "@heroui-vue/avatar";
 ```
+
 ```js [全局导入]
-import { Avatar, AvatarGroup } from 'heroui-vue'
+import { Avatar, AvatarGroup } from "heroui-vue";
 ```
 :::
 
@@ -270,19 +275,21 @@ HeroUI React 的 `renderCount` 支持渲染函数。HeroUI Vue 当前的 `render
 
 ::: component-view
 <Avatar
-  showFallback
-  :class-names="{
-    base: 'bg-linear-to-br from-[#FFB457] to-[#FF705B]',
-    icon: 'text-black/80'
-  }"
+showFallback
+:class-names="{
+base: 'bg-linear-to-br from-[#FFB457] to-[#FF705B]',
+icon: 'text-black/80'
+}"
+
 >
-  <template #icon>
-    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-      <path
+
+<template #icon>
+<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+<path
         d="M11.845 21.662C8.153 21.662 5 21.088 5 18.787s3.133-4.425 6.845-4.425c3.692 0 6.845 2.1 6.845 4.4s-3.134 2.9-6.845 2.9z M11.837 11.174a4.372 4.372 0 10-.031 0z"
       />
-    </svg>
-  </template>
+</svg>
+</template>
 </Avatar>
 :::
 
@@ -298,28 +305,28 @@ HeroUI React 的 `renderCount` 支持渲染函数。HeroUI Vue 当前的 `render
 
 ### Avatar 属性
 
-| 名称 | 类型 | 默认值 | 描述 |
-| --- | --- | --- | --- |
-| src | `string` | - | 要显示的图片地址。 |
-| color | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | 设置头像背景色。 |
-| radius | `"none" \| "sm" \| "md" \| "lg" \| "full"` | `"full"` | 设置头像圆角。 |
-| size | `"sm" \| "md" \| "lg"` | `"md"` | 设置头像尺寸。 |
-| name | `string` | - | 图片缺失或加载失败时显示姓名缩写。 |
-| icon | `any` | - | 在头像回退状态中显示自定义图标。 |
-| fallback | `any` | - | 图片加载失败时显示的自定义回退内容。 |
-| isBordered | `boolean` | `false` | 是否显示头像边框。 |
-| isDisabled | `boolean` | `false` | 是否禁用头像并应用禁用样式。 |
-| isFocusable | `boolean` | `false` | 是否支持键盘聚焦。 |
-| showFallback | `boolean` | `false` | 图片加载失败时是否显示回退图标/缩写。 |
-| imgProps | `ImgHTMLAttributes` | - | 透传给内部图片元素的属性。 |
-| classNames | `Partial<Record<"base" \| "img" \| "fallback" \| "name" \| "icon", string>>` | - | Avatar 各插槽的自定义类名。 |
+| 名称         | 类型                                                                          | 默认值      | 描述                                  |
+| ------------ | ----------------------------------------------------------------------------- | ----------- | ------------------------------------- |
+| src          | `string`                                                                      | -           | 要显示的图片地址。                    |
+| color        | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | `"default"` | 设置头像背景色。                      |
+| radius       | `"none" \| "sm" \| "md" \| "lg" \| "full"`                                    | `"full"`    | 设置头像圆角。                        |
+| size         | `"sm" \| "md" \| "lg"`                                                        | `"md"`      | 设置头像尺寸。                        |
+| name         | `string`                                                                      | -           | 图片缺失或加载失败时显示姓名缩写。    |
+| icon         | `any`                                                                         | -           | 在头像回退状态中显示自定义图标。      |
+| fallback     | `any`                                                                         | -           | 图片加载失败时显示的自定义回退内容。  |
+| isBordered   | `boolean`                                                                     | `false`     | 是否显示头像边框。                    |
+| isDisabled   | `boolean`                                                                     | `false`     | 是否禁用头像并应用禁用样式。          |
+| isFocusable  | `boolean`                                                                     | `false`     | 是否支持键盘聚焦。                    |
+| showFallback | `boolean`                                                                     | `false`     | 图片加载失败时是否显示回退图标/缩写。 |
+| imgProps     | `ImgHTMLAttributes`                                                           | -           | 透传给内部图片元素的属性。            |
+| classNames   | `Partial<Record<"base" \| "img" \| "fallback" \| "name" \| "icon", string>>`  | -           | Avatar 各插槽的自定义类名。           |
 
 ### Avatar Group 属性
 
-| 名称 | 类型 | 默认值 | 描述 |
-| --- | --- | --- | --- |
-| max | `number` | - | 可见头像的最大数量。 |
-| total | `number` | - | 控制不可见头像数量。 |
-| isGrid | `boolean` | `false` | 是否以网格布局展示头像。 |
-| renderCount | `boolean` | `true` | 是否渲染内置计数徽标。 |
-| classNames | `Partial<Record<"base" \| "count", string>>` | - | 头像组插槽自定义类名。 |
+| 名称        | 类型                                         | 默认值  | 描述                     |
+| ----------- | -------------------------------------------- | ------- | ------------------------ |
+| max         | `number`                                     | -       | 可见头像的最大数量。     |
+| total       | `number`                                     | -       | 控制不可见头像数量。     |
+| isGrid      | `boolean`                                    | `false` | 是否以网格布局展示头像。 |
+| renderCount | `boolean`                                    | `true`  | 是否渲染内置计数徽标。   |
+| classNames  | `Partial<Record<"base" \| "count", string>>` | -       | 头像组插槽自定义类名。   |
