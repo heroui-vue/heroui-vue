@@ -25,7 +25,7 @@
     "bump:badge": "pnpm -C packages/components/badge run bump",
     "bump:checkbox": "pnpm -C packages/components/checkbox run bump",
     "bump:accordion": "pnpm -C packages/components/accordion run bump",
-    "nvc": "heroui-vue-create",
+    "create:tmp": "heroui-vue-create",
     "pub:view": "pnpm publish -r --dry-run --registry=https://registry.npmjs.org/"
   },
   "dependencies": {
