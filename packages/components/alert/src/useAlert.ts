@@ -124,7 +124,6 @@ export function useAlert(originalProps: MaybeRef<UseAlertProps>): UseAlertReturn
     watchedProps,
     (originalProps) => {
       const props = toValue(originalProps) ?? {};
-      console.log({ ...props });
       const [define, variant] = mapPropsVariants(props, getAlertSlots.variantKeys);
       defineProps.value = define;
       variantProps.value = variant;

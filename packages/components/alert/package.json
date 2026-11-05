@@ -23,7 +23,7 @@
   ],
   "type": "module",
   "exports": {
-    ".": "./dist/index.js"
+    ".": "./dist/index.mjs"
   },
   "publishConfig": {
     "access": "public",
@@ -31,7 +31,10 @@
   },
   "scripts": {
     "build": "tsdown --minify",
+    "build:check": "tsdown",
     "dev": "tsdown -w",
+    "test": "vitest",
+    "test:run": "vitest run",
     "bump": "bumpp --tag @heroui-vue/alert@ --sign"
   },
   "devDependencies": {
@@ -43,6 +46,7 @@
     "@types/node": "catalog:prod",
     "@vue/tsconfig": "catalog:prod",
     "unplugin-vue": "catalog:prod",
+    "vitest": "^5.0.5",
     "vue": "catalog:prod"
   }
 }
