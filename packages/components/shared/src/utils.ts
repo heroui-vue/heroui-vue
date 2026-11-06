@@ -1,3 +1,5 @@
+import type { ComponentInternalInstance } from "vue";
+
 export function pureObject(obj: Record<string, any>): Record<string, any> {
   return Object.entries(obj).reduce((acc, [key, value]) => {
     if (value !== undefined && value !== null) {
@@ -37,4 +39,12 @@ export const mapPropsVariants = <T extends Record<string, any>, K extends keyof 
   } else {
     return [props, picked] as [T, Pick<T, K>];
   }
+};
+
+export const hasBoundProp = (instance: ComponentInternalInstance, key: string): boolean => {
+  if (!instance?.vnode.props) {
+    return false;
+  }
+  const kebabKey = key.replace(/[A-Z]/g, (char) => `-${char.toLowerCase()}`);
+  return key in instance.vnode.props || kebabKey in instance.vnode.props;
 };

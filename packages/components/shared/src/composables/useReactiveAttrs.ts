@@ -1,6 +1,7 @@
 import { getCurrentInstance, ref, onUpdated, onMounted } from "vue";
+import type { Ref } from "vue";
 
-export function useReactiveAttrs<T = any>() {
+export function useReactiveAttrs<T = any>(): Ref<any, any> | Ref<T, T> {
   const instance = getCurrentInstance();
 
   if (!instance) {

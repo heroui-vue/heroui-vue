@@ -1,7 +1,6 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "extends": "../../../tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
     // See https://www.typescriptlang.org/tsconfig/#allowSyntheticDefaultImports
     "allowSyntheticDefaultImports": true,
     "paths": {

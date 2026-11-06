@@ -1,14 +1,14 @@
-import type { Slot, VNodeTypes } from "vue";
+import type { Slot, VNodeTypes, Ref } from "vue";
 import { getCurrentInstance, ref, watchEffect, Text, Comment } from "vue";
 
 export type Children = VNodeTypes | VNodeTypes[] | null;
 
-export function useRawChildren(slotName = "default") {
+export function useRawChildren(slotName = "default"): Ref<VNodeTypes | VNodeTypes[] | null> {
   const instance = getCurrentInstance();
   const children = ref<VNodeTypes | VNodeTypes[] | null>([]);
 
   if (!instance) {
-    throw new Error("useRawChildren must be called within setup");
+    throw new Error("`useRawChildren` must be called within setup");
   }
 
   const extractRawContent = (slot: ReturnType<Slot>) => {

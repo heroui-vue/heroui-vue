@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@heroui/shared-utils": "catalog:prod",
+    "@heroui/theme": "catalog:prod",
     "@vue/tsconfig": "catalog:prod",
     "@vueuse/core": "catalog:prod",
     "vue": "catalog:prod"

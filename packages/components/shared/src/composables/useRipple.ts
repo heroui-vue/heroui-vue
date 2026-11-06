@@ -49,7 +49,7 @@ function ripple(event: MouseEvent) {
 export function useRipple(
   target: MaybeRefOrGetter<HTMLElement | null | undefined>,
   options?: { disabled?: MaybeRef<boolean> },
-) {
+): void {
   onMounted(() => {
     rippleElement.value = document.createElement("span");
   });

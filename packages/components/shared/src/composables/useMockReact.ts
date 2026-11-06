@@ -23,9 +23,9 @@ export function useMockReact<Props, Slots extends string, Emits extends string>(
     mock.value = {
       ...props,
       // like React Node props
-      ...(slotsVNode.value ?? {}),
+      ...slotsVNode.value,
       // like React Event props
-      ...(events.value ?? {}),
+      ...events.value,
       children: children.value,
       className: attrs.value.class,
     };

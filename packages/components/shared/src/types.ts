@@ -1,12 +1,13 @@
-import type { Component, HTMLAttributes } from "vue";
+import type { Component, ComputedRef } from "vue";
 
-// export type HTMLHeroVueUIProps<T extends keyof HTMLElementTagNameMap = "div"> =
-//   {
-//     as?: Component | T | (string & {});
-//   } & /* @vue-ignore */ HTMLAttributes;
+import type { SlotsToClasses } from "@heroui/theme";
 
 export type HTMLHeroVueUIProps<T extends keyof HTMLElementTagNameMap = "div"> = {
   as?: Component | T | (string & {});
+};
+
+export type BaseProps = {
+  class: string;
 };
 
 /**
@@ -15,3 +16,9 @@ export type HTMLHeroVueUIProps<T extends keyof HTMLElementTagNameMap = "div"> = 
 export type Prettify<T> = {
   [K in keyof T]: T[K];
 } & {};
+
+export type ClassNameValue = SlotsToClasses<string>[string];
+
+export type ToComputedRefs<T = any, P extends keyof T = never> = {
+  [K in keyof T]: K extends P ? never : ComputedRef<T[K]>;
+};

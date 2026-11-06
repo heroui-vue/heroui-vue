@@ -1,12 +1,14 @@
 import { getCurrentInstance, ref, watchEffect } from "vue";
+import type { Ref } from "vue";
 
 type FirstUppercase<T extends string> = T extends `${infer F}${infer Rest}`
   ? `${Uppercase<F>}${Rest}`
   : never;
 export type OnEventName<T extends string> = `on${FirstUppercase<T>}`;
 
-export function useRegisteredListeners<T extends string>() {
-  type Listeners = Record<OnEventName<T>, Function>;
+type Listeners = Record<OnEventName<T>, Function>;
+
+export function useRegisteredListeners<T extends string>(): Ref<Listeners, Listeners> {
   const instance = getCurrentInstance();
   const listeners = ref<Listeners>({} as any);
 

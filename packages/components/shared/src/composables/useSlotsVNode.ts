@@ -1,14 +1,17 @@
-import type { VNode } from "vue";
 import { getCurrentInstance, watchEffect, ref } from "vue";
+import type { VNode, Ref } from "vue";
 
-export function useSlotsVNode<Slots extends Record<string, any>>() {
+type Slots = Record<string, any>;
+type ReactiveSlots = Record<keyof Slots, VNode | undefined>;
+
+export function useSlotsVNode(): Ref<ReactiveSlots, ReactiveSlots> {
   const inst = getCurrentInstance();
-  const reactiveSlots = ref<Record<keyof Slots, VNode | undefined>>({} as any);
+  const reactiveSlots = ref<ReactiveSlots>({} as any);
 
   watchEffect(() => {
     if (!inst) return;
     const keys = Object.keys(inst.slots) as (keyof Slots)[];
-    const newSlots = {} as Record<keyof Slots, VNode | undefined>;
+    const newSlots = {} as ReactiveSlots;
     keys.forEach((key) => {
       // Call slot function to get VNode
       newSlots[key] = inst.slots[key]?.() as unknown as VNode;
