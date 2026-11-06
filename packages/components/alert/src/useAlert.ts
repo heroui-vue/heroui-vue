@@ -1,90 +1,84 @@
-import { ref, computed, watch, toValue, mergeProps, useSlots, toRef } from "vue";
-import { pureObject, mapPropsVariants, isEmpty } from "@heroui-vue/shared";
+import { ref, computed, watch, mergeProps, toRef, toValue } from "vue";
+import { pureObject, mapPropsVariants, isEmpty, useChildren } from "@heroui-vue/shared";
 import { alert as getAlertSlots } from "@heroui/theme";
-
-import type {
-  AlertSlots as _AlertSlots,
-  AlertVariantProps as _AlertVariantProps,
-  SlotsToClasses,
-} from "@heroui/theme";
+import type { AlertSlots, AlertVariantProps, SlotsToClasses } from "@heroui/theme";
 import type { HTMLHeroVueUIProps, BaseProps, ToComputedRefs } from "@heroui-vue/shared";
-import type { MaybeRef, Ref } from "vue";
+import type { Ref, MaybeRef } from "vue";
 
-namespace HeroUIAlert {
-  export type Slots = _AlertSlots;
-  export type VariantProps = _AlertVariantProps;
-}
-
-export interface AlertDefineProps extends /* @vue-ignore */ HTMLHeroVueUIProps {
-  title?: string;
-  description?: string;
-  isVisible?: boolean;
-  isDefaultVisible?: boolean;
-  isClosable?: boolean;
-  classNames?: SlotsToClasses<HeroUIAlert.Slots>;
-  runtime?: "vitest" | "browser";
-}
-
-export interface AlertVariantProps {
-  variant?: HeroUIAlert.VariantProps["variant"];
-  color?: HeroUIAlert.VariantProps["color"];
-  radius?: HeroUIAlert.VariantProps["radius"];
-  hideIcon?: boolean;
-  hideIconWrapper?: boolean;
-  hasContent?: boolean;
-}
-
-export interface AlertSlotsProps {
-  baseProps: BaseProps & {
-    "data-visible": boolean;
-    "data-closeable": boolean;
-    "data-has-title": boolean;
-    "data-has-description": boolean;
-  };
-  mainWrapperProps: BaseProps;
-  descriptionProps: BaseProps;
-  titleProps: BaseProps;
-  alertIconProps: BaseProps;
-  iconWrapperProps: BaseProps;
-  closeButtonProps: BaseProps;
-}
-
-export type UseAlertReturn = ToComputedRefs<
-  AlertSlotsProps & {
-    isVisible: boolean;
+namespace Props {
+  export interface Option extends HTMLHeroVueUIProps {
+    title?: string;
+    description?: string;
+    isVisible?: boolean;
+    isDefaultVisible?: boolean;
     isClosable?: boolean;
-    color: AlertVariantProps["color"];
+    classNames?: SlotsToClasses<AlertSlots>;
+  }
+  export interface Variant {
+    variant?: AlertVariantProps["variant"];
+    color?: AlertVariantProps["color"];
+    radius?: AlertVariantProps["radius"];
+    hideIcon?: boolean;
+    hideIconWrapper?: boolean;
     hasContent?: boolean;
   }
-> & {
-  close: () => undefined;
-};
+}
+namespace Return {
+  export interface Slot {
+    baseProps: BaseProps & {
+      "data-visible": boolean;
+      "data-closeable": boolean;
+      "data-has-title": boolean;
+      "data-has-description": boolean;
+    };
+    mainWrapperProps: BaseProps;
+    descriptionProps: BaseProps;
+    titleProps: BaseProps;
+    alertIconProps: BaseProps;
+    iconWrapperProps: BaseProps;
+    closeButtonProps: BaseProps;
+  }
+  export interface Option {
+    isVisible: boolean;
+    isClosable: boolean;
+    color: Props.Variant["color"];
+    hasContent: boolean;
+    close: () => undefined;
+  }
+}
 
-export type UseAlertProps = AlertDefineProps & AlertVariantProps;
+export type UseAlertReturn = ToComputedRefs<Return.Slot & Return.Option, "close">;
+export type UseAlertProps = Props.Option & Props.Variant;
 
 export function useAlert(originalProps: MaybeRef<UseAlertProps>): UseAlertReturn {
-  const defineProps = ref<AlertDefineProps>();
-  const variantProps = ref<AlertVariantProps>();
+  const defineProps = ref<Props.Option>();
+  const variantProps = ref<Props.Variant>();
   const innerVisible = ref(true);
-  const children = toValue(originalProps)?.runtime !== "vitest" ? useSlots() : null;
+  const children = useChildren();
 
   const hasContent = computed(() => {
     const { description } = defineProps.value ?? {};
-    return !isEmpty(description) || !isEmpty(children);
+    return !isEmpty(description) || !isEmpty(children.value);
+  });
+  const baseDataProps = computed(() => {
+    const { title, description, isClosable } = toValue(originalProps);
+    return {
+      "data-visible": innerVisible.value,
+      "data-closeable": !!isClosable,
+      "data-has-title": !isEmpty(title),
+      "data-has-description": !isEmpty(description),
+    };
   });
 
   const slotsProps = computed(() => {
-    const { title, description, isClosable, classNames } = defineProps.value ?? {};
+    const { classNames } = defineProps.value ?? {};
     const slots = getAlertSlots({
       hasContent: hasContent.value,
       ...pureObject(variantProps.value ?? {}),
     });
 
     const baseProps = {
-      "data-visible": innerVisible.value,
-      "data-closeable": !!isClosable,
-      "data-has-title": !isEmpty(title),
-      "data-has-description": !isEmpty(description),
+      ...baseDataProps.value,
       class: slots.base(mergeProps({ class: classNames?.base }, { class: classNames })),
     };
     const mainWrapperProps = {
@@ -121,7 +115,7 @@ export function useAlert(originalProps: MaybeRef<UseAlertProps>): UseAlertReturn
   watch(
     watchedProps,
     (originalProps) => {
-      const props = toValue(originalProps) ?? {};
+      const props = originalProps ?? {};
       const [define, variant] = mapPropsVariants(props, getAlertSlots.variantKeys);
       defineProps.value = define;
       variantProps.value = variant;
