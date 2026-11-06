@@ -1,30 +1,24 @@
 <script lang="ts" setup>
-import { useButton, type ButtonProps } from "./use-button";
+import { ref } from "vue";
+import { useButton, type UseButtonProps } from "./useButton";
 
-import { computed, ref, type Component } from "vue";
-
-const props = withDefaults(defineProps<ButtonProps>(), {
+const props = withDefaults(defineProps<UseButtonProps>(), {
+  size: "md",
+  color: "default",
+  variant: "solid",
   spinnerPlacement: "start",
-  isLoading: false,
 });
 
-defineSlots<{
-  default(): Component;
-  startContent(): Component;
-  endContent(): Component;
-  spinner(): Component;
-}>();
-
 const buttonRef = ref<HTMLButtonElement | null>();
-const bind = useButton(props, buttonRef);
+const { buttonProps, isLoading, spinnerPlacement } = useButton(props, buttonRef);
 </script>
 
 <template>
-  <button ref="buttonRef" v-bind="bind">
+  <button ref="buttonRef" v-bind="buttonProps">
     <slot name="startContent" />
-    <slot v-if="isLoading && props.spinnerPlacement === 'start'" name="spinner" />
+    <slot name="spinner" v-if="isLoading && spinnerPlacement === 'start'" />
     <slot />
-    <slot v-if="isLoading && props.spinnerPlacement === 'end'" name="spinner" />
+    <slot name="spinner" v-if="isLoading && spinnerPlacement === 'end'" />
     <slot name="endContent" />
   </button>
 </template>
