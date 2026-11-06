@@ -24,16 +24,17 @@
     "src"
   ],
   "type": "module",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/index.d.mts",
   "exports": {
-    ".": "./dist/index.js"
+    ".": "./dist/index.mjs"
   },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "build": "tsdown",
+    "build": "tsdown --minify",
+    "build:check": "tsdown",
     "dev": "tsdown -w",
     "bump": "pnpm build && bumpp --tag @heroui-vue/icon@ --sign"
   },
