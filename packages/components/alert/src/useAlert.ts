@@ -119,7 +119,9 @@ export function useAlert(originalProps: MaybeRef<UseAlertProps>): UseAlertReturn
       const [define, variant] = mapPropsVariants(props, getAlertSlots.variantKeys);
       defineProps.value = define;
       variantProps.value = variant;
-      innerVisible.value = !!define.isVisible || !!define.isDefaultVisible;
+      innerVisible.value = isEmpty(define.isVisible)
+        ? !!define.isDefaultVisible
+        : !!define.isVisible;
     },
     {
       immediate: true,

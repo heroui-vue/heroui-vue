@@ -10,6 +10,7 @@ const emits = defineEmits<{
   (e: "visibleChange", isVisible: boolean): void;
 }>();
 const props = withDefaults(defineProps<Omit<UseAlertProps, "hasContent">>(), {
+  isVisible: undefined,
   isDefaultVisible: true,
 });
 
