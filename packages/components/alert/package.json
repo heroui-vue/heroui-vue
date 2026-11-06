@@ -35,7 +35,7 @@
     "dev": "tsdown -w",
     "test": "vitest",
     "test:run": "vitest run",
-    "bump": "bumpp --tag @heroui-vue/alert@ --sign"
+    "bump": "pnpm build && bumpp --tag @heroui-vue/alert@ --sign"
   },
   "devDependencies": {
     "@heroui-vue/shared": "workspace:*",
