@@ -29,7 +29,7 @@
     "pub:view": "pnpm publish -r --dry-run --registry=https://registry.npmjs.org/"
   },
   "dependencies": {
-    "oxfmt": "^0.75.0"
+    "oxfmt": "^0.76.0"
   },
   "devDependencies": {
     "bumpp": "^12.3.0",
