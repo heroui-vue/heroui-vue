@@ -30,10 +30,11 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "build": "pnpm -w build:shared && tsdown --minify",
-    "build:check": "pnpm -w build:shared && tsdown",
+    "build": "pnpm -w build:shared && pnpm type:check && tsdown --minify",
+    "build:check": "pnpm -w build:shared && pnpm type:check && tsdown",
     "dev": "pnpm -w build:shared && tsdown -w",
-    "bump": "pnpm build && bumpp --tag @heroui-vue/alert@ --sign"
+    "bump": "pnpm build && bumpp --tag @heroui-vue/alert@ --sign",
+    "type:check": "vue-tsc --noEmit --isolatedDeclarations false"
   },
   "devDependencies": {
     "@heroui-vue/shared": "workspace:*",
