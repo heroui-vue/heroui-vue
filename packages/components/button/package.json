@@ -31,22 +31,14 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "build": "tsdown --minify",
-    "build:check": "tsdown",
-    "dev": "tsdown -w",
+    "build": "pnpm -w build:shared && tsdown --minify",
+    "build:check": "pnpm -w build:shared && tsdown",
+    "dev": "pnpm -w build:shared && tsdown -w",
     "bump": "pnpm build && bumpp --tag @heroui-vue/button@ --sign"
-  },
-  "dependencies": {
-    "@heroui-vue/shared": "workspace:*"
   },
   "devDependencies": {
     "@heroui-vue/shared": "workspace:*",
-    "@heroui/shared-utils": "catalog:prod",
-    "@heroui/system": "catalog:prod",
     "@heroui/theme": "catalog:prod",
-    "@heroui/use-aria-button": "catalog:prod",
-    "@types/node": "catalog:prod",
-    "@vue/tsconfig": "catalog:prod",
     "@vueuse/core": "catalog:prod",
     "unplugin-vue": "catalog:prod",
     "vue": "catalog:prod"
