@@ -1,11 +1,6 @@
 {
-  "extends": "../../../tsconfig.json",
-  "compilerOptions": {
-    // See https://www.typescriptlang.org/tsconfig/#allowSyntheticDefaultImports
-    "allowSyntheticDefaultImports": true,
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  },
+  "extends": "@vue/tsconfig/tsconfig.lib.json",
+  "compilerOptions": {},
+  "exclude": ["node_modules", "dist"],
   "include": ["./src/**/*"]
 }

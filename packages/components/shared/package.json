@@ -1,6 +1,6 @@
 {
   "name": "@heroui-vue/shared",
-  "version": "0.0.12",
+  "version": "0.0.1",
   "keywords": [
     "button component",
     "heroui",
@@ -23,10 +23,16 @@
   },
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./dist/index.mjs"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "scripts": {
+    "dev": "tsdown -w",
+    "build": "tsdown --minify",
+    "build:check": "tsdown",
+    "bump": "pnpm build && bumpp --tag @heroui-vue/shared@ --sign"
   },
   "devDependencies": {
     "@heroui/shared-utils": "catalog:prod",
