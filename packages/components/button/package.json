@@ -34,7 +34,7 @@
     "build": "tsdown --minify",
     "build:check": "tsdown",
     "dev": "tsdown -w",
-    "bump": "npm run build && bumpp --tag @heroui-vue/button@ --sign"
+    "bump": "pnpm build && bumpp --tag @heroui-vue/button@ --sign"
   },
   "dependencies": {
     "@heroui-vue/shared": "workspace:*"
