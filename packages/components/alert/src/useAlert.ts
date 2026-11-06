@@ -1,8 +1,6 @@
 import { ref, computed, watch, toValue, mergeProps, useSlots, toRef } from "vue";
-import { pureObject } from "@heroui-vue/shared";
+import { pureObject, mapPropsVariants, isEmpty } from "@heroui-vue/shared";
 import { alert as getAlertSlots } from "@heroui/theme";
-import { mapPropsVariants } from "@heroui-vue/shared";
-import { isEmpty } from "@heroui/shared-utils";
 
 import type {
   AlertSlots as _AlertSlots,
