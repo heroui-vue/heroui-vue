@@ -1,6 +1,6 @@
 import { ref, computed, watch, mergeProps, toRef, toValue } from "vue";
-import { pureObject, mapPropsVariants, isEmpty, useChildren } from "@heroui-vue/shared";
-import { alert as getAlertSlots } from "@heroui/theme";
+import { pureObject, mapPropsVariants, isEmpty, tryUseSlots } from "@heroui-vue/shared";
+import { alert } from "@heroui/theme";
 import type { AlertSlots, AlertVariantProps, SlotsToClasses } from "@heroui/theme";
 import type { HTMLHeroVueUIProps, BaseProps, ToComputedRefs } from "@heroui-vue/shared";
 import type { Ref, MaybeRef } from "vue";
@@ -49,16 +49,30 @@ namespace Return {
 
 export type UseAlertReturn = ToComputedRefs<Return.Slot & Return.Option, "close">;
 export type UseAlertProps = Props.Option & Props.Variant;
+export type UseAlertSlot =
+  | "startContent"
+  | "icon"
+  | "title"
+  | "description"
+  | "default"
+  | "endContent";
 
 export function useAlert(originalProps: MaybeRef<UseAlertProps>): UseAlertReturn {
   const defineProps = ref<Props.Option>();
   const variantProps = ref<Props.Variant>();
   const innerVisible = ref(true);
-  const children = useChildren();
+  const children = tryUseSlots<UseAlertSlot[]>(
+    "startContent",
+    "icon",
+    "title",
+    "description",
+    "default",
+    "endContent",
+  );
 
   const hasContent = computed(() => {
     const { description } = defineProps.value ?? {};
-    return !isEmpty(description) || !isEmpty(children.value);
+    return !isEmpty(description) || !isEmpty(children);
   });
   const baseDataProps = computed(() => {
     const { title, description, isClosable } = toValue(originalProps);
@@ -72,7 +86,7 @@ export function useAlert(originalProps: MaybeRef<UseAlertProps>): UseAlertReturn
 
   const slotsProps = computed(() => {
     const { classNames } = defineProps.value ?? {};
-    const slots = getAlertSlots({
+    const slots = alert({
       hasContent: hasContent.value,
       ...pureObject(variantProps.value ?? {}),
     });
@@ -116,7 +130,7 @@ export function useAlert(originalProps: MaybeRef<UseAlertProps>): UseAlertReturn
     watchedProps,
     (originalProps) => {
       const props = originalProps ?? {};
-      const [define, variant] = mapPropsVariants(props, getAlertSlots.variantKeys);
+      const [define, variant] = mapPropsVariants(props, alert.variantKeys);
       defineProps.value = define;
       variantProps.value = variant;
       innerVisible.value = isEmpty(define.isVisible)
