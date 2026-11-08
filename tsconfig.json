@@ -1,0 +1,10 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "compilerOptions": {
+    "declaration": true,
+    "isolatedDeclarations": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "allowSyntheticDefaultImports": true
+  }
+}
