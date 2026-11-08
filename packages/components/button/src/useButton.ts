@@ -1,7 +1,7 @@
 import { computed } from "vue";
 import { button } from "@heroui/theme";
 import { useFocus, useMousePressed, useElementHover } from "@vueuse/core";
-import { useRipple, useClassNames } from "@heroui-vue/shared";
+import { useRipple, tryUseAttrs } from "@heroui-vue/shared";
 import type { ButtonVariantProps as _ButtonVariantProps } from "@heroui/theme";
 import type { HTMLHeroVueUIProps, BaseProps, ToComputedRefs } from "@heroui-vue/shared";
 import type { Ref, Reactive } from "vue";
@@ -58,7 +58,7 @@ export function useButton(
   const { focused } = useFocus(buttonRef);
   const { pressed } = useMousePressed({ target: buttonRef });
   const hovered = useElementHover(buttonRef);
-  const classNames = useClassNames();
+  const { class: className } = tryUseAttrs("class");
 
   const disableRipple = computed(() => {
     const { disableRipple, disableAnimation } = originalProps;
@@ -83,7 +83,6 @@ export function useButton(
 
     const isInGroup = false;
     const disabled = !!isDisabled.value;
-    const { className } = classNames.value;
     const styles = button({
       size,
       color,
