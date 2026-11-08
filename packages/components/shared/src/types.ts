@@ -20,5 +20,5 @@ export type Prettify<T> = {
 export type ClassNameValue = SlotsToClasses<string>[string];
 
 export type ToComputedRefs<T = any, P extends keyof T = never> = {
-  [K in keyof T]: K extends P ? never : ComputedRef<T[K]>;
+  [K in keyof T]: K extends P ? T[K] : ComputedRef<T[K]>;
 };
