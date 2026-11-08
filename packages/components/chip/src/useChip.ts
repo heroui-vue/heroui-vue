@@ -16,6 +16,12 @@ import type { HTMLHeroVueUIProps, BaseProps, ToComputedRefs } from "@heroui-vue/
 
 namespace Props {
   export interface Option extends HTMLHeroVueUIProps {
+    isOneChar?: boolean;
+    isCloseable?: boolean;
+    hasStartContent?: boolean;
+    hasEndContent?: boolean;
+    isDisabled?: boolean;
+    isCloseButtonFocusVisible?: boolean;
     classNames?: SlotsToClasses<ChipSlots>;
     onClose?: (e: any) => void;
   }
@@ -24,12 +30,6 @@ namespace Props {
     size?: ChipVariantProps["size"];
     color?: ChipVariantProps["color"];
     radius?: ChipVariantProps["radius"];
-    isOneChar?: boolean;
-    isCloseable?: boolean;
-    hasStartContent?: boolean;
-    hasEndContent?: boolean;
-    isDisabled?: boolean;
-    isCloseButtonFocusVisible?: boolean;
   }
 }
 namespace Return {
