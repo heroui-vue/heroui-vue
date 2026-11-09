@@ -7,7 +7,7 @@ export type HTMLHeroVueUIProps<T extends keyof HTMLElementTagNameMap = "div"> = 
 };
 
 export type BaseProps = {
-  class: string;
+  class?: string;
 };
 
 /**
