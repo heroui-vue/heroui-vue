@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 import type { VNode } from "vue";
 
 import { Comment, cloneVNode, computed, defineComponent, h, provide, toRef, useAttrs } from "vue";
@@ -94,4 +94,6 @@ export default defineComponent({
     };
   },
 });
-</script>
+</script> -->
+
+<script></script>

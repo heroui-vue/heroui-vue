@@ -23,23 +23,24 @@
   ],
   "type": "module",
   "exports": {
-    ".": "./dist/index.js"
+    ".": "./dist/index.mjs"
   },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "build": "tsdown --minify",
-    "dev": "tsdown -w",
-    "bump": "bumpp --tag @heroui-vue/avatar@ --sign"
+    "dev": "pnpm build:workspace && tsdown -w",
+    "build": "pnpm build:workspace && pnpm type:check && tsdown --minify",
+    "build:check": "pnpm build:workspace && pnpm type:check && tsdown",
+    "build:workspace": "pnpm -w build:shared && pnpm -w build:icon",
+    "type:check": "vue-tsc --noEmit --isolatedDeclarations false",
+    "bump": "pnpm build && bumpp --tag @heroui-vue/avatar@ --sign"
   },
   "devDependencies": {
+    "@heroui-vue/icon": "workspace:*",
     "@heroui-vue/shared": "workspace:*",
-    "@heroui/shared-utils": "catalog:prod",
     "@heroui/theme": "catalog:prod",
-    "@types/node": "catalog:prod",
-    "@vue/tsconfig": "catalog:prod",
     "@vueuse/core": "catalog:prod",
     "unplugin-vue": "catalog:prod",
     "vue": "catalog:prod"
