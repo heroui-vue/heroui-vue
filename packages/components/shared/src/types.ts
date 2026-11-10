@@ -4,6 +4,7 @@ import type { SlotsToClasses } from "@heroui/theme";
 
 export type HTMLHeroVueUIProps<T extends keyof HTMLElementTagNameMap = "div"> = {
   as?: Component | T | (string & {});
+  class?: string;
 };
 
 export type BaseProps = {
