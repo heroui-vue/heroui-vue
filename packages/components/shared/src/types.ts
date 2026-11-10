@@ -23,3 +23,5 @@ export type ClassNameValue = SlotsToClasses<string>[string];
 export type ToComputedRefs<T = any, P extends keyof T = never> = {
   [K in keyof T]: K extends P ? T[K] : ComputedRef<T[K]>;
 };
+
+export type PickRequired<T, K extends keyof T> = Required<{ [P in K]: T[P] }> & Omit<T, K>;
