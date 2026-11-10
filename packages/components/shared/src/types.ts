@@ -2,8 +2,13 @@ import type { Component, ComputedRef } from "vue";
 
 import type { SlotsToClasses } from "@heroui/theme";
 
-export type HTMLHeroVueUIProps<T extends keyof HTMLElementTagNameMap = "div"> = {
-  as?: Component | T | (string & {});
+/**
+ * @deprecated use `HeroUIVueBaseProps`
+ */
+export type HTMLHeroVueUIProps = HeroUIVueBaseProps;
+
+export type HeroUIVueBaseProps = {
+  as?: Component | keyof HTMLElementTagNameMap | (string & {});
   class?: string;
 };
 
