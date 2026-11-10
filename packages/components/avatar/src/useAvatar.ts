@@ -1,6 +1,13 @@
 import { ref, watchEffect, toValue, h } from "vue";
 import { useElementHover, useFocus, useImage, toReactive } from "@vueuse/core";
-import { safeText, clsx, tryUseSlots, cloneSlot, toRefsWithDefault } from "@heroui-vue/shared";
+import {
+  safeText,
+  clsx,
+  tryUseSlots,
+  tryUseAttrs,
+  cloneSlot,
+  toRefsWithDefault,
+} from "@heroui-vue/shared";
 import { avatar } from "@heroui/theme";
 import { AvatarIcon } from "@heroui-vue/icon";
 import type { UseAsyncStateOptions, MaybeElementRef, MaybeElement } from "@vueuse/core";
@@ -86,6 +93,7 @@ export function useAvatar(
   const { focused } = useFocus(avatarRef);
   const isHovered = useElementHover(avatarRef);
   const { fallback, icon } = tryUseSlots<UseAvatarSlot[]>("fallback", "icon");
+  const { class: className } = tryUseAttrs("class");
 
   const isImgLoaded = ref() as Ref<Return.Option["isImgLoaded"]>;
   const showFallback = ref() as Ref<Return.Option["showFallback"]>;
@@ -94,14 +102,17 @@ export function useAvatar(
   const imageProps = ref() as Ref<Return.Slot["imageProps"]>;
   const fallbackContent = ref() as Ref<Return.Slot["fallback"]>;
 
+  // isImgLoaded
   watchEffect(() => {
     const { ignoreFallback, as, imgAs } = toReactive(props);
     isImgLoaded.value = ignoreFallback || (as !== undefined && imgAs !== "img") || isReady.value;
   });
+  // showFallback
   watchEffect(() => {
     const { src, showFallback: showFallbackProp } = toReactive(props);
     showFallback.value = (!src || !isImgLoaded.value) && showFallbackProp;
   });
+  // slots
   watchEffect(() => {
     const {
       color,
@@ -126,6 +137,7 @@ export function useAvatar(
       isInGridGroup: isInGridGroup ?? false,
     });
   });
+  // avatarProps
   watchEffect(() => {
     const { isFocusable, isDisabled, as, classNames } = toReactive(props);
     avatarProps.value = {
@@ -136,10 +148,12 @@ export function useAvatar(
       // TODO: should exact value
       "data-focus-visible": false,
       class: slots.value?.base({
-        class: clsx(classNames?.base),
+        // class: clsx(classNames?.base, className),
+        class: clsx(classNames?.base, className),
       }),
     } as Return.Slot["avatarProps"];
   });
+  // imageProps
   watchEffect(() => {
     const { src, classNames } = toReactive(props);
     imageProps.value = {
@@ -148,6 +162,7 @@ export function useAvatar(
       class: slots.value?.img({ class: classNames?.img }),
     };
   });
+  // fallbackContent
   watchEffect(() => {
     const { src, alt, classNames, name, getInitials } = toReactive(props);
     const createImgWrapperVnodes = (
