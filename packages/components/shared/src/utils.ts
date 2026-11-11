@@ -133,18 +133,18 @@ export function isValidVNode(vnode?: VNode) {
   return type !== Comment && type !== Text;
 }
 
-function flattenFragment(vnodes: VNode | VNode[] | undefined | null): VNode[] {
+export function flattenVNodes(vnodes: VNode | VNode[] | undefined | null): VNode[] {
   if (!vnodes) {
     return [];
   } else if (!Array.isArray(vnodes)) {
-    return flattenFragment([vnodes]);
+    return flattenVNodes([vnodes]);
   }
 
   const flatVnodes = vnodes.flatMap((vnode) => {
     if (!isVNode(vnode)) {
       return [];
     } else if (vnode.type === Fragment) {
-      return flattenFragment(vnode.children as VNode | VNode[]);
+      return flattenVNodes(vnode.children as VNode | VNode[]);
     } else {
       return [vnode];
     }
@@ -174,7 +174,7 @@ export function cloneValidVnode(
     return cloneValidVnode([vnodes], ...cloneNode);
   }
 
-  const flatVnodes = flattenFragment(vnodes);
+  const flatVnodes = flattenVNodes(vnodes);
   if (flatVnodes.filter(isValidVNode).length !== 1) {
     return vnodes;
   }
