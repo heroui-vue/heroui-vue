@@ -1,21 +1,22 @@
-import { h, Text, computed, toValue } from "vue";
+import { ref, watchEffect, h, Text } from "vue";
+import { toReactive } from "@vueuse/core";
 import {
   mapPropsVariants,
-  clsx,
   isEmpty,
   hasEmitListeners,
   cloneSlot,
   tryUseSlots,
   tryUseAttrs,
+  toRefsWithDefault,
 } from "@heroui-vue/shared";
 import { CloseFilledIcon } from "@heroui-vue/icon";
-import { chip } from "@heroui/theme";
+import { chip, cn } from "@heroui/theme";
 import type { ChipVariantProps, ChipSlots, SlotsToClasses } from "@heroui/theme";
-import type { MaybeRef, VNode } from "vue";
-import type { HTMLHeroVueUIProps, BaseProps, ToComputedRefs } from "@heroui-vue/shared";
+import type { MaybeRef, Ref, ToRefs, VNode } from "vue";
+import type { HeroUIVueBaseProps, BaseProps } from "@heroui-vue/shared";
 
 namespace Props {
-  export interface Option extends HTMLHeroVueUIProps {
+  export interface Option extends HeroUIVueBaseProps {
     isOneChar?: boolean;
     isCloseable?: boolean;
     hasStartContent?: boolean;
@@ -38,6 +39,7 @@ namespace Return {
     closeButtonProps: BaseProps & {
       role: "button";
       tabIndex: 0;
+      "aria-label": "close chip";
     };
     avatarProps: BaseProps;
     defaultProps: BaseProps;
@@ -72,8 +74,11 @@ function extractTextContent(nodes: VNode[] | undefined) {
 }
 
 export function useChip(
-  props: MaybeRef<UseChipProps>,
-): ToComputedRefs<UseChipReturn, "isCloseable"> {
+  originalProps: MaybeRef<UseChipProps>,
+): ToRefs<Omit<UseChipReturn, "isCloseable">> & { isCloseable: UseChipReturn["isCloseable"] } {
+  const props = toRefsWithDefault(toReactive(originalProps) as UseChipProps, {
+    as: "div",
+  });
   const { class: className } = tryUseAttrs("class");
   const {
     startContent,
@@ -81,18 +86,26 @@ export function useChip(
     avatar,
     default: defaultSlot,
   } = tryUseSlots<UseChipSlot[]>("startContent", "endContent", "avatar", "default");
-
   const { hasClose: isCloseable } = hasEmitListeners<UseChipEmit[]>("close");
   const isOneChar = extractTextContent(defaultSlot?.()).length === 1;
   const hasStartContent = !!avatar || !!startContent;
   const hasEndContent = !!endContent || isCloseable;
 
-  const as = computed(() => toValue(props).as || "div");
-  const classNames = computed(() => toValue(props).classNames);
-  const isDot = computed(() => toValue(props).variant === "dot");
-  const chipSlots = computed(() => {
-    const [, variantProps] = mapPropsVariants(toValue(props), chip.variantKeys);
-    return chip({
+  const slots = ref() as Ref<Return.Option["slots"]>;
+  const isDot = ref() as Ref<Return.Option["isDot"]>;
+  const chipProps = ref() as Ref<Return.Slot["chipProps"]>;
+  const defaultProps = ref() as Ref<Return.Slot["defaultProps"]>;
+  const closeButtonProps = ref() as Ref<Return.Slot["closeButtonProps"]>;
+  const avatarProps = ref() as Ref<Return.Slot["avatarProps"]>;
+  const contentProps = ref() as Ref<Return.Slot["contentProps"]>;
+  const dotProps = ref() as Ref<Return.Slot["dotProps"]>;
+  const startContentSlot = ref() as Ref<Return.Slot["startContent"]>;
+  const endContentSlot = ref() as Ref<Return.Slot["endContent"]>;
+
+  // slots
+  watchEffect(() => {
+    const [, variantProps] = mapPropsVariants(toReactive(props), chip.variantKeys);
+    slots.value = chip({
       ...variantProps,
       hasStartContent,
       hasEndContent,
@@ -100,67 +113,80 @@ export function useChip(
       isCloseable,
     });
   });
-  const chipProps = computed<Return.Slot["chipProps"]>(() => {
-    const baseStyles = clsx(classNames.value?.base, className);
-    return {
-      class: chipSlots.value.base({ class: baseStyles }),
+  // isDot
+  watchEffect(() => {
+    isDot.value = toReactive(props).variant === "dot";
+  });
+  // chipProps
+  watchEffect(() => {
+    const { classNames, class: propsClass } = toReactive(props);
+    chipProps.value = {
+      class: slots.value.base({ class: cn(classNames?.base, className, propsClass) }),
     };
   });
-  const defaultProps = computed<Return.Slot["defaultProps"]>(() => {
-    return {
-      class: chipSlots.value.content({ class: classNames.value?.content }),
+  // defaultProps
+  watchEffect(() => {
+    defaultProps.value = {
+      class: slots.value.content({ class: toReactive(props).classNames?.content }),
     };
   });
-  const closeButtonProps = computed<Return.Slot["closeButtonProps"]>(() => {
-    return {
+  // closeButtonProps
+  watchEffect(() => {
+    closeButtonProps.value = {
       role: "button" as const,
       tabIndex: 0 as const,
-      class: chipSlots.value.closeButton({ class: classNames.value?.closeButton }),
+      class: slots.value.closeButton({ class: toReactive(props).classNames?.closeButton }),
       "aria-label": "close chip",
     };
   });
-  const avatarProps = computed<Return.Slot["avatarProps"]>(() => {
-    return {
-      class: chipSlots.value.avatar({ class: classNames.value?.avatar }),
+  // avatarProps
+  watchEffect(() => {
+    avatarProps.value = {
+      class: slots.value.avatar({ class: toReactive(props).classNames?.avatar }),
     };
   });
-  const contentProps = computed<Return.Slot["contentProps"]>(() => {
-    return {
-      class: clsx("max-h-[80%]"),
+  // contentProps
+  watchEffect(() => {
+    contentProps.value = {
+      class: cn("max-h-[80%]"),
     };
   });
-  const dotProps = computed<Return.Slot["avatarProps"]>(() => {
-    return {
-      class: chipSlots.value.dot({ class: classNames.value?.dot }),
+  // dotProps
+  watchEffect(() => {
+    dotProps.value = {
+      class: slots.value.dot({ class: toReactive(props).classNames?.dot }),
     };
   });
-  const startContentNode = computed<Return.Slot["startContent"]>(() => {
-    return () => {
-      const vnodes = cloneSlot(startContent, contentProps.value)();
-      if (isDot.value && !vnodes) {
+  // startContentSlot
+  watchEffect(() => {
+    startContentSlot.value = () => {
+      const startNodes = cloneSlot(startContent, contentProps.value)();
+      const avatarVnodes = cloneSlot(avatar, avatarProps.value)();
+      const content = avatarVnodes || startNodes;
+      if (isDot.value && !content) {
         return h("span", dotProps.value);
       } else {
-        return vnodes;
+        return content;
       }
     };
   });
-  const endContentNode = computed<Return.Slot["endContent"]>(() => {
-    return () => {
-      const avatarVnodes = cloneSlot(avatar, avatarProps.value)();
+  // endContentSlot
+  watchEffect(() => {
+    endContentSlot.value = () => {
       const endContentVnodes = cloneSlot(endContent, contentProps.value)();
-      const end = avatarVnodes || endContentVnodes;
       if (isCloseable) {
-        return h("span", closeButtonProps.value, [end || h(CloseFilledIcon, { size: 18 })]);
+        return h("span", closeButtonProps.value, [
+          endContentVnodes || h(CloseFilledIcon, { size: 18 }),
+        ]);
       } else {
-        return end;
+        return endContentVnodes;
       }
     };
   });
 
   return {
-    as,
-    slots: computed(() => chipSlots.value),
-    classNames,
+    ...props,
+    slots,
     isDot,
     isCloseable: !!isCloseable,
     chipProps,
@@ -169,7 +195,7 @@ export function useChip(
     avatarProps,
     contentProps,
     dotProps,
-    startContent: startContentNode,
-    endContent: endContentNode,
+    startContent: startContentSlot,
+    endContent: endContentSlot,
   };
 }
