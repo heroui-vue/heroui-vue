@@ -2,29 +2,20 @@ import { ref, watchEffect, toValue, h } from "vue";
 import { useElementHover, useFocus, useImage, toReactive } from "@vueuse/core";
 import {
   safeText,
-  clsx,
   tryUseSlots,
   tryUseAttrs,
   cloneSlot,
   toRefsWithDefault,
 } from "@heroui-vue/shared";
-import { avatar } from "@heroui/theme";
+import { avatar, cn } from "@heroui/theme";
 import { AvatarIcon } from "@heroui-vue/icon";
 import type { UseAsyncStateOptions, MaybeElementRef, MaybeElement } from "@vueuse/core";
-import type { HTMLHeroVueUIProps, BaseProps } from "@heroui-vue/shared";
+import type { HeroUIVueBaseProps, BaseProps } from "@heroui-vue/shared";
 import type { AvatarSlots, AvatarVariantProps, SlotsToClasses } from "@heroui/theme";
-import type {
-  Ref,
-  MaybeRef,
-  MaybeRefOrGetter,
-  Reactive,
-  ToRefs,
-  ImgHTMLAttributes,
-  VNode,
-} from "vue";
+import type { Ref, MaybeRef, Reactive, ToRefs, ImgHTMLAttributes, VNode } from "vue";
 
 namespace Props {
-  export interface Option extends HTMLHeroVueUIProps {
+  export interface Option extends HeroUIVueBaseProps {
     name?: string;
     src?: string;
     alt?: string;
@@ -36,7 +27,7 @@ namespace Props {
     /**
      * same `ImgComponent`
      */
-    imgAs?: HTMLHeroVueUIProps["as"];
+    imgAs?: HeroUIVueBaseProps["as"];
     imgProps?: /* @vue-ignore */ ImgHTMLAttributes;
     classNames?: SlotsToClasses<AvatarSlots>;
   }
@@ -79,9 +70,9 @@ export type UseAvatarSlot = "icon" | "fallback";
 
 export function useAvatar(
   originalProps: MaybeRef<UseAvatarProps>,
-  avatarRef: MaybeElementRef<MaybeElement> & MaybeRefOrGetter<EventTarget | null | undefined>,
+  avatarRef: MaybeElementRef<MaybeElement & EventTarget>,
 ): ToRefs<UseAvatarReturn> {
-  const props = toRefsWithDefault(originalProps, {
+  const props = toRefsWithDefault(toReactive(originalProps) as UseAvatarProps, {
     as: "span",
     imgAs: "img",
     alt: toValue(originalProps).name || "avatar",
@@ -100,7 +91,7 @@ export function useAvatar(
   const slots = ref() as Ref<Return.Option["slots"]>;
   const avatarProps = ref() as Ref<Return.Slot["avatarProps"]>;
   const imageProps = ref() as Ref<Return.Slot["imageProps"]>;
-  const fallbackContent = ref() as Ref<Return.Slot["fallback"]>;
+  const fallbackSlot = ref() as Ref<Return.Slot["fallback"]>;
 
   // isImgLoaded
   watchEffect(() => {
@@ -148,8 +139,7 @@ export function useAvatar(
       // TODO: should exact value
       "data-focus-visible": false,
       class: slots.value?.base({
-        // class: clsx(classNames?.base, className),
-        class: clsx(classNames?.base, className),
+        class: cn(classNames?.base, props.class?.value, className),
       }),
     } as Return.Slot["avatarProps"];
   });
@@ -162,7 +152,7 @@ export function useAvatar(
       class: slots.value?.img({ class: classNames?.img }),
     };
   });
-  // fallbackContent
+  // fallbackSlot
   watchEffect(() => {
     const { src, alt, classNames, name, getInitials } = toReactive(props);
     const createImgWrapperVnodes = (
@@ -180,7 +170,7 @@ export function useAvatar(
         vnodes as any,
       );
     };
-    fallbackContent.value = () => {
+    fallbackSlot.value = () => {
       const fallbackVnodes = cloneSlot(fallback)();
       const iconVnodes = cloneSlot(icon)();
       if (!showFallback.value && src) {
@@ -216,6 +206,6 @@ export function useAvatar(
     slots,
     avatarProps,
     imageProps,
-    fallback: fallbackContent,
+    fallback: fallbackSlot,
   };
 }
