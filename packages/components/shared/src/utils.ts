@@ -9,6 +9,7 @@ import {
   useAttrs,
 } from "vue";
 import { isEmpty } from "@heroui/shared-utils";
+import { cn } from "@heroui/theme";
 import type { ComponentInternalInstance, Slot, VNode } from "vue";
 
 export function pureObject(obj: Record<string, any>): Record<string, any> {
@@ -124,9 +125,12 @@ export function tryUseAttrs<T extends string[], R = Record<T[number], string | u
   return result;
 }
 
-export function isValidVNode(vnode: VNode) {
-  const { type, children } = vnode;
-  return type !== Comment && type !== Text && !!String(children ?? "").trim();
+export function isValidVNode(vnode?: VNode) {
+  if (!vnode) {
+    return false;
+  }
+  const { type } = vnode;
+  return type !== Comment && type !== Text;
 }
 
 function flattenFragment(vnodes: VNode | VNode[] | undefined | null): VNode[] {
@@ -151,7 +155,7 @@ function flattenFragment(vnodes: VNode | VNode[] | undefined | null): VNode[] {
 
 export function cloneSlot(
   slot: Slot | undefined | null,
-  ...cloneNode: Parameters<typeof cloneVNode> extends [infer _, ...infer R] ? R : never
+  ...cloneNode: Parameters<typeof cloneValidVnode> extends [infer _, ...infer R] ? R : never
 ): () => ReturnType<typeof cloneValidVnode> {
   if (!slot) {
     return () => null;
@@ -167,7 +171,7 @@ export function cloneValidVnode(
   if (!vnodes) {
     return null;
   } else if (!Array.isArray(vnodes)) {
-    return cloneValidVnode([vnodes]);
+    return cloneValidVnode([vnodes], ...cloneNode);
   }
 
   const flatVnodes = flattenFragment(vnodes);
@@ -179,6 +183,12 @@ export function cloneValidVnode(
     if (!isValidVNode(vnode)) {
       return vnode;
     } else {
+      const [props, ...rest] = cloneNode;
+      if (props) {
+        const mergedClass = cn(vnode.props?.class, props.class as string);
+        delete vnode.props?.class;
+        return cloneVNode(vnode, { ...props, class: mergedClass }, ...rest);
+      }
       return cloneVNode(vnode, ...cloneNode);
     }
   });
