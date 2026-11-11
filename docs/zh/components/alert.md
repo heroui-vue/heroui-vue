@@ -1,5 +1,7 @@
 # Alert
 
+[HeroUI Alert 文档](https://v2.heroui.com/docs/components/alert)
+
 提供关于操作或事件的简洁反馈的临时通知
 
 ## 安装
@@ -23,7 +25,7 @@ bun add @heroui-vue/alert
 :::
 
 > [!NOTE]
-> 如果你使用[全局安装](/guide/installation#全局安装)的方式，可忽略此安装步骤
+> 如果你使用[全局安装](/zh/guide/installation#全局安装)的方式，可忽略此安装步骤
 
 ## 导入
 
@@ -90,12 +92,13 @@ import { Alert } from '@heroui-vue/alert'
 ::: sfc
 <script setup>
 import { Alert } from '@heroui-vue/alert'
+import { AvatarIcon } from '@heroui-vue/icon'
 </script>
 
 <template>
     <Alert title="An alert with a custom icon">
       <template #icon>
-      <svg data-name="Iconly/Curved/Profile" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg" class="fill-current w-6 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5"><path d="M11.845 21.662C8.153 21.662 5 21.088 5 18.787s3.133-4.425 6.845-4.425c3.692 0 6.845 2.1 6.845 4.4s-3.134 2.9-6.845 2.9z" data-name="Stroke 1"></path><path d="M11.837 11.174a4.372 4.372 0 10-.031 0z" data-name="Stroke 3"></path></g></svg>
+          <AvatarIcon />
       </template>
     </Alert>
 </template>
@@ -140,5 +143,3 @@ import { Alert } from '@heroui-vue/alert'
     />
 </template>
 :::
-
-###
