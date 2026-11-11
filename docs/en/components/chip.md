@@ -172,7 +172,15 @@ import { Avatar } from '@heroui-vue/avatar'
 </script>
 
 <template>
-    <div class="flex gap-4 items-center">
+    <div class="flex gap-4">
+        <Chip variant="flat">
+            <template #avatar>
+            <Avatar
+                name="JW" src="https://i.pravatar.cc/300?u=a042581f4e29026709d"
+            />
+            </template>
+            Avatar
+        </Chip>
       <Chip variant="flat">
         <template #avatar>
           <Avatar

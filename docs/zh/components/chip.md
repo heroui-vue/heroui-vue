@@ -1,10 +1,6 @@
-<script setup>
-import { Chip } from '@heroui-vue/core/raw'
-import { Avatar } from '@heroui-vue/core/raw'
-import { NotificationIcon, CheckIcon } from '@heroui-vue/icon'
-</script>
-
 # Chip
+
+[HeroUI Chip 文档](https://v2.heroui.com/docs/components/chip)
 
 Chip是一个呈现输入信息、属性或操作的小型信息块。
 
@@ -30,109 +26,173 @@ bun add @heroui-vue/chip
 
 ## 使用
 
-::: component-view
-<Chip>Chip</Chip>
+::: sfc
+<script setup>
+import { Chip } from '@heroui-vue/chip'
+</script>
+
+<template>
+    <Chip>Chip</Chip>
+</template>
 :::
 
 ### 禁用
 
-::: component-view
-<Chip isDisabled color="primary">Chip</Chip>
+::: sfc
+<script setup>
+import { Chip } from '@heroui-vue/chip'
+</script>
+
+<template>
+    <Chip isDisabled color="primary">Chip</Chip>
+</template>
 :::
 
 ### 尺寸
 
-::: component-view
-<div class="flex gap-4">
-    <Chip size="sm">Small</Chip>
-    <Chip size="md">Medium</Chip>
-    <Chip size="lg">Large</Chip>
-</div>
+::: sfc
+<script setup>
+import { Chip } from '@heroui-vue/chip'
+</script>
+
+<template>
+    <div class="flex gap-4">
+        <Chip size="sm">Small</Chip>
+        <Chip size="md">Medium</Chip>
+        <Chip size="lg">Large</Chip>
+    </div>
+</template>
 :::
 
 ### 颜色
 
-::: component-view
-<div class="flex gap-4">
-    <Chip color="default">Default</Chip>
-    <Chip color="primary">Primary</Chip>
-    <Chip color="secondary">Secondary</Chip>
-    <Chip color="success">Success</Chip>
-    <Chip color="warning">Warning</Chip>
-    <Chip color="danger">Danger</Chip>
-</div>
+::: sfc
+<script setup>
+import { Chip } from '@heroui-vue/chip'
+</script>
+
+<template>
+    <div class="flex gap-4">
+        <Chip color="default">Default</Chip>
+        <Chip color="primary">Primary</Chip>
+        <Chip color="secondary">Secondary</Chip>
+        <Chip color="success">Success</Chip>
+        <Chip color="warning">Warning</Chip>
+        <Chip color="danger">Danger</Chip>
+    </div>
+</template>
 :::
 
 ### 半径
 
-::: component-view
-<div class="flex gap-4">
-    <Chip radius="full">Full</Chip>
-    <Chip radius="lg">Large</Chip>
-    <Chip radius="md">Medium</Chip>
-    <Chip radius="sm">Small</Chip>
-</div>
+::: sfc
+<script setup>
+import { Chip } from '@heroui-vue/chip'
+</script>
+
+<template>
+    <div class="flex gap-4">
+        <Chip radius="full">Full</Chip>
+        <Chip radius="lg">Large</Chip>
+        <Chip radius="md">Medium</Chip>
+        <Chip radius="sm">Small</Chip>
+    </div>
+</template>
 :::
 
 ### 变体
 
-::: component-view
-<div class="flex gap-4">
-    <Chip color="warning" variant="solid">Solid</Chip>
-    <Chip color="warning" variant="bordered">Bordered</Chip>
-    <Chip color="warning" variant="light">Light</Chip>
-    <Chip color="warning" variant="flat">Flat</Chip>
-    <Chip color="warning" variant="faded">Faded</Chip>
-    <Chip color="warning" variant="shadow">Shadow</Chip>
-    <Chip color="warning" variant="dot">Dot</Chip>
-</div>
+::: sfc
+<script setup>
+import { Chip } from '@heroui-vue/chip'
+</script>
+
+<template>
+    <div class="flex gap-4">
+        <Chip color="warning" variant="solid">Solid</Chip>
+        <Chip color="warning" variant="bordered">Bordered</Chip>
+        <Chip color="warning" variant="light">Light</Chip>
+        <Chip color="warning" variant="flat">Flat</Chip>
+        <Chip color="warning" variant="faded">Faded</Chip>
+        <Chip color="warning" variant="shadow">Shadow</Chip>
+        <Chip color="warning" variant="dot">Dot</Chip>
+    </div>
+</template>
 :::
 
 ### Start 和 End 内容
 
-::: component-view
-<div className="flex gap-4">
-    <Chip color="success" variant="faded">
-        <template #startContent>
-            <CheckIcon :size="18" />
-        </template>
-        Chip
-    </Chip>
-    <Chip color="secondary" variant="flat">
-        <template #endContent>
-            <NotificationIcon :size="18" />
-        </template>
-        Chip
-    </Chip>
-</div>
+::: sfc
+<script setup>
+import { Chip } from '@heroui-vue/chip'
+import { NotificationIcon, CheckIcon } from '@heroui-vue/icon'
+</script>
+
+<template>
+    <div className="flex gap-4">
+        <Chip color="success" variant="faded">
+            <template #startContent>
+                <CheckIcon :size="18" />
+            </template>
+            Chip
+        </Chip>
+        <Chip color="secondary" variant="flat">
+            <template #endContent>
+                <NotificationIcon :size="18" />
+            </template>
+            Chip
+        </Chip>
+    </div>
+</template>
 :::
 
 ### 带关闭按钮
 
-::: component-view
-<div className="flex gap-4">
-    <Chip @close="console.log('close')">Chip</Chip>
-    <Chip variant="bordered" @close="console.log('close')">
-    Chip
-    </Chip>
-</div>
+::: sfc
+<script setup>
+import { Chip } from '@heroui-vue/chip'
+</script>
+
+<template>
+    <div className="flex gap-4">
+        <Chip @close="console.log('close')">Chip</Chip>
+        <Chip variant="bordered" @close="console.log('close')">
+        Chip
+        </Chip>
+    </div>
+</template>
 :::
 
 ### 带头像
 
-::: component-view
-<div class="flex gap-4 items-center">
-  <Chip color="secondary" variant="flat">
-    <template #avatar>
-      <Avatar
-        size="sm"
-        name="HV"
-        showFallback
-      />
-    </template>
-    HeroUI Vue
-  </Chip>
-</div>
+::: sfc
+<script setup>
+import { Chip } from '@heroui-vue/chip'
+import { Avatar } from '@heroui-vue/avatar'
+</script>
+
+<template>
+    <div class="flex gap-4">
+        <Chip variant="flat">
+            <template #avatar>
+            <Avatar
+                name="JW" src="https://i.pravatar.cc/300?u=a042581f4e29026709d"
+            />
+            </template>
+            Avatar
+        </Chip>
+      <Chip variant="flat">
+        <template #avatar>
+          <Avatar
+            :getInitials="(name) => name.charAt(0)"
+            name="JW"
+            size="sm"
+          />
+        </template>
+        Avatar
+      </Chip>
+    </div>
+</template>
 :::
 
 ## 样式插槽Slots
@@ -145,18 +205,19 @@ bun add @heroui-vue/chip
 
 ### 自定义样式
 
-::: component-view
+::: sfc
+<script setup>
+import { Chip } from '@heroui-vue/chip'
+</script>
+
+<template>
 <Chip
-:classNames="{
-base: 'bg-linear-to-br from-indigo-500 to-pink-500 border-small border-white/50 shadow-pink-500/30',
-content: 'drop-shadow-xs shadow-black text-white',
-}"
-variant="shadow"
-
->
-
-New
+    :classNames="{
+        base: 'bg-linear-to-br from-indigo-500 to-pink-500 border-small border-white/50 shadow-pink-500/30',
+        content: 'drop-shadow-xs shadow-black text-white',
+    }"
+    variant="shadow">
+    New
 </Chip>
+</template>
 :::
-
-###
