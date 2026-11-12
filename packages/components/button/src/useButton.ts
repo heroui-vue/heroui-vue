@@ -3,14 +3,14 @@ import { button } from "@heroui/theme";
 import { useFocus, useMousePressed, useElementHover } from "@vueuse/core";
 import { useRipple, tryUseAttrs } from "@heroui-vue/shared";
 import type { ButtonVariantProps as _ButtonVariantProps } from "@heroui/theme";
-import type { HTMLHeroVueUIProps, BaseProps, ToComputedRefs } from "@heroui-vue/shared";
+import type { HeroUIVueBaseProps, BaseProps, ToComputedRefs } from "@heroui-vue/shared";
 import type { Ref, Reactive } from "vue";
 
 namespace HeroUIButton {
   export type VariantProps = _ButtonVariantProps;
 }
 namespace Props {
-  export interface Option extends HTMLHeroVueUIProps<"button"> {
+  export interface Option extends HeroUIVueBaseProps {
     disableRipple?: boolean;
     spinnerPlacement?: "start" | "end";
     isLoading?: boolean;
@@ -109,7 +109,7 @@ export function useButton(
 
   return {
     buttonProps: computed(() => buttonSlots.value.buttonProps),
-    styles: computed(() => buttonSlots.value.buttonProps.class),
+    styles: computed(() => buttonSlots.value.buttonProps.class as string),
     isLoading: computed(() => !!originalProps.isLoading),
     spinnerPlacement: computed(() => originalProps.spinnerPlacement),
     spinnerSize: computed(() => originalProps.size),
