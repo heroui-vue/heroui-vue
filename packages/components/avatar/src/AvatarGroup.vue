@@ -1,99 +1,20 @@
-<!-- <script lang="ts">
-import type { VNode } from "vue";
+<script lang="ts" setup>
+import { provide } from "vue";
+import { useAvatarGroup, avatarGroupContextKey } from "./useAvatarGroup";
+import type { UseAvatarGroupProps, UseAvatarGroupSlot } from "./useAvatarGroup";
 
-import { Comment, cloneVNode, computed, defineComponent, h, provide, toRef, useAttrs } from "vue";
-import { avatarGroup } from "@heroui/theme";
-import { avatarGroupContextKey } from "./use-avatar";
+const props = defineProps<UseAvatarGroupProps>();
+defineSlots<Record<UseAvatarGroupSlot, any>>();
 
-export default defineComponent({
-  name: "AvatarGroup",
-  props: {
-    isGrid: {
-      type: Boolean,
-      default: false,
-    },
-    max: {
-      type: Number,
-      default: undefined,
-    },
-    total: {
-      type: Number,
-      default: undefined,
-    },
-    renderCount: {
-      type: Boolean,
-      default: true,
-    },
-    classNames: {
-      type: Object as () => Partial<Record<"base" | "count", string>>,
-      default: undefined,
-    },
-  },
-  setup(props, { slots }) {
-    const attrs = useAttrs();
-    const isGrid = toRef(props, "isGrid");
+const { as, context, clones, renderCount, avatarGroupProps } = useAvatarGroup(props);
 
-    provide(avatarGroupContextKey, {
-      isInGroup: computed(() => !isGrid.value),
-      isInGridGroup: isGrid,
-    });
+// use `tryProvide` in future
+provide(avatarGroupContextKey, context);
+</script>
 
-    const styles = computed(() => avatarGroup({ isGrid: props.isGrid }));
-
-    const slotChildren = computed(() => {
-      return (slots.default?.() ?? []).filter((node) => node.type !== Comment);
-    });
-
-    const visibleChildren = computed(() => {
-      if (!props.max || props.max < 1) {
-        return slotChildren.value;
-      }
-
-      return slotChildren.value.slice(0, props.max);
-    });
-
-    const hiddenCount = computed(() => {
-      if (!props.renderCount) {
-        return 0;
-      }
-
-      const renderedCount = visibleChildren.value.length;
-      const sourceCount = props.total ?? slotChildren.value.length;
-
-      return Math.max(sourceCount - renderedCount, 0);
-    });
-
-    return () => {
-      const children: VNode[] = visibleChildren.value.map((child, index) =>
-        cloneVNode(child, { key: child.key ?? `avatar-group-${index}` }),
-      );
-
-      if (hiddenCount.value > 0) {
-        children.push(
-          h(
-            "span",
-            {
-              class: styles.value.count({ class: props.classNames?.count }),
-              key: "avatar-group-count",
-            },
-            `+${hiddenCount.value}`,
-          ),
-        );
-      }
-
-      return h(
-        "div",
-        {
-          ...attrs,
-          class: styles.value.base({
-            class: [props.classNames?.base, attrs.class].filter(Boolean).join(" ") || undefined,
-          }),
-        },
-        children,
-      );
-    };
-  },
-});
-</script> -->
-
-<script></script>
+<template>
+  <component :is="as" v-bind="avatarGroupProps">
+    <component :is="clones" />
+    <component :is="renderCount" />
+  </component>
+</template>

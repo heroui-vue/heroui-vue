@@ -3,9 +3,8 @@ import { useAvatar, type UseAvatarProps, type UseAvatarEmit } from "./useAvatar"
 import { ref } from "vue";
 
 const props = withDefaults(defineProps<UseAvatarProps>(), {
-  color: "default",
-  radius: "full",
-  size: "md",
+  isBordered: undefined,
+  isDisabled: undefined,
 });
 defineSlots<Record<UseAvatarEmit, any>>();
 

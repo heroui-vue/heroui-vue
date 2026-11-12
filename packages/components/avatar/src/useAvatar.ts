@@ -4,12 +4,14 @@ import {
   safeText,
   tryUseSlots,
   tryUseAttrs,
-  cloneSlot,
+  tryInject,
+  cloneValidVnode,
   toRefsWithDefault,
 } from "@heroui-vue/shared";
 import { avatar, cn } from "@heroui/theme";
 import { AvatarIcon } from "@heroui-vue/icon";
-import type { UseAsyncStateOptions, MaybeElementRef, MaybeElement } from "@vueuse/core";
+import { avatarGroupContextKey } from "./useAvatarGroup";
+import type { UseAsyncStateOptions, MaybeElementRef } from "@vueuse/core";
 import type { HeroUIVueBaseProps, BaseProps } from "@heroui-vue/shared";
 import type { AvatarSlots, AvatarVariantProps, SlotsToClasses } from "@heroui/theme";
 import type { Ref, MaybeRef, Reactive, ToRefs, ImgHTMLAttributes, VNode } from "vue";
@@ -67,15 +69,23 @@ export type UseAvatarProps = Props.Option & Props.Variant;
 export type UseAvatarReturn = Return.Option & Return.Slot;
 export type UseAvatarEmit = "error";
 export type UseAvatarSlot = "icon" | "fallback";
+export type UseAvatarElement = HTMLElement | SVGElement | null | undefined;
 
 export function useAvatar(
   originalProps: MaybeRef<UseAvatarProps>,
-  avatarRef: MaybeElementRef<MaybeElement & EventTarget>,
+  avatarRef: MaybeElementRef<UseAvatarElement>,
 ): ToRefs<UseAvatarReturn> {
+  const groupContext = tryInject(avatarGroupContextKey);
   const props = toRefsWithDefault(toReactive(originalProps) as UseAvatarProps, {
     as: "span",
     imgAs: "img",
     alt: toValue(originalProps).name || "avatar",
+    color: groupContext?.value.color ?? "default",
+    radius: groupContext?.value.radius ?? "full",
+    size: groupContext?.value.size ?? "md",
+    isBordered: groupContext?.value.isBordered ?? false,
+    isDisabled: groupContext?.value.isDisabled ?? false,
+    isInGridGroup: groupContext?.value.isGrid ?? false,
     getInitials: safeText,
   });
   const { isReady } = useImage(toReactive(props) as Reactive<UseAvatarProps> as any, {
@@ -115,17 +125,17 @@ export function useAvatar(
       disableAnimation,
       isInGridGroup,
     } = toReactive(props);
+    const group = groupContext?.value;
 
     slots.value = avatar({
-      color,
-      radius,
-      size,
-      isBordered,
-      isDisabled,
-      isInGroup,
+      color: color ?? group?.color,
+      radius: radius ?? group?.radius,
+      size: size ?? group?.size,
+      isBordered: isBordered ?? group?.isBordered,
+      isDisabled: isDisabled ?? group?.isDisabled,
+      isInGroup: group ? true : isInGroup,
       disableAnimation,
-      // groupContext?.isGrid ?? false
-      isInGridGroup: isInGridGroup ?? false,
+      isInGridGroup: group?.isGrid ?? isInGridGroup ?? false,
     });
   });
   // avatarProps
@@ -133,8 +143,7 @@ export function useAvatar(
     const { isFocusable, isDisabled, as, classNames } = toReactive(props);
     avatarProps.value = {
       tabIndex: isFocusable || as === "button" ? (0 as const) : (-1 as const),
-      // TODO: need test
-      "data-hover": isDisabled && isHovered.value,
+      "data-hover": isDisabled ? false : isHovered.value,
       "data-focus": focused.value,
       // TODO: should exact value
       "data-focus-visible": false,
@@ -171,8 +180,8 @@ export function useAvatar(
       );
     };
     fallbackSlot.value = () => {
-      const fallbackVnodes = cloneSlot(fallback)();
-      const iconVnodes = cloneSlot(icon)();
+      const fallbackVnodes = cloneValidVnode(fallback?.());
+      const iconVnodes = cloneValidVnode(icon?.());
       if (!showFallback.value && src) {
         return null;
       } else if (fallbackVnodes) {
