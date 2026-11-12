@@ -7,6 +7,7 @@ import {
   isVNode,
   useSlots,
   useAttrs,
+  inject,
 } from "vue";
 import { isEmpty } from "@heroui/shared-utils";
 import { cn } from "@heroui/theme";
@@ -125,6 +126,19 @@ export function tryUseAttrs<T extends string[], R = Record<T[number], string | u
   return result;
 }
 
+/**
+ * Safe `inject`
+ */
+// @ts-expect-error overloads are not compatible
+export const tryInject: typeof inject = <T>(...args) => {
+  const instance = getCurrentInstance();
+  if (!instance) {
+    return;
+  }
+  // @ts-expect-error overloads are not compatible
+  return inject<T>(...args);
+};
+
 export function isValidVNode(vnode?: VNode) {
   if (!vnode) {
     return false;
@@ -153,6 +167,9 @@ export function flattenVNodes(vnodes: VNode | VNode[] | undefined | null): VNode
   return flatVnodes;
 }
 
+/**
+ * @deprecated use `cloneValidVnode` instead
+ */
 export function cloneSlot(
   slot: Slot | undefined | null,
   ...cloneNode: Parameters<typeof cloneValidVnode> extends [infer _, ...infer R] ? R : never
