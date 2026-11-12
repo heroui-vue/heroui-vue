@@ -44,6 +44,9 @@ export default defineConfig({
   vite: {
     // @ts-ignore
     plugins: [groupIconVitePlugin(), tailwindcss(), sfcVitePlugin()],
+    ssr: {
+      noExternal: ["vitepress-plugin-sfc"],
+    },
   },
 
   locales: {
