@@ -33,7 +33,7 @@
     "pub:view": "pnpm publish -r --dry-run --registry=https://registry.npmjs.org/"
   },
   "devDependencies": {
-    "@tsdown/css": "^0.23.2",
+    "@tsdown/css": "^0.23.7",
     "@vue/tsconfig": "^0.9.1",
     "bumpp": "^12.3.0",
     "heroui-vue-create": "workspace:*",
