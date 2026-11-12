@@ -1,0 +1,36 @@
+{
+  "name": "heroui-vue-test",
+  "private": true,
+  "description": "HeroUI Vue Test",
+  "license": "MIT",
+  "author": "hotdogc1017@gmail.com",
+  "type": "module",
+  "scripts": {
+    "test:avatar": "pnpm -w build:avatar -l silent && vitest run components/avatar",
+    "test:alert": "pnpm -w build:alert -l silent && vitest run components/alert",
+    "test:chip": "pnpm -w build:chip -l silent && vitest run components/chip",
+    "test:shared": "pnpm -w build:shared -l silent && vitest run shared"
+  },
+  "dependencies": {
+    "@heroui-vue/alert": "workspace:*",
+    "@heroui-vue/avatar": "workspace:*",
+    "@heroui-vue/chip": "workspace:*",
+    "@heroui-vue/icon": "workspace:*",
+    "@heroui-vue/shared": "workspace:*",
+    "@heroui/alert": "^2.2.32",
+    "@heroui/react": "^2.8.10",
+    "@heroui/theme": "catalog:prod",
+    "@types/react": "^19.3.0",
+    "react": "^19.3.1",
+    "vitest": "^5.0.5",
+    "vue": "catalog:prod"
+  },
+  "devDependencies": {
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.2.0",
+    "@vitest/browser-playwright": "^5.0.5",
+    "react-dom": "^19.3.1",
+    "vitest-browser-react": "^2.3.0",
+    "vitest-browser-vue": "^3.1.0"
+  }
+}
