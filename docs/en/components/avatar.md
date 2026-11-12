@@ -1,10 +1,16 @@
 <script setup>
-import { Avatar, AvatarGroup } from '@heroui-vue/core/raw'
+import { Chip } from '@heroui-vue/chip'
 </script>
 
-# Avatar
+# Avatar <sup><Chip class="tracking-wider" size="sm" color="secondary">updated</Chip></sup>
+
+[HeroUI Avatar Docs](https://v2.heroui.com/docs/components/avatar)
 
 The Avatar component is used to represent a user, and displays the profile picture, initials or fallback icon.
+
+::: tip
+The version is synced to `2.8.2` so tha the examples in the documentation may not align with the HeroUI's latest v2 version.
+:::
 
 ## Installation
 
@@ -50,77 +56,113 @@ import { Avatar, AvatarGroup } from "heroui-vue";
 
 ## Usage
 
-::: component-view
-<div class="flex gap-3 items-center">
-  <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-  <Avatar name="Junior" showFallback />
-  <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
-  <Avatar name="Jane" showFallback />
-  <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
-  <Avatar name="Joe" showFallback />
-</div>
+::: sfc
+<script setup>
+import { Avatar } from '@heroui-vue/avatar'
+</script>
+
+<template>
+    <div class="flex gap-3 items-center">
+      <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+      <Avatar name="Junior" showFallback />
+      <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
+      <Avatar name="Jane" showFallback />
+      <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
+      <Avatar name="Joe" showFallback />
+    </div>
+</template>
 :::
 
 ### Sizes
 
-::: component-view
-<div class="flex gap-4 items-center">
-  <Avatar class="w-6 h-6 text-tiny" src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-  <Avatar size="sm" src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
-  <Avatar size="md" src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
-  <Avatar size="lg" src="https://i.pravatar.cc/150?u=a04258114e29026302d" />
-  <Avatar class="w-20 h-20 text-large" src="https://i.pravatar.cc/150?u=a04258114e29026708c" />
-</div>
+::: sfc
+<script setup>
+import { Avatar } from '@heroui-vue/avatar'
+</script>
+
+<template>
+    <div class="flex gap-4 items-center">
+      <Avatar class="w-6 h-6 text-tiny" src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+      <Avatar size="sm" src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
+      <Avatar size="md" src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
+      <Avatar size="lg" src="https://i.pravatar.cc/150?u=a04258114e29026302d" />
+      <Avatar class="w-20 h-20 text-large" src="https://i.pravatar.cc/150?u=a04258114e29026708c" />
+    </div>
+</template>
 :::
 
 ### Disabled
 
-::: component-view
-<div class="flex gap-3 items-center">
-  <Avatar isDisabled src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-  <Avatar isDisabled name="Junior" showFallback />
-  <Avatar isDisabled src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
-  <Avatar isDisabled name="Jane" showFallback />
-  <Avatar isDisabled src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
-  <Avatar isDisabled name="Joe" showFallback />
-</div>
+::: sfc
+<script setup>
+import { Avatar } from '@heroui-vue/avatar'
+</script>
+
+<template>
+    <div class="flex gap-3 items-center">
+      <Avatar isDisabled src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+      <Avatar isDisabled name="Junior" showFallback />
+      <Avatar isDisabled src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
+      <Avatar isDisabled name="Jane" showFallback />
+      <Avatar isDisabled src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
+      <Avatar isDisabled name="Joe" showFallback />
+    </div>
+</template>
 :::
 
 ### Bordered
 
-::: component-view
-<div class="flex gap-4 items-center">
-  <Avatar isBordered src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-  <Avatar isBordered src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
-  <Avatar isBordered src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
-  <Avatar isBordered src="https://i.pravatar.cc/150?u=a04258114e29026302d" />
-  <Avatar isBordered src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
-  <Avatar isBordered src="https://i.pravatar.cc/150?u=a04258114e29026708c" />
-</div>
+::: sfc
+<script setup>
+import { Avatar } from '@heroui-vue/avatar'
+</script>
+
+<template>
+    <div class="flex gap-4 items-center">
+      <Avatar isBordered src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+      <Avatar isBordered src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
+      <Avatar isBordered src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
+      <Avatar isBordered src="https://i.pravatar.cc/150?u=a04258114e29026302d" />
+      <Avatar isBordered src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
+      <Avatar isBordered src="https://i.pravatar.cc/150?u=a04258114e29026708c" />
+    </div>
+</template>
 :::
 
 ### Radius
 
-::: component-view
-<div class="flex gap-4 items-center">
-  <Avatar isBordered radius="full" src="https://i.pravatar.cc/150?u=a04258114e29026708c" />
-  <Avatar isBordered radius="lg" src="https://i.pravatar.cc/150?u=a04258114e29026302d" />
-  <Avatar isBordered radius="md" src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
-  <Avatar isBordered radius="sm" src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
-</div>
+::: sfc
+<script setup>
+import { Avatar } from '@heroui-vue/avatar'
+</script>
+
+<template>
+    <div class="flex gap-4 items-center">
+      <Avatar isBordered radius="full" src="https://i.pravatar.cc/150?u=a04258114e29026708c" />
+      <Avatar isBordered radius="lg" src="https://i.pravatar.cc/150?u=a04258114e29026302d" />
+      <Avatar isBordered radius="md" src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
+      <Avatar isBordered radius="sm" src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
+    </div>
+</template>
 :::
 
 ### Colors
 
-::: component-view
-<div class="flex gap-4 items-center">
-  <Avatar isBordered color="default" src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-  <Avatar isBordered color="primary" src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
-  <Avatar isBordered color="secondary" src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
-  <Avatar isBordered color="success" src="https://i.pravatar.cc/150?u=a04258114e29026302d" />
-  <Avatar isBordered color="warning" src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
-  <Avatar isBordered color="danger" src="https://i.pravatar.cc/150?u=a04258114e29026708c" />
-</div>
+::: sfc
+<script setup>
+import { Avatar } from '@heroui-vue/avatar'
+</script>
+
+<template>
+    <div class="flex gap-4 items-center">
+      <Avatar isBordered color="default" src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+      <Avatar isBordered color="primary" src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
+      <Avatar isBordered color="secondary" src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
+      <Avatar isBordered color="success" src="https://i.pravatar.cc/150?u=a04258114e29026302d" />
+      <Avatar isBordered color="warning" src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
+      <Avatar isBordered color="danger" src="https://i.pravatar.cc/150?u=a04258114e29026708c" />
+    </div>
+</template>
 :::
 
 ### Avatar Fallbacks
@@ -132,45 +174,59 @@ If there is an error loading the `src` of the avatar, there are 2 fallbacks:
 
 If `showFallback` is not passed, the fallbacks will not be displayed.
 
-::: component-view
-<div class="flex gap-4 items-center">
-  <Avatar showFallback src="https://images.unsplash.com/broken" />
-  <Avatar showFallback name="Jane" src="https://images.unsplash.com/broken" />
-  <Avatar name="Joe" src="https://images.unsplash.com/broken" />
-</div>
+::: sfc
+<script setup>
+import { Avatar } from '@heroui-vue/avatar'
+</script>
+
+<template>
+    <div class="flex gap-4 items-center">
+      <Avatar showFallback src="https://images.unsplash.com/broken" />
+      <Avatar showFallback name="Jane" src="https://images.unsplash.com/broken" />
+      <Avatar name="Joe" src="https://images.unsplash.com/broken" />
+    </div>
+</template>
 :::
 
 ### Custom Fallback
 
 You can also provide a custom fallback component to be displayed when the `src` fails to load.
 
-::: component-view
-<div class="flex gap-4 items-center">
-  <Avatar showFallback src="https://images.unsplash.com/broken">
-    <template #fallback>
-      <svg class="w-6 h-6 text-default-500" fill="currentColor" viewBox="0 0 24 24">
-        <path
-          d="M17.44 6.236c.04.07.11.12.2.12 2.4 0 4.36 1.958 4.36 4.355v5.934A4.368 4.368 0 0117.64 21H6.36A4.361 4.361 0 012 16.645V10.71a4.361 4.361 0 014.36-4.355c.08 0 .16-.04.19-.12l.06-.12.106-.222a97.79 97.79 0 01.714-1.486C7.89 3.51 8.67 3.01 9.64 3h4.71c.97.01 1.76.51 2.22 1.408.157.315.397.822.629 1.31l.141.299.1.22z"
-        />
-      </svg>
-    </template>
-  </Avatar>
-  <Avatar showFallback name="Jane" src="https://images.unsplash.com/broken" />
-  <Avatar name="Joe" src="https://images.unsplash.com/broken" />
-</div>
+::: sfc
+<script setup>
+import { Avatar } from '@heroui-vue/avatar'
+import { Camera } from '@heroui-vue/icon'
+</script>
+
+<template>
+    <div class="flex gap-4 items-center">
+      <Avatar showFallback src="https://images.unsplash.com/broken">
+        <template #fallback>
+            <Camera class="animate-pulse w-6 h-6 text-default-500" />
+        </template>
+      </Avatar>
+      <Avatar showFallback name="Jane" src="https://images.unsplash.com/broken" />
+      <Avatar name="Joe" src="https://images.unsplash.com/broken" />
+    </div>
+</template>
 :::
 
 ### Custom Implementation
 
-In case you need to customize avatar behavior further, HeroUI Vue currently keeps `useAvatar` as an internal composition utility and does not expose it as a stable public API yet.
+In case you need to customize avatar behavior further, use the `useAvatar` composition utility.
 
 ### Custom initials logic
 
-HeroUI React supports `getInitials` for custom initials logic. HeroUI Vue does not expose this prop yet; by default initials are derived from the first characters of up to two words in `name`.
+Supports `getInitials` for custom initials logic by default initials are derived from the first characters of up to two words in `name`.
 
 ## Avatar Group
 
-::: component-view
+::: sfc
+<script setup>
+import { AvatarGroup, Avatar } from '@heroui-vue/avatar'
+</script>
+
+<template>
 <AvatarGroup isBordered>
   <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
   <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
@@ -179,26 +235,38 @@ HeroUI React supports `getInitials` for custom initials logic. HeroUI Vue does n
   <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
   <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" />
 </AvatarGroup>
+</template>
 :::
 
 ### Group Disabled
 
-::: component-view
-<AvatarGroup isBordered>
-  <Avatar isDisabled src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-  <Avatar isDisabled src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
-  <Avatar isDisabled src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
-  <Avatar isDisabled src="https://i.pravatar.cc/150?u=a04258114e29026302d" />
-  <Avatar isDisabled src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
-  <Avatar isDisabled src="https://i.pravatar.cc/150?u=a04258114e29026708c" />
+::: sfc
+<script setup>
+import { AvatarGroup, Avatar } from '@heroui-vue/avatar'
+</script>
+
+<template>
+<AvatarGroup isBordered isDisabled>
+  <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+  <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
+  <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
+  <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026302d" />
+  <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
+  <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" />
 </AvatarGroup>
+</template>
 :::
 
 ### Group Max Count
 
 You can limit the number of avatars displayed by passing the `max` prop to the `AvatarGroup` component.
 
-::: component-view
+::: sfc
+<script setup>
+import { AvatarGroup, Avatar } from '@heroui-vue/avatar'
+</script>
+
+<template>
 <AvatarGroup isBordered :max="3">
   <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
   <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
@@ -207,13 +275,19 @@ You can limit the number of avatars displayed by passing the `max` prop to the `
   <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
   <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" />
 </AvatarGroup>
+</template>
 :::
 
 ### Group Total Count
 
-You can display the total number of avatars by passing the `total` prop to the `AvatarGroup` component.
+You can control the number of avatars not visible by passing the `total` prop to the `AvatarGroup` component.
 
-::: component-view
+::: sfc
+<script setup>
+import { AvatarGroup, Avatar } from '@heroui-vue/avatar'
+</script>
+
+<template>
 <AvatarGroup isBordered :max="3" :total="10">
   <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
   <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
@@ -222,28 +296,49 @@ You can display the total number of avatars by passing the `total` prop to the `
   <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
   <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" />
 </AvatarGroup>
+</template>
 :::
 
 ### Group Custom count
 
-HeroUI React supports `renderCount` as a render function. HeroUI Vue currently supports `renderCount` as a boolean switch to show/hide the built-in count badge.
+`AvatarGroup` provides a `renderCount` prop to customize the count displayed when the `total` prop is passed.
 
-::: component-view
-<AvatarGroup isBordered :max="3" :total="10" :render-count="false">
-  <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
-  <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
-  <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
-  <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026302d" />
-  <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
-  <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" />
-</AvatarGroup>
+::: sfc
+<script setup>
+import { Avatar, AvatarGroup } from '@heroui-vue/avatar'
+</script>
+
+<template>
+  <AvatarGroup isBordered :max="3" :total="10" :render-count="renderCount">
+    <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+    <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
+    <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026704d" />
+    <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026302d" />
+    <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026702d" />
+    <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" />
+    <template #renderCount="{ count }">
+        <p class="text-small text-foreground font-medium ms-2">+{{ count }} others</p>
+    </template>
+  </AvatarGroup>
+</template>
+
+<style scoped>
+p {
+  all: revert-layer;
+}
+</style>
 :::
 
 ### Group Grid
 
 By passing the `isGrid` prop to the `AvatarGroup` component, avatars will be displayed in a grid layout.
 
-::: component-view
+::: sfc
+<script setup>
+import { AvatarGroup, Avatar } from '@heroui-vue/avatar'
+</script>
+
+<template>
 <AvatarGroup isBordered isGrid :max="7">
   <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
   <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
@@ -255,13 +350,18 @@ By passing the `isGrid` prop to the `AvatarGroup` component, avatars will be dis
   <Avatar src="https://i.pravatar.cc/300?u=a042581f4e29026710d" />
   <Avatar src="https://i.pravatar.cc/300?u=a042581f4e29026712d" />
 </AvatarGroup>
+</template>
 :::
 
 ### Group Custom Implementation
 
-In case you need lower-level customization, HeroUI React exposes `useAvatarGroup` and `AvatarGroupProvider`. HeroUI Vue has not exposed equivalent public APIs yet.
+In case you need lower-level customization, use the `useAvatarGroup` composable. `AvatarGroup` internally provides the group context that `Avatar` children consume.
 
-## Slots
+## Slots <sup><Chip class="tracking-wider" size="sm" color="warning">outdated</Chip></sup>
+
+:::warning
+This content should not be used as a reference; please rely on the slot type defined in the `Avatar` declaration instead.
+:::
 
 - **base**: Avatar wrapper, it includes styles for focus ring, position, and general appearance.
 - **img**: Image element within the avatar, it includes styles for opacity transition and size.
@@ -273,24 +373,25 @@ In case you need lower-level customization, HeroUI React exposes `useAvatarGroup
 
 You can customize any part of the avatar by using the `classNames` prop.
 
-::: component-view
-<Avatar
-showFallback
-:class-names="{
-base: 'bg-linear-to-br from-[#FFB457] to-[#FF705B]',
-icon: 'text-black/80'
-}"
+::: sfc
+<script setup>
+import { Avatar } from "@heroui-vue/avatar";
+import { AvatarIcon } from "@heroui-vue/icon";
+</script>
 
->
-
-<template #icon>
-<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-<path
-        d="M11.845 21.662C8.153 21.662 5 21.088 5 18.787s3.133-4.425 6.845-4.425c3.692 0 6.845 2.1 6.845 4.4s-3.134 2.9-6.845 2.9z M11.837 11.174a4.372 4.372 0 10-.031 0z"
-      />
-</svg>
+<template>
+  <Avatar
+    showFallback
+    :class-names="{
+      base: 'bg-linear-to-br from-[#FFB457] to-[#FF705B]',
+      icon: 'text-black/80',
+    }"
+  >
+    <template #icon>
+        <AvatarIcon />
+    </template>
+  </Avatar>
 </template>
-</Avatar>
 :::
 
 ## Data Attributes
@@ -323,10 +424,15 @@ icon: 'text-black/80'
 
 ### Avatar Group Props
 
-| Name        | Type                                         | Default | Description                                    |
-| ----------- | -------------------------------------------- | ------- | ---------------------------------------------- |
-| max         | `number`                                     | -       | The maximum number of visible avatars.         |
-| total       | `number`                                     | -       | Controls the number of avatars not visible.    |
-| isGrid      | `boolean`                                    | `false` | Whether avatars should be displayed in a grid. |
-| renderCount | `boolean`                                    | `true`  | Whether to render the built-in count badge.    |
-| classNames  | `Partial<Record<"base" \| "count", string>>` | -       | Custom class names for avatar group slots.     |
+| Name        | Type                                                                          | Default | Description                                                |
+| ----------- | ----------------------------------------------------------------------------- | ------- | ---------------------------------------------------------- |
+| max         | `number`                                                                      | `5`     | The maximum number of visible avatars.                     |
+| total       | `number`                                                                      | -       | Controls the number of avatars not visible.                |
+| size        | `"sm" \| "md" \| "lg"`                                                        | -       | Sets the size of the avatars in the group.                 |
+| color       | `"default" \| "primary" \| "secondary" \| "success" \| "warning" \| "danger"` | -       | Sets the color of the avatars in the group.                |
+| radius      | `"none" \| "sm" \| "md" \| "lg" \| "full"`                                    | -       | Sets the border radius of the avatars in the group.        |
+| isGrid      | `boolean`                                                                     | `false` | Whether avatars should be displayed in a grid.             |
+| isDisabled  | `boolean`                                                                     | -       | Whether the avatars in the group are disabled.             |
+| isBordered  | `boolean`                                                                     | -       | Whether the avatars in the group have a border.            |
+| renderCount | `(count: number) => VNode \| VNode[] \| string \| null`                       | -       | Renders a custom count component when `total` is provided. |
+| classNames  | `Partial<Record<"base" \| "count", string>>`                                  | -       | Custom class names for avatar group slots.                 |
