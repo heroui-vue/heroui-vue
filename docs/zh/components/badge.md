@@ -46,7 +46,7 @@ import { Badge } from "heroui-vue";
 
 ## 使用
 
-::: component-view
+::: sfc
 <Badge color="primary" content="5">
   <Avatar radius="md" size="lg" src="https://i.pravatar.cc/300?u=a042581f4e29026709d" />
 </Badge>
@@ -54,7 +54,7 @@ import { Badge } from "heroui-vue";
 
 ### 尺寸
 
-::: component-view
+::: sfc
 <div class="flex gap-3 items-center">
   <Badge color="primary" content="5" size="sm">
     <Avatar radius="md" src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
@@ -70,7 +70,7 @@ import { Badge } from "heroui-vue";
 
 ### 颜色
 
-::: component-view
+::: sfc
 <div class="flex gap-3 items-center flex-wrap">
   <Badge color="default" content="5"><Avatar radius="md" src="https://i.pravatar.cc/150?u=a042f81f4e29026024d" /></Badge>
   <Badge color="primary" content="5"><Avatar radius="md" src="https://i.pravatar.cc/150?u=a04258a2462d826712d" /></Badge>
@@ -83,7 +83,7 @@ import { Badge } from "heroui-vue";
 
 ### 变体
 
-::: component-view
+::: sfc
 <div class="flex gap-3 items-center">
   <Badge color="warning" content="5" variant="solid"><Avatar radius="md" src="https://i.pravatar.cc/150?u=a042f81f4e29026024d" /></Badge>
   <Badge color="warning" content="5" variant="flat"><Avatar radius="md" src="https://i.pravatar.cc/150?u=a04258a2462d826712d" /></Badge>
@@ -94,7 +94,7 @@ import { Badge } from "heroui-vue";
 
 ### 位置
 
-::: component-view
+::: sfc
 <div class="flex gap-4 items-center">
   <Badge color="danger" content="5" placement="top-right"><Avatar isBordered radius="md" src="https://i.pravatar.cc/150?u=a042f81f4e29026024d" /></Badge>
   <Badge color="danger" content="5" placement="bottom-right"><Avatar isBordered radius="md" src="https://i.pravatar.cc/150?u=a04258a2462d826712d" /></Badge>
@@ -107,7 +107,7 @@ import { Badge } from "heroui-vue";
 
 为了更好的定位效果，你可以使用 `shape` 属性来定义 badge 的形状。
 
-::: component-view
+::: sfc
 <div class="flex gap-4 items-center">
   <Badge color="danger" content="5" shape="rectangle">
     <Avatar isBordered radius="md" src="https://i.pravatar.cc/150?u=a042f81f4e29026024d" />
@@ -122,7 +122,7 @@ import { Badge } from "heroui-vue";
 
 你可以通过 `isInvisible` 属性控制 badge 的可见性。
 
-::: component-view
+::: sfc
 <div class="flex items-center gap-4">
   <div class="flex items-center gap-3">
     <Badge color="danger" :content="5" :isInvisible="!isVisible" shape="circle">
@@ -148,7 +148,7 @@ import { Badge } from "heroui-vue";
 
 ### 内容示例
 
-::: component-view
+::: sfc
 <div class="flex gap-5 items-center flex-wrap">
   <Badge color="danger" content="5"><Avatar radius="md" src="https://i.pravatar.cc/150?u=a042581f4e29026024d" /></Badge>
   <Badge color="success" content="" placement="bottom-right" shape="circle"><Avatar radius="full" src="https://i.pravatar.cc/150?u=a04258a2462d826712d" /></Badge>
@@ -176,7 +176,7 @@ import { Badge } from "heroui-vue";
 
 默认情况下 badge 带有描边，你可以通过 `showOutline={false}` 禁用描边。
 
-::: component-view
+::: sfc
 <div class="flex gap-4 items-center">
   <Badge color="danger" content="5" shape="rectangle" :showOutline="false">
     <Avatar isBordered radius="md" src="https://i.pravatar.cc/150?u=a042f81f4e29026024d" />
@@ -192,7 +192,7 @@ import { Badge } from "heroui-vue";
 不建议依赖 badge 文本本身作为完整无障碍提示。
 建议提供更完整的描述，例如使用 `aria-label`。
 
-::: component-view
+::: sfc
 <Badge color="danger" content="99+" shape="circle">
   <Button isIconOnly aria-label="more than 99 notifications" radius="full" variant="light">
     <svg fill="none" viewBox="0 0 24 24" width="24" height="24">

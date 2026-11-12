@@ -1,0 +1,9 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "compilerOptions": {
+    "isolatedDeclarations": false,
+    "allowArbitraryExtensions": true
+  },
+  "exclude": ["node_mmodules", ".vitepress/cache", ".vitepress/dist"],
+  "include": [".vitepress/**/*.ts", ".vitepress/**/*.vue"]
+}

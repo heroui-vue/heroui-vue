@@ -47,13 +47,13 @@ import { Checkbox } from "heroui-vue";
 
 ## 使用
 
-::: component-view
+::: sfc
 <Checkbox :defaultSelected="true">Option</Checkbox>
 :::
 
 ### 禁用
 
-::: component-view
+::: sfc
 <div class="flex gap-4">
   <Checkbox isDisabled>Option</Checkbox>
   <Checkbox :defaultSelected="true" isDisabled>Option</Checkbox>
@@ -62,7 +62,7 @@ import { Checkbox } from "heroui-vue";
 
 ### 尺寸
 
-::: component-view
+::: sfc
 <div class="flex gap-4">
   <Checkbox :defaultSelected="true" size="sm">Small</Checkbox>
   <Checkbox :defaultSelected="true" size="md">Medium</Checkbox>
@@ -72,7 +72,7 @@ import { Checkbox } from "heroui-vue";
 
 ### 颜色
 
-::: component-view
+::: sfc
 <div class="flex gap-4 flex-wrap">
   <Checkbox :defaultSelected="true" color="default">Default</Checkbox>
   <Checkbox :defaultSelected="true" color="primary">Primary</Checkbox>
@@ -85,7 +85,7 @@ import { Checkbox } from "heroui-vue";
 
 ### 圆角
 
-::: component-view
+::: sfc
 <div class="flex gap-4 flex-wrap">
   <Checkbox :defaultSelected="true" radius="full">Full</Checkbox>
   <Checkbox :defaultSelected="true" radius="lg">Large</Checkbox>
@@ -99,13 +99,13 @@ import { Checkbox } from "heroui-vue";
 
 `isIndeterminate` 属性会让 `Checkbox` 显示为半选状态，并在设置为 `false` 前持续保持该状态，不受用户交互影响。
 
-::: component-view
+::: sfc
 <Checkbox isIndeterminate>Option</Checkbox>
 :::
 
 ### 删除线
 
-::: component-view
+::: sfc
 <Checkbox :defaultSelected="true" lineThrough>Option</Checkbox>
 :::
 
@@ -113,7 +113,7 @@ import { Checkbox } from "heroui-vue";
 
 > HeroUI React 默认会给图标透传 `IconProps`。在 HeroUI Vue 中，请使用 `icon` 插槽自定义图标。
 
-::: component-view
+::: sfc
 <div class="flex gap-4">
   <Checkbox :defaultSelected="true">
     <template #icon>
@@ -137,7 +137,7 @@ import { Checkbox } from "heroui-vue";
 
 ### 受控
 
-::: component-view
+::: sfc
 <div class="flex flex-col gap-2">
   <Checkbox v-model="isSelected">Subscribe (controlled)</Checkbox>
   <p class="text-default-500">Selected: {{ isSelected ? 'true' : 'false' }}</p>
@@ -158,7 +158,7 @@ import { Checkbox } from "heroui-vue";
 
 你可以给不同插槽传入 Tailwind CSS 类来自定义 `Checkbox`。
 
-::: component-view
+::: sfc
 <Checkbox
 v-model="customSelected"
 aria-label="custom checkbox"
@@ -186,7 +186,7 @@ label: 'w-full',
 
 如果你需要更深度自定义，HeroUI React 提供 `useCheckbox`。HeroUI Vue 目前还未暴露该 Hook。
 
-::: component-view
+::: sfc
 <label class="inline-flex items-center gap-2 px-3 py-2 border rounded-md cursor-pointer">
   <input type="checkbox" checked />
   <span>Enabled (native custom implementation)</span>

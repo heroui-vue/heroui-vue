@@ -47,13 +47,13 @@ import { Checkbox } from "heroui-vue";
 
 ## Usage
 
-::: component-view
+::: sfc
 <Checkbox :defaultSelected="true">Option</Checkbox>
 :::
 
 ### Disabled
 
-::: component-view
+::: sfc
 <div class="flex gap-4">
   <Checkbox isDisabled>Option</Checkbox>
   <Checkbox :defaultSelected="true" isDisabled>Option</Checkbox>
@@ -62,7 +62,7 @@ import { Checkbox } from "heroui-vue";
 
 ### Sizes
 
-::: component-view
+::: sfc
 <div class="flex gap-4">
   <Checkbox :defaultSelected="true" size="sm">Small</Checkbox>
   <Checkbox :defaultSelected="true" size="md">Medium</Checkbox>
@@ -72,7 +72,7 @@ import { Checkbox } from "heroui-vue";
 
 ### Colors
 
-::: component-view
+::: sfc
 <div class="flex gap-4 flex-wrap">
   <Checkbox :defaultSelected="true" color="default">Default</Checkbox>
   <Checkbox :defaultSelected="true" color="primary">Primary</Checkbox>
@@ -85,7 +85,7 @@ import { Checkbox } from "heroui-vue";
 
 ### Radius
 
-::: component-view
+::: sfc
 <div class="flex gap-4 flex-wrap">
   <Checkbox :defaultSelected="true" radius="full">Full</Checkbox>
   <Checkbox :defaultSelected="true" radius="lg">Large</Checkbox>
@@ -99,13 +99,13 @@ import { Checkbox } from "heroui-vue";
 
 The `isIndeterminate` prop sets a `Checkbox` to an indeterminate state, overriding its appearance and maintaining it until set to `false`, regardless of user interaction.
 
-::: component-view
+::: sfc
 <Checkbox isIndeterminate>Option</Checkbox>
 :::
 
 ### Line Through
 
-::: component-view
+::: sfc
 <Checkbox :defaultSelected="true" lineThrough>Option</Checkbox>
 :::
 
@@ -113,7 +113,7 @@ The `isIndeterminate` prop sets a `Checkbox` to an indeterminate state, overridi
 
 > By default, HeroUI React passes `IconProps` to your icon component. In HeroUI Vue, use the `icon` slot for custom icons.
 
-::: component-view
+::: sfc
 <div class="flex gap-4">
   <Checkbox :defaultSelected="true">
     <template #icon>
@@ -137,7 +137,7 @@ The `isIndeterminate` prop sets a `Checkbox` to an indeterminate state, overridi
 
 ### Controlled
 
-::: component-view
+::: sfc
 <div class="flex flex-col gap-2">
   <Checkbox v-model="isSelected">Subscribe (controlled)</Checkbox>
   <p class="text-default-500">Selected: {{ isSelected ? 'true' : 'false' }}</p>
@@ -158,7 +158,7 @@ The `isIndeterminate` prop sets a `Checkbox` to an indeterminate state, overridi
 
 You can customize the `Checkbox` component by passing custom Tailwind CSS classes to the component slots.
 
-::: component-view
+::: sfc
 <Checkbox
 v-model="customSelected"
 aria-label="custom checkbox"
@@ -186,7 +186,7 @@ label: 'w-full',
 
 In case you need to customize the checkbox even further, HeroUI React offers `useCheckbox`. HeroUI Vue does not expose this hook yet.
 
-::: component-view
+::: sfc
 <label class="inline-flex items-center gap-2 px-3 py-2 border rounded-md cursor-pointer">
   <input type="checkbox" checked />
   <span>Enabled (native custom implementation)</span>

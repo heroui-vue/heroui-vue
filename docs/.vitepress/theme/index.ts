@@ -1,14 +1,19 @@
 import DefaultTheme from "vitepress/theme";
+import { enhanceAppWithComponentView } from "vitepress-plugin-sfc/client";
+import { enhanceAppWithTabs } from "vitepress-plugin-tabs/client";
 import type { Theme } from "vitepress";
+
+import "vitepress-plugin-sfc/style";
 import "./styles.css";
 import "virtual:group-icons.css";
-import { enhanceAppWithComponentView } from "vitepress-plugin-component/client";
-import { enhanceAppWithTabs } from "vitepress-plugin-tabs/client";
 
 export default {
   extends: DefaultTheme,
-  enhanceApp({ app }) {
-    enhanceAppWithComponentView(app);
+  async enhanceApp({ app }) {
+    await enhanceAppWithComponentView(app, {
+      disableRender: false,
+      nativeIfNotRender: true,
+    });
     enhanceAppWithTabs(app);
   },
 } satisfies Theme;

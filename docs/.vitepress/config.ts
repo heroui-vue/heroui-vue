@@ -1,6 +1,6 @@
 import { defineConfig } from "vitepress";
 import { groupIconMdPlugin, groupIconVitePlugin } from "vitepress-plugin-group-icons";
-import { componentViewMarkdownPlugin } from "vitepress-plugin-component";
+import { sfcPlugin, sfcVitePlugin } from "vitepress-plugin-sfc";
 import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 import { npmCommandsMarkdownPlugin } from "vitepress-plugin-npm-commands";
 import tailwindcss from "@tailwindcss/vite";
@@ -32,14 +32,18 @@ export default defineConfig({
 
   markdown: {
     config(md) {
-      md.use(componentViewMarkdownPlugin);
+      md.use(sfcPlugin);
+      // @ts-ignore
       md.use(tabsMarkdownPlugin);
+      // @ts-ignore
       md.use(npmCommandsMarkdownPlugin);
+      // @ts-ignore
       md.use(groupIconMdPlugin);
     },
   },
   vite: {
-    plugins: [groupIconVitePlugin(), tailwindcss()],
+    // @ts-ignore
+    plugins: [groupIconVitePlugin(), tailwindcss(), sfcVitePlugin()],
   },
 
   locales: {
@@ -57,7 +61,7 @@ export default defineConfig({
             text: "Playground",
             link: "https://play.heroui.hotdogc.org",
           },
-          { text: "HeroUI", link: "https://heroui.com/" },
+          { text: "HeroUI", link: "https://v2.heroui.com/?utm_source=v3.heroui.com" },
         ],
         sidebar: [
           {
@@ -79,9 +83,9 @@ export default defineConfig({
               { text: "Button", link: "/en/components/button" },
               { text: "Alert", link: "/en/components/alert" },
               { text: "Avatar", link: "/en/components/avatar" },
-              { text: "Badge", link: "/en/components/badge" },
-              { text: "Accordion", link: "/en/components/accordion" },
-              { text: "Checkbox", link: "/en/components/checkbox" },
+              // { text: "Badge", link: "/en/components/badge" },
+              // { text: "Accordion", link: "/en/components/accordion" },
+              // { text: "Checkbox", link: "/en/components/checkbox" },
               { text: "Chip", link: "/en/components/chip" },
             ],
           },
@@ -102,7 +106,7 @@ export default defineConfig({
             text: "演练场",
             link: "https://play.heroui.hotdogc.org",
           },
-          { text: "HeroUI", link: "https://heroui.com/" },
+          { text: "HeroUI", link: "https://v2.heroui.com/?utm_source=v3.heroui.com" },
         ],
         sidebar: [
           {
@@ -121,9 +125,9 @@ export default defineConfig({
               { text: "Button", link: "/zh/components/button" },
               { text: "Alert", link: "/zh/components/alert" },
               { text: "Avatar", link: "/zh/components/avatar" },
-              { text: "Badge", link: "/zh/components/badge" },
-              { text: "Accordion", link: "/zh/components/accordion" },
-              { text: "Checkbox", link: "/zh/components/checkbox" },
+              // { text: "Badge", link: "/zh/components/badge" },
+              // { text: "Accordion", link: "/zh/components/accordion" },
+              // { text: "Checkbox", link: "/zh/components/checkbox" },
               { text: "Chip", link: "/zh/components/chip" },
             ],
           },
@@ -131,14 +135,12 @@ export default defineConfig({
       },
     },
   },
-
   themeConfig: {
     logo: "/logo.png",
     search: {
       provider: "local",
     },
     outline: "deep",
-
     socialLinks: [
       {
         icon: "github",
@@ -149,13 +151,10 @@ export default defineConfig({
         link: "https://npmx.dev/package/heroui-vue",
       },
     ],
-
     footer: {
       message: "MIT Licensed",
       copyright: "©hotdogc1017",
     },
-
-    // Language switcher
     langMenuLabel: "Change language",
     returnToTopLabel: "Return to top",
     sidebarMenuLabel: "Menu",
