@@ -333,8 +333,8 @@ importers:
         specifier: ^1.8.1
         version: 1.8.1(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
       vitepress-plugin-npm-commands:
-        specifier: ^0.8.1
-        version: 0.8.1(vitepress-plugin-tabs@0.7.3(vitepress@2.0.0-alpha.21(@types/node@22.20.5)(jiti@2.7.0)(postcss@8.5.32)(typescript@6.0.3)(yaml@2.9.1))(vue@3.5.44(typescript@6.0.3)))(vitepress@2.0.0-alpha.21(@types/node@22.20.5)(jiti@2.7.0)(postcss@8.5.32)(typescript@6.0.3)(yaml@2.9.1))
+        specifier: ^0.10.0
+        version: 0.10.0(vitepress-plugin-tabs@0.7.3(vitepress@2.0.0-alpha.21(@types/node@22.20.5)(jiti@2.7.0)(postcss@8.5.32)(typescript@6.0.3)(yaml@2.9.1))(vue@3.5.44(typescript@6.0.3)))(vitepress@2.0.0-alpha.21(@types/node@22.20.5)(jiti@2.7.0)(postcss@8.5.32)(typescript@6.0.3)(yaml@2.9.1))
       vitepress-plugin-sfc:
         specifier: 2.0.0-beta.6
         version: 2.0.0-beta.6
@@ -4923,6 +4923,7 @@ packages:
 
   tldts-core@7.4.20:
     resolution: {integrity: sha512-C630TWXZCZmLq0F2bW4QqwnaaxCQ/svpAqvJwnC4JvgEM5ohhBnGsEzTLSOXcN+xjz+kEaHS5uoWIw2klnqd0A==}
+    deprecated: Partial release, see https://github.com/remusao/tldts/issues/2735. Use >=7.4.22.
 
   tldts@7.4.19:
     resolution: {integrity: sha512-48dH6aSpQnpbzDUc4vIQZ1VjB8tkK+e8c1yx05/SZK+rkssgjEOlxDd/yU8/a4vGYQ9vRgJr9dwMq9TJ0b3X2Q==}
@@ -5194,11 +5195,11 @@ packages:
       vite:
         optional: true
 
-  vitepress-plugin-npm-commands@0.8.1:
-    resolution: {integrity: sha512-HafhdjBxstvXZ29CgxnbFIeyHci0yVcqaEAwzVRnGikGsVmZa8WG3IppoPtKdvbXDKntPmQT3S3kK4kVxZUcLg==}
+  vitepress-plugin-npm-commands@0.10.0:
+    resolution: {integrity: sha512-81HV6ZfRCNciZLBMgnXnQ8HIlSLn3XOXUny++Hb/B9IjHIZplb2sIa/1PzjnHjsObdtBWXVjxCvzs/4zrUMXPw==}
     peerDependencies:
-      vitepress: ^1.0.0
-      vitepress-plugin-tabs: ^0.7.1
+      vitepress: ^1.0.0 || ^2.0.0-alpha.17
+      vitepress-plugin-tabs: ^0.9.0
 
   vitepress-plugin-sfc@2.0.0-beta.6:
     resolution: {integrity: sha512-Em5hSvi0LHAqqw1CmGftDyCsEdQ91/pPj9itdbGmeqDJrfD3bpwl6RRxXQN4OeZBTByekGqPW7MRBwtWPuc3gA==}
@@ -10515,7 +10516,7 @@ snapshots:
     optionalDependencies:
       vite: 8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)
 
-  vitepress-plugin-npm-commands@0.8.1(vitepress-plugin-tabs@0.7.3(vitepress@2.0.0-alpha.21(@types/node@22.20.5)(jiti@2.7.0)(postcss@8.5.32)(typescript@6.0.3)(yaml@2.9.1))(vue@3.5.44(typescript@6.0.3)))(vitepress@2.0.0-alpha.21(@types/node@22.20.5)(jiti@2.7.0)(postcss@8.5.32)(typescript@6.0.3)(yaml@2.9.1)):
+  vitepress-plugin-npm-commands@0.10.0(vitepress-plugin-tabs@0.7.3(vitepress@2.0.0-alpha.21(@types/node@22.20.5)(jiti@2.7.0)(postcss@8.5.32)(typescript@6.0.3)(yaml@2.9.1))(vue@3.5.44(typescript@6.0.3)))(vitepress@2.0.0-alpha.21(@types/node@22.20.5)(jiti@2.7.0)(postcss@8.5.32)(typescript@6.0.3)(yaml@2.9.1)):
     dependencies:
       klona: 2.0.6
       npm-to-yarn: 3.2.0
