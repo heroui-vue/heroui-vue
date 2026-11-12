@@ -37,7 +37,7 @@
     "@vue/tsconfig": "^0.9.1",
     "bumpp": "^12.3.0",
     "heroui-vue-create": "workspace:*",
-    "oxfmt": "^0.75.0",
+    "oxfmt": "^0.78.0",
     "oxlint": "^1.90.0",
     "pnpm": "^12.15.0",
     "rimraf": "^6.1.3",
