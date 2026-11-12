@@ -6,6 +6,7 @@ packages:
   - packages/bin/*
   - playground
   - docs
+  - __tests__
 
 allowBuilds:
   "@heroui/shared-utils": false
@@ -13,24 +14,26 @@ allowBuilds:
   pnpm: true
 
 verifyDepsBeforeRun: false
-linkWorkspacePackages: true
 
 catalogs:
   prod:
     "@heroui/shared-utils": ^2.1.10
     "@heroui/system": ^2.4.20
-    "@heroui/theme": ^2.4.11
+    "@heroui/theme": ^2.4.26
     "@heroui/use-aria-button": ^2.2.18
-    "@tailwindcss/vite": ^4.1.12
+    "@tailwindcss/vite": ^4.3.3
     "@types/node": ^22.15.26
     "@vitejs/plugin-vue": ^6.0.1
-    "@vue/tsconfig": ^0.7.0
+    "@vue/tsconfig": ^0.9.1
     "@vueuse/core": ^13.9.0
-    tailwindcss: ^4.1.12
-    unplugin-vue: ^6.0.1
-    vite: ^7.1.7
-    vue: ^3.5.13
+    tailwindcss: ^4.3.3
+    unplugin-vue: ^8
+    vite: ^8
+    vue: ^3
 
 patchedDependencies:
   "@vue/repl": patches/@vue__repl.patch
-  vitepress: patches/vitepress.patch
+minimumReleaseAgeExclude:
+  - vitepress-plugin-sfc@2.0.0-beta.4 || 2.0.0-beta.6
+catalog:
+  "@vueuse/core": ^15.0.0

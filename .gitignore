@@ -27,3 +27,4 @@ dist-ssr
 *.sw?
 docs/.vitepress/dist
 docs/.vitepress/cache
+__tests__/.vitest

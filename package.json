@@ -8,9 +8,14 @@
     "dev:docs": "pnpm run -C docs dev",
     "build": "pnpm --filter \"./packages/components/*\"  --filter \"./packages/core\" build",
     "build:core": "pnpm --filter \"./packages/core\" build",
+    "build:alert": "pnpm --filter \"./packages/components/alert\" build",
+    "build:avatar": "pnpm --filter \"./packages/components/avatar\" build",
+    "build:button": "pnpm --filter \"./packages/components/button\" build",
+    "build:chip": "pnpm --filter \"./packages/components/chip\" build",
     "build:cmp": "pnpm --filter \"./packages/components/*\" build",
-    "build:icon": "pnpm --filter \"@heroui-vue/icon\" build",
-    "build:doc": "pnpm build:cmp && pnpm -C docs build",
+    "build:icon": "pnpm --filter \"./packages/icon\" build",
+    "build:shared": "pnpm --filter \"./packages/components/shared\" build",
+    "build:docs": "pnpm build:cmp && pnpm -C docs build",
     "clean": "rimraf -g **/node_modules **/dist",
     "clean:dist": "rimraf -g **/dist",
     "fmt": "oxfmt",
@@ -23,22 +28,22 @@
     "bump:chip": "pnpm -C packages/components/chip run bump",
     "bump:avatar": "pnpm -C packages/components/avatar run bump",
     "bump:badge": "pnpm -C packages/components/badge run bump",
-    "bump:checkbox": "pnpm -C packages/components/checkbox run bump",
     "bump:accordion": "pnpm -C packages/components/accordion run bump",
     "create:tmp": "heroui-vue-create",
     "pub:view": "pnpm publish -r --dry-run --registry=https://registry.npmjs.org/"
   },
-  "dependencies": {
-    "oxfmt": "^0.75.0"
-  },
   "devDependencies": {
+    "@tsdown/css": "^0.23.2",
+    "@vue/tsconfig": "^0.9.1",
     "bumpp": "^12.3.0",
     "heroui-vue-create": "workspace:*",
+    "oxfmt": "^0.75.0",
     "oxlint": "^1.90.0",
     "pnpm": "^12.15.0",
     "rimraf": "^6.1.3",
-    "tsdown": "^0.23.2",
-    "typescript": "^7.0.2"
+    "tsdown": "^0.22.0",
+    "typescript": "^6",
+    "vue-tsc": "^3.3.13"
   },
-  "packageManager": "pnpm@12.15.0"
+  "packageManager": "pnpm@12.16.1"
 }
