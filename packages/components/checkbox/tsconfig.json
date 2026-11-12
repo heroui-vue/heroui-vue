@@ -1,7 +1,0 @@
-{
-  "compilerOptions": {
-    "baseUrl": ".",
-    "isolatedModules": true
-  },
-  "include": ["src/**/*.{js,ts,tsx,jsx,vue}"]
-}
