@@ -1,10 +1,15 @@
 <script setup lang="ts">
 import Iconify, { type IconifyProps } from "./Iconify.vue";
-defineProps<IconifyProps>();
+const props = defineProps<IconifyProps>();
 </script>
 
 <template>
-  <Iconify class="animate-spin h-5 w-5 text-current" role="presentation" aria-hidden="true">
+  <Iconify
+    v-bind="props"
+    class="animate-spin h-5 w-5 text-current"
+    role="presentation"
+    aria-hidden="true"
+  >
     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
     <path
       class="opacity-75"

@@ -5,3 +5,4 @@ export { default as AvatarIcon } from "./AvatarIcon.vue";
 export { default as Loading } from "./Loading.vue";
 export { default as Camera } from "./Camera.vue";
 export { default as Heart } from "./Heart.vue";
+export { default as Cart } from "./Cart.vue";
