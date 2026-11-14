@@ -1,7 +1,10 @@
-export { heroui } from "@heroui/theme";
 import { heroui } from "@heroui/theme";
 
 // For browser
-typeof window !== "undefined" && (window.heroui = heroui);
+if (typeof window !== "undefined") {
+  // @ts-expect-error no exist `heroui` proporty in window
+  window.heroui = heroui;
+}
 
 export default heroui() as any;
+export { heroui } from "@heroui/theme";

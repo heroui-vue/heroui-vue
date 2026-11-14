@@ -1,25 +1,23 @@
-import { defineConfig } from "tsdown";
-import vue from "unplugin-vue/rolldown";
+import { defineConfig, type UserConfig } from "tsdown";
 
-export default defineConfig([
+const config: UserConfig[] = defineConfig([
   {
     entry: ["src/index.ts", "src/heroui.ts"],
-    plugins: [vue()],
-    external: ["vue"],
     minify: true,
-    dts: {
-      vue: true,
-      sourcemap: true,
-      resolve: true,
+    deps: {
+      neverBundle: ["vue"],
     },
   },
+  // for CDN and static resources
   {
     entry: {
       heroui: "src/heroui.ts",
     },
-    minify: false,
+    minify: true,
     platform: "browser",
     format: "iife",
     outDir: "dist/browser",
   },
 ]);
+
+export default config;

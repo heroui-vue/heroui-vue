@@ -22,29 +22,22 @@
     "dist"
   ],
   "type": "module",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/index.d.mts",
   "exports": {
-    ".": "./dist/index.js",
-    "./plugin": "./dist/heroui.js"
+    ".": "./dist/index.mjs",
+    "./plugin": "./dist/heroui.mjs"
   },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "build": "pnpm -w build && pnpm build:only",
-    "build:only": "tsdown",
     "dev": "tsdown -w",
+    "build": "pnpm -w build:shared && pnpm -w build:icon && pnpm -w build:components && tsdown --minify",
     "bump": "pnpm build && bumpp --tag v --sign"
   },
   "devDependencies": {
     "@heroui-vue/core": "workspace:*",
-    "@heroui/theme": "catalog:prod",
-    "@tailwindcss/vite": "catalog:prod",
-    "@vitejs/plugin-vue": "catalog:prod",
-    "tailwindcss": "catalog:prod",
-    "unplugin-vue": "catalog:prod",
-    "vite": "catalog:prod",
-    "vite-plugin-dts": "^4.5.4"
+    "@heroui/theme": "catalog:prod"
   }
 }

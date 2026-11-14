@@ -4,9 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "pnpm --parallel --filter \"./packages/components/*\" --filter \"./packages/core\" --filter \"./packages/icon\" dev",
     "dev:docs": "pnpm run -C docs dev",
-    "build": "pnpm --filter \"./packages/components/*\"  --filter \"./packages/core\" build",
+    "build": "pnpm --filter \"./packages/heroui-vue\" build",
     "build:core": "pnpm --filter \"./packages/core\" build",
     "build:alert": "pnpm --filter \"./packages/components/alert\" build",
     "build:avatar": "pnpm --filter \"./packages/components/avatar\" build",
@@ -29,7 +28,6 @@
     "bump:chip": "pnpm -C packages/components/chip run bump",
     "bump:avatar": "pnpm -C packages/components/avatar run bump",
     "bump:badge": "pnpm -C packages/components/badge run bump",
-    "bump:accordion": "pnpm -C packages/components/accordion run bump",
     "create:tmp": "heroui-vue-create",
     "pub:view": "pnpm publish -r --dry-run --registry=https://registry.npmjs.org/"
   },
