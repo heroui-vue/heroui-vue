@@ -2,6 +2,7 @@ packages:
   - packages/core
   - packages/heroui-vue
   - packages/icon
+  - packages/shared
   - packages/components/*
   - packages/bin/*
   - playground

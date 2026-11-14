@@ -1,37 +1,19 @@
 <script lang="ts" setup>
-import { useBadge, type BadgeProps } from "./use-badge";
+import { useBadge, type UseBadgeProps, type UseBadgeSlot } from "./useBadge";
 
-const props = withDefaults(defineProps<BadgeProps>(), {
-  variant: "solid",
-  color: "default",
-  size: "md",
-  placement: "top-right",
-  shape: "rectangle",
-  isInvisible: false,
-  isOneChar: undefined,
-  isDot: false,
-  disableOutline: false,
-  disableAnimation: false,
+const props = withDefaults(defineProps<UseBadgeProps>(), {
   showOutline: true,
 });
+defineSlots<Record<UseBadgeSlot, any>>();
 
-defineSlots<{
-  default(): any;
-  content(): any;
-}>();
-
-const { tag, baseProps, badgeProps, shouldRenderBadgeContent, content } = useBadge(props);
+const { as, baseProps, badgeProps, contentSlot } = useBadge(props);
 </script>
 
 <template>
-  <component :is="tag" v-bind="baseProps">
+  <div v-bind="baseProps">
     <slot />
-    <span v-bind="badgeProps">
-      <template v-if="shouldRenderBadgeContent">
-        <slot name="content">
-          {{ content }}
-        </slot>
-      </template>
-    </span>
-  </component>
+    <component :is="as" v-bind="badgeProps">
+      <component :is="contentSlot"></component>
+    </component>
+  </div>
 </template>

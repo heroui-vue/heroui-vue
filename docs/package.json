@@ -6,13 +6,13 @@
   "scripts": {
     "dev": "vitepress dev",
     "build:base": "pnpm -w build:shared && pnpm -w build:icon",
-    "build:components": "pnpm -w build:alert && pnpm -w build:avatar && pnpm -w build:button && pnpm -w build:chip",
     "build": "pnpm build:base && pnpm build:components && vitepress build",
     "preview": "pnpm build && vitepress preview"
   },
   "devDependencies": {
     "@heroui-vue/alert": "workspace:*",
     "@heroui-vue/avatar": "workspace:*",
+    "@heroui-vue/badge": "workspace:*",
     "@heroui-vue/button": "workspace:*",
     "@heroui-vue/chip": "workspace:*",
     "@heroui-vue/icon": "workspace:*",

@@ -247,6 +247,9 @@ importers:
       '@heroui-vue/avatar':
         specifier: workspace:*
         version: link:../packages/components/avatar
+      '@heroui-vue/badge':
+        specifier: workspace:*
+        version: link:../packages/components/badge
       '@heroui-vue/chip':
         specifier: workspace:*
         version: link:../packages/components/chip
@@ -255,7 +258,7 @@ importers:
         version: link:../packages/icon
       '@heroui-vue/shared':
         specifier: workspace:*
-        version: link:../packages/components/shared
+        version: link:../packages/shared
       '@heroui/alert':
         specifier: ^2.2.32
         version: 2.2.32(@heroui/system@2.4.28(@heroui/theme@2.4.26(tailwindcss@4.3.3))(@react-spectrum/provider@3.11.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(framer-motion@14.9.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(@heroui/theme@2.4.26(tailwindcss@4.3.3))(@react-spectrum/provider@3.11.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(framer-motion@14.9.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -305,6 +308,9 @@ importers:
       '@heroui-vue/avatar':
         specifier: workspace:*
         version: link:../packages/components/avatar
+      '@heroui-vue/badge':
+        specifier: workspace:*
+        version: link:../packages/components/badge
       '@heroui-vue/button':
         specifier: workspace:*
         version: link:../packages/components/button
@@ -367,7 +373,7 @@ importers:
     devDependencies:
       '@heroui-vue/shared':
         specifier: workspace:*
-        version: link:../shared
+        version: link:../../shared
       '@heroui/theme':
         specifier: catalog:prod
         version: 2.4.26(tailwindcss@4.3.3)
@@ -385,7 +391,7 @@ importers:
         version: link:../../icon
       '@heroui-vue/shared':
         specifier: workspace:*
-        version: link:../shared
+        version: link:../../shared
       '@heroui/theme':
         specifier: catalog:prod
         version: 2.4.26(tailwindcss@4.3.3)
@@ -403,7 +409,7 @@ importers:
     devDependencies:
       '@heroui-vue/shared':
         specifier: workspace:*
-        version: link:../shared
+        version: link:../../shared
       '@heroui/shared-utils':
         specifier: catalog:prod
         version: 2.1.12
@@ -416,6 +422,9 @@ importers:
       '@vue/tsconfig':
         specifier: catalog:prod
         version: 0.9.1(typescript@6.0.3)(vue@3.5.44(typescript@6.0.3))
+      '@vueuse/core':
+        specifier: catalog:prod
+        version: 13.9.0(vue@3.5.44(typescript@6.0.3))
       unplugin-vue:
         specifier: catalog:prod
         version: 8.0.1(@types/node@22.20.5)(jiti@2.7.0)(rolldown@1.2.16)(rollup@4.67.3)(vue@3.5.44(typescript@6.0.3))(yaml@2.9.1)
@@ -427,7 +436,7 @@ importers:
     devDependencies:
       '@heroui-vue/shared':
         specifier: workspace:*
-        version: link:../shared
+        version: link:../../shared
       '@heroui/theme':
         specifier: catalog:prod
         version: 2.4.26(tailwindcss@4.3.3)
@@ -448,7 +457,7 @@ importers:
         version: link:../../icon
       '@heroui-vue/shared':
         specifier: workspace:*
-        version: link:../shared
+        version: link:../../shared
       '@heroui/theme':
         specifier: catalog:prod
         version: 2.4.26(tailwindcss@4.3.3)
@@ -458,24 +467,6 @@ importers:
       unplugin-vue:
         specifier: catalog:prod
         version: 8.0.1(@types/node@22.20.5)(jiti@2.7.0)(rolldown@1.2.16)(rollup@4.67.3)(vue@3.5.44(typescript@6.0.3))(yaml@2.9.1)
-      vue:
-        specifier: catalog:prod
-        version: 3.5.44(typescript@6.0.3)
-
-  packages/components/shared:
-    devDependencies:
-      '@heroui/shared-utils':
-        specifier: catalog:prod
-        version: 2.1.12
-      '@heroui/theme':
-        specifier: catalog:prod
-        version: 2.4.26(tailwindcss@4.3.3)
-      '@vue/tsconfig':
-        specifier: catalog:prod
-        version: 0.9.1(typescript@6.0.3)(vue@3.5.44(typescript@6.0.3))
-      '@vueuse/core':
-        specifier: catalog:prod
-        version: 13.9.0(vue@3.5.44(typescript@6.0.3))
       vue:
         specifier: catalog:prod
         version: 3.5.44(typescript@6.0.3)
@@ -533,6 +524,24 @@ importers:
       unplugin-vue:
         specifier: catalog:prod
         version: 8.0.1(@types/node@22.20.5)(jiti@2.7.0)(rolldown@1.2.16)(rollup@4.67.3)(vue@3.5.44(typescript@6.0.3))(yaml@2.9.1)
+      vue:
+        specifier: catalog:prod
+        version: 3.5.44(typescript@6.0.3)
+
+  packages/shared:
+    devDependencies:
+      '@heroui/shared-utils':
+        specifier: catalog:prod
+        version: 2.1.12
+      '@heroui/theme':
+        specifier: catalog:prod
+        version: 2.4.26(tailwindcss@4.3.3)
+      '@vue/tsconfig':
+        specifier: catalog:prod
+        version: 0.9.1(typescript@6.0.3)(vue@3.5.44(typescript@6.0.3))
+      '@vueuse/core':
+        specifier: catalog:prod
+        version: 13.9.0(vue@3.5.44(typescript@6.0.3))
       vue:
         specifier: catalog:prod
         version: 3.5.44(typescript@6.0.3)
@@ -4923,6 +4932,7 @@ packages:
 
   tldts-core@7.4.20:
     resolution: {integrity: sha512-C630TWXZCZmLq0F2bW4QqwnaaxCQ/svpAqvJwnC4JvgEM5ohhBnGsEzTLSOXcN+xjz+kEaHS5uoWIw2klnqd0A==}
+    deprecated: Partial release, see https://github.com/remusao/tldts/issues/2735. Use >=7.4.22.
 
   tldts@7.4.19:
     resolution: {integrity: sha512-48dH6aSpQnpbzDUc4vIQZ1VjB8tkK+e8c1yx05/SZK+rkssgjEOlxDd/yU8/a4vGYQ9vRgJr9dwMq9TJ0b3X2Q==}
