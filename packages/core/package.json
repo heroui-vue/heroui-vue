@@ -23,19 +23,17 @@
     "src"
   ],
   "type": "module",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/index.d.mts",
   "exports": {
-    ".": "./dist/index.js",
-    "./raw": "./src/index.ts"
+    ".": "./dist/index.mjs"
   },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "build": "pnpm -w build:cmp && pnpm build:only",
-    "build:only": "tsdown --minify",
     "dev": "tsdown -w",
+    "build": "pnpm -w build:components && tsdown --minify",
     "bump": "pnpm build && bumpp --tag @heroui-vue/core@ --sign"
   },
   "devDependencies": {
@@ -43,7 +41,6 @@
     "@heroui-vue/avatar": "workspace:*",
     "@heroui-vue/badge": "workspace:*",
     "@heroui-vue/button": "workspace:*",
-    "@heroui-vue/chip": "workspace:*",
-    "unplugin-vue": "catalog:prod"
+    "@heroui-vue/chip": "workspace:*"
   }
 }
