@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vitepress dev",
     "build:base": "pnpm -w build:shared && pnpm -w build:icon",
-    "build": "pnpm build:base && pnpm build:components && vitepress build",
+    "build": "pnpm build:base && pnpm -w build:components && vitepress build",
     "preview": "pnpm build && vitepress preview"
   },
   "devDependencies": {
