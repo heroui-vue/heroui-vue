@@ -22,7 +22,7 @@ catalogs:
     "@heroui/system": ^2.4.20
     "@heroui/theme": ^2.4.26
     "@heroui/use-aria-button": ^2.2.18
-    "@tailwindcss/vite": ^4.3.3
+    "@tailwindcss/vite": ^4.3.5
     "@types/node": ^22.15.26
     "@vitejs/plugin-vue": ^6.0.1
     "@vue/tsconfig": ^0.9.1
