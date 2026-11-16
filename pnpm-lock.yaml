@@ -336,8 +336,8 @@ importers:
         specifier: next
         version: 2.0.0-alpha.21(@types/node@22.20.5)(jiti@2.7.0)(postcss@8.5.32)(typescript@6.0.3)(yaml@2.9.1)
       vitepress-plugin-group-icons:
-        specifier: ^1.8.1
-        version: 1.8.1(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
+        specifier: ^1.8.2
+        version: 1.8.2(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))
       vitepress-plugin-npm-commands:
         specifier: ^0.8.1
         version: 0.8.1(vitepress-plugin-tabs@0.7.3(vitepress@2.0.0-alpha.21(@types/node@22.20.5)(jiti@2.7.0)(postcss@8.5.32)(typescript@6.0.3)(yaml@2.9.1))(vue@3.5.44(typescript@6.0.3)))(vitepress@2.0.0-alpha.21(@types/node@22.20.5)(jiti@2.7.0)(postcss@8.5.32)(typescript@6.0.3)(yaml@2.9.1))
@@ -4974,8 +4974,8 @@ packages:
       yaml:
         optional: true
 
-  vitepress-plugin-group-icons@1.8.1:
-    resolution: {integrity: sha512-9TY8xunZDX+a+k4GZu+2rJftBsZXCEMsFXLj3p2JTM/NCTRGvIemx+iBhvauyCbOFcIEYTsRVswWF1TeMS89Ew==}
+  vitepress-plugin-group-icons@1.8.2:
+    resolution: {integrity: sha512-xyydao7FXp0Av4N0X0+DA+Roumxp+HoYWR+UaCS5O1L/Ym85C9NByQvvPahtIgSOGDqxbhMQCT+QSURvKUR62g==}
     peerDependencies:
       vite: '>=3'
     peerDependenciesMeta:
@@ -10077,7 +10077,7 @@ snapshots:
       jiti: 2.7.0
       yaml: 2.9.1
 
-  vitepress-plugin-group-icons@1.8.1(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)):
+  vitepress-plugin-group-icons@1.8.2(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)):
     dependencies:
       '@iconify-json/logos': 1.2.18
       '@iconify-json/vscode-icons': 1.2.95
