@@ -177,8 +177,8 @@ catalogs:
       specifier: ^22.15.26
       version: 22.20.5
     '@vitejs/plugin-vue':
-      specifier: ^6.0.1
-      version: 6.0.10
+      specifier: ^6.0.11
+      version: 6.0.11
     '@vue/tsconfig':
       specifier: ^0.9.1
       version: 0.9.1
@@ -538,7 +538,7 @@ importers:
         version: 22.20.5
       '@vitejs/plugin-vue':
         specifier: catalog:prod
-        version: 6.0.10(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))(vue@3.5.44(typescript@6.0.3))
+        version: 6.0.11(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))(vue@3.5.44(typescript@6.0.3))
       '@vue/repl':
         specifier: ^4.6.3
         version: 4.7.2(patch_hash=86097ebfd4de79b7984b94c1b8cdda7de694d3d6045d56e6ed6eb6c9b37faa8f)
@@ -3091,6 +3091,13 @@ packages:
     peerDependencies:
       vite: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
       vue: ^3.2.25 || ^3.6.0-rc.10
+
+  '@vitejs/plugin-vue@6.0.11':
+    resolution: {integrity: sha512-m48lskIUJGlB6qUiYhDMI8nd2ngeidz2U4nKTjqI13cFMu5rH8JeEILPkDtK9Fk/TjBA2pkj8AlbenqDaKu+ww==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    peerDependencies:
+      vite: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0
+      vue: ^3.2.25 || ^3.6.0-rc.15
 
   '@vitest/browser-playwright@5.0.5':
     resolution: {integrity: sha512-lcdThFUUcMV9mGGV1SUiZXPxfjgW4CssA7o3STxzh8WK0tT2r526kc12tZIBRZfoLMwkhxjLmMXkWXONzdsDQw==}
@@ -8253,6 +8260,12 @@ snapshots:
       vite: 8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)
 
   '@vitejs/plugin-vue@6.0.10(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))(vue@3.5.44(typescript@6.0.3))':
+    dependencies:
+      '@rolldown/pluginutils': 1.0.1
+      vite: 8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)
+      vue: 3.5.44(typescript@6.0.3)
+
+  '@vitejs/plugin-vue@6.0.11(vite@8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1))(vue@3.5.44(typescript@6.0.3))':
     dependencies:
       '@rolldown/pluginutils': 1.0.1
       vite: 8.3.5(@types/node@22.20.5)(jiti@2.7.0)(yaml@2.9.1)
