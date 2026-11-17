@@ -23,7 +23,7 @@
     "vitepress": "next",
     "vitepress-plugin-group-icons": "^1.8.1",
     "vitepress-plugin-npm-commands": "^0.8.1",
-    "vitepress-plugin-sfc": "2.0.0-beta.6",
+    "vitepress-plugin-sfc": "2.0.0",
     "vitepress-plugin-tabs": "^0.7.3"
   }
 }
