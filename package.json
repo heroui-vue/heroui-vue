@@ -31,7 +31,9 @@
     "bump:badge": "pnpm -C packages/components/badge run bump",
     "bump:link": "pnpm -C packages/components/link run bump",
     "create:tmp": "heroui-vue-create",
-    "pub:view": "pnpm publish -r --dry-run --registry=https://registry.npmjs.org/"
+    "pub:view": "pnpm publish -r --dry-run --registry=https://registry.npmjs.org/",
+    "build:user": "pnpm --filter \"./packages/components/user\" build",
+    "bump:user": "pnpm -C packages/components/user run bump"
   },
   "devDependencies": {
     "@tsdown/css": "^0.23.2",
