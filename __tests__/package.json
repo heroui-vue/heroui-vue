@@ -20,7 +20,7 @@
     "@heroui-vue/icon": "workspace:*",
     "@heroui-vue/shared": "workspace:*",
     "@heroui/alert": "^2.2.32",
-    "@heroui/react": "^2.8.10",
+    "@heroui/react": "^3.2.7",
     "@heroui/theme": "catalog:prod",
     "@types/react": "^19.3.0",
     "react": "^19.3.1",
