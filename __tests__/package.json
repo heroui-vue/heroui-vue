@@ -10,7 +10,8 @@
     "test:alert": "pnpm -w build:alert -l silent && vitest run components/alert",
     "test:chip": "pnpm -w build:chip -l silent && vitest run components/chip",
     "test:badge": "pnpm -w build:badge -l silent && vitest run components/badge",
-    "test:shared": "pnpm -w build:shared -l silent && vitest run shared"
+    "test:shared": "pnpm -w build:shared -l silent && vitest run shared",
+    "test:link": "pnpm -w build:link -l silent && vitest run components/link"
   },
   "dependencies": {
     "@heroui-vue/alert": "workspace:*",
@@ -18,6 +19,7 @@
     "@heroui-vue/badge": "workspace:*",
     "@heroui-vue/chip": "workspace:*",
     "@heroui-vue/icon": "workspace:*",
+    "@heroui-vue/link": "workspace:*",
     "@heroui-vue/shared": "workspace:*",
     "@heroui/alert": "^2.2.32",
     "@heroui/react": "^2.8.10",

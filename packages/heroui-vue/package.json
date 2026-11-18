@@ -33,11 +33,12 @@
   },
   "scripts": {
     "dev": "tsdown -w",
-    "build": "pnpm -w build:shared && pnpm -w build:icon && pnpm -w build:components && tsdown --minify",
+    "build": "pnpm -w build:core && tsdown --minify",
     "bump": "pnpm build && bumpp --tag v --sign"
   },
   "devDependencies": {
     "@heroui-vue/core": "workspace:*",
-    "@heroui/theme": "catalog:prod"
+    "@heroui/theme": "catalog:prod",
+    "vue": "catalog:prod"
   }
 }
