@@ -16,14 +16,16 @@
     "@heroui-vue/button": "workspace:*",
     "@heroui-vue/chip": "workspace:*",
     "@heroui-vue/icon": "workspace:*",
+    "@heroui-vue/link": "workspace:*",
     "@heroui/theme": "catalog:prod",
     "@tailwindcss/vite": "catalog:prod",
     "@vue/tsconfig": "catalog:prod",
+    "postcss": "^8.5.33",
     "tailwindcss": "catalog:prod",
     "vitepress": "next",
     "vitepress-plugin-group-icons": "^1.8.1",
     "vitepress-plugin-npm-commands": "^0.8.1",
-    "vitepress-plugin-sfc": "2.0.0-beta.6",
+    "vitepress-plugin-sfc": "2.0.1",
     "vitepress-plugin-tabs": "^0.7.3"
   }
 }

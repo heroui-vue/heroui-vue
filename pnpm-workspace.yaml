@@ -35,6 +35,6 @@ catalogs:
 patchedDependencies:
   "@vue/repl": patches/@vue__repl.patch
 minimumReleaseAgeExclude:
-  - vitepress-plugin-sfc@2.0.0-beta.4 || 2.0.0-beta.6
+  - vitepress-plugin-sfc@2.0.1
 catalog:
   "@vueuse/core": ^15.0.0

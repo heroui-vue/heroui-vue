@@ -12,7 +12,8 @@
     "build:button": "pnpm --filter \"./packages/components/button\" build",
     "build:badge": "pnpm --filter \"./packages/components/badge\" build",
     "build:chip": "pnpm --filter \"./packages/components/chip\" build",
-    "build:components": "pnpm --filter \"./packages/components/*\" build",
+    "build:link": "pnpm --filter \"./packages/components/link\" build",
+    "build:components": "pnpm --filter \"./packages/components/*\" --workspace-concurrency=1 build",
     "build:icon": "pnpm --filter \"./packages/icon\" build",
     "build:shared": "pnpm --filter \"./packages/shared\" build",
     "build:docs": "pnpm build:cmp && pnpm -C docs build",
@@ -28,6 +29,7 @@
     "bump:chip": "pnpm -C packages/components/chip run bump",
     "bump:avatar": "pnpm -C packages/components/avatar run bump",
     "bump:badge": "pnpm -C packages/components/badge run bump",
+    "bump:link": "pnpm -C packages/components/link run bump",
     "create:tmp": "heroui-vue-create",
     "pub:view": "pnpm publish -r --dry-run --registry=https://registry.npmjs.org/"
   },
