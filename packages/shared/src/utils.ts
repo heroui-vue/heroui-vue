@@ -111,9 +111,10 @@ export function tryUseSlots<T extends string[], R = Record<T[number], Slot | und
 /**
  * Safe `useAttrs`
  */
-export function tryUseAttrs<T extends string[], R = Record<T[number], string | undefined>>(
-  ...attrNames: [...T]
-): R {
+export function tryUseAttrs<
+  T extends string[],
+  R = Record<T[number] extends never ? string : T[number], string | undefined>,
+>(...attrNames: [...T]): R {
   const instance = getCurrentInstance();
   const result = {} as any;
   if (!instance) {
@@ -123,7 +124,7 @@ export function tryUseAttrs<T extends string[], R = Record<T[number], string | u
   for (const name of attrNames) {
     result[name] = attrs?.[name];
   }
-  return result;
+  return attrNames?.length ? result : (attrs as R);
 }
 
 /**
