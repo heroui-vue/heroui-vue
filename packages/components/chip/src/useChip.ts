@@ -4,10 +4,11 @@ import {
   mapPropsVariants,
   isEmpty,
   hasEmitListeners,
-  cloneSlot,
+  cloneValidVnode,
   tryUseSlots,
   tryUseAttrs,
   toRefsWithDefault,
+  mergeClassProps,
 } from "@heroui-vue/shared";
 import { CloseFilledIcon } from "@heroui-vue/icon";
 import { chip, cn } from "@heroui/theme";
@@ -79,7 +80,8 @@ export function useChip(
   const props = toRefsWithDefault(toReactive(originalProps) as UseChipProps, {
     as: "div",
   });
-  const { class: className } = tryUseAttrs("class");
+  const attrs = tryUseAttrs();
+  const { class: className } = attrs;
   const {
     startContent,
     endContent,
@@ -119,10 +121,11 @@ export function useChip(
   });
   // chipProps
   watchEffect(() => {
-    const { classNames, class: propsClass } = toReactive(props);
-    chipProps.value = {
-      class: slots.value.base({ class: cn(classNames?.base, className, propsClass) }),
+    const { classNames } = toReactive(props);
+    const baseProps: UseChipReturn["chipProps"] = {
+      class: slots.value.base({ class: cn(classNames?.base, className) }),
     };
+    chipProps.value = mergeClassProps(baseProps, attrs);
   });
   // defaultProps
   watchEffect(() => {
@@ -160,8 +163,8 @@ export function useChip(
   // startContentSlot
   watchEffect(() => {
     startContentSlot.value = () => {
-      const startNodes = cloneSlot(startContent, contentProps.value)();
-      const avatarVnodes = cloneSlot(avatar, avatarProps.value)();
+      const startNodes = cloneValidVnode(startContent?.(), contentProps.value);
+      const avatarVnodes = cloneValidVnode(avatar?.(), avatarProps.value);
       const content = avatarVnodes || startNodes;
       if (isDot.value && !content) {
         return h("span", dotProps.value);
@@ -173,7 +176,7 @@ export function useChip(
   // endContentSlot
   watchEffect(() => {
     endContentSlot.value = () => {
-      const endContentVnodes = cloneSlot(endContent, contentProps.value)();
+      const endContentVnodes = cloneValidVnode(endContent?.(), contentProps.value);
       if (isCloseable) {
         return h("span", closeButtonProps.value, [
           endContentVnodes || h(CloseFilledIcon, { size: 18 }),

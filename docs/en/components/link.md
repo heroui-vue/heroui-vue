@@ -240,30 +240,40 @@ The `as` prop lets you customize the HTML element or Vue component used to rende
 
 :::sfc
 <script setup>
+import { Button } from "@heroui-vue/button";
 import { Link } from "@heroui-vue/link";
 </script>
 
 <template>
-  <Link as="button" type="button" showAnchorIcon color="primary">
+  <Button
+    showAnchorIcon
+    :as="Link"
+    color="primary"
+    href="https://github.com/heroui-inc/heroui"
+    variant="solid"
+  >
     Button Link
-  </Link>
+  </Button>
 </template>
+
 :::
 
 ### Routing
 
 Use native `href` links, or pass a Vue router link component with `as` and its routing props (such as `to`). Router setup belongs to your application.
 
-```vue
+:::sfc
 <script setup>
 import { Link } from "@heroui-vue/link";
 </script>
 
 <template>
-  <Link href="/home">Home</Link>
-  <Link href="/about">About</Link>
+  <div class="flex gap-2">
+    <Link href="/home">Home</Link>
+    <Link href="/about">About</Link>
+  </div>
 </template>
-```
+:::
 
 ### Custom Implementation
 

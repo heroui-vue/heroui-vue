@@ -13,6 +13,7 @@ export default {
     await enhanceAppWithComponentView(app, {
       disableRender: false,
       nativeIfNotRender: true,
+      isolateStyles: true,
     });
     enhanceAppWithTabs(app);
   },
