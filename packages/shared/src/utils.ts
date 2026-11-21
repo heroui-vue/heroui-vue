@@ -8,6 +8,7 @@ import {
   useSlots,
   useAttrs,
   inject,
+  mergeProps,
 } from "vue";
 import { isEmpty } from "@heroui/shared-utils";
 import { cn } from "@heroui/theme";
@@ -213,3 +214,14 @@ export function cloneValidVnode(
 
   return clonedVnodes;
 }
+
+export const mergeClassProps: typeof mergeProps = (...args) => {
+  const classNames = new Set<string>();
+  const props: any[] = [];
+  for (const prop of args) {
+    const { class: className, ...propWithoutClass } = prop;
+    (className as string)?.split(" ").forEach((cls) => classNames.add(cls));
+    props.push(propWithoutClass);
+  }
+  return mergeProps(...props, { class: cn(...Array.from(classNames)) });
+};
