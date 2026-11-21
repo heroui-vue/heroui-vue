@@ -1,5 +1,4 @@
-import type { Component, ComputedRef } from "vue";
-
+import type { Component, ComputedRef, ToRef } from "vue";
 import type { SlotsToClasses } from "@heroui/theme";
 
 /**
@@ -30,3 +29,7 @@ export type ToComputedRefs<T = any, P extends keyof T = never> = {
 };
 
 export type PickRequired<T, K extends keyof T> = Required<{ [P in K]: T[P] }> & Omit<T, K>;
+
+export type ToRefsWithDefault<T extends object, K extends keyof T> = {
+  [P in keyof T]: ToRef<P extends K ? T[P] & {} : T[P]>;
+};
