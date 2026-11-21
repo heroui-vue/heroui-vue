@@ -169,20 +169,6 @@ export function flattenVNodes(vnodes: VNode | VNode[] | undefined | null): VNode
   return flatVnodes;
 }
 
-/**
- * @deprecated use `cloneValidVnode` instead
- */
-export function cloneSlot(
-  slot: Slot | undefined | null,
-  ...cloneNode: Parameters<typeof cloneValidVnode> extends [infer _, ...infer R] ? R : never
-): () => ReturnType<typeof cloneValidVnode> {
-  if (!slot) {
-    return () => null;
-  } else {
-    return () => cloneValidVnode(slot(), ...cloneNode);
-  }
-}
-
 export function cloneValidVnode(
   vnodes: VNode | VNode[] | undefined,
   ...cloneNode: Parameters<typeof cloneVNode> extends [infer _, ...infer R] ? R : never

@@ -4,6 +4,7 @@ import { useChip, type UseChipProps, type UseChipSlot } from "./useChip";
 const props = defineProps<UseChipProps>();
 const emit = defineEmits(["close"]);
 defineSlots<Record<UseChipSlot, any>>();
+defineOptions({ inheritAttrs: false });
 
 const { as, chipProps, defaultProps, startContent, endContent } = useChip(props);
 

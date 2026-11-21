@@ -7,6 +7,7 @@ const props = withDefaults(defineProps<UseAvatarProps>(), {
   isDisabled: undefined,
 });
 defineSlots<Record<UseAvatarEmit, any>>();
+defineOptions({ inheritAttrs: false });
 
 const avatarRef = ref<HTMLElement | undefined>();
 const { as, imgAs, src, alt, avatarProps, imageProps, fallback } = useAvatar(props, avatarRef);

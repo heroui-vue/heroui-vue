@@ -8,7 +8,6 @@ export type HTMLHeroVueUIProps = HeroUIVueBaseProps;
 
 export type HeroUIVueBaseProps = {
   as?: Component | keyof HTMLElementTagNameMap | (string & {});
-  class?: string;
 };
 
 export type BaseProps = {

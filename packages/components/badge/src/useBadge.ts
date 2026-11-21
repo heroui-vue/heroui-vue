@@ -1,6 +1,12 @@
 import { ref, watchEffect } from "vue";
 import { toReactive } from "@vueuse/core";
-import { tryUseAttrs, toRefsWithDefault, mapPropsVariants, tryUseSlots } from "@heroui-vue/shared";
+import {
+  tryUseAttrs,
+  toRefsWithDefault,
+  mapPropsVariants,
+  tryUseSlots,
+  mergeClassProps,
+} from "@heroui-vue/shared";
 import { badge, cn } from "@heroui/theme";
 import type { HeroUIVueBaseProps, BaseProps } from "@heroui-vue/shared";
 import type { BadgeSlots, BadgeVariantProps, SlotsToClasses } from "@heroui/theme";
@@ -52,7 +58,8 @@ export function useBadge(originalProps: MaybeRef<UseBadgeProps>): ToRefs<UseBadg
     showOutline: true,
     classNames: {},
   });
-  const { class: className } = tryUseAttrs("class");
+  const attrs = tryUseAttrs();
+  const { class: className } = attrs;
   const { content } = tryUseSlots<UseBadgeSlot[]>("content");
 
   const slots = ref() as Ref<Return.Option["slots"]>;
@@ -79,9 +86,10 @@ export function useBadge(originalProps: MaybeRef<UseBadgeProps>): ToRefs<UseBadg
   // baseProps
   watchEffect(() => {
     const { classNames } = toReactive(props);
-    baseProps.value = {
+    const ps: UseBadgeReturn["baseProps"] = {
       class: slots.value.base({ class: classNames?.base }),
     };
+    baseProps.value = mergeClassProps(ps, attrs);
   });
   // badgeProps
   watchEffect(() => {

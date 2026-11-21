@@ -1,7 +1,12 @@
 import { ref, watchEffect } from "vue";
 import { link } from "@heroui/theme";
 import { toReactive, useFocus } from "@vueuse/core";
-import { toRefsWithDefault, mapPropsVariants, tryUseAttrs } from "@heroui-vue/shared";
+import {
+  toRefsWithDefault,
+  mapPropsVariants,
+  tryUseAttrs,
+  mergeClassProps,
+} from "@heroui-vue/shared";
 import type { AnchorHTMLAttributes, MaybeRef, Ref, ToRefs } from "vue";
 import type { MaybeElement } from "@vueuse/core";
 import type { LinkVariantProps } from "@heroui/theme";
@@ -73,7 +78,8 @@ export function useLink(
     autofocus: false,
   });
   const { focused: isFocused } = useFocus(linkRef);
-  const { class: className } = tryUseAttrs("class");
+  const attrs = tryUseAttrs();
+  const { class: className } = attrs;
 
   const linkProps = ref() as Ref<Return.Slot["linkProps"]>;
 
@@ -93,7 +99,7 @@ export function useLink(
       rel: isExternal ? (rel ?? "noopener noreferrer") : undefined,
       target: isExternal ? (target ?? "_blank") : undefined,
     };
-    linkProps.value = {
+    const mergedProps: UseLinkReturn["linkProps"] = {
       ...nativeProps,
       class: styles,
       "data-focus": !!isFocused.value,
@@ -101,6 +107,7 @@ export function useLink(
       // TODO
       "data-focus-visible": false,
     };
+    linkProps.value = mergeClassProps(mergedProps as any, attrs) as any;
   });
 
   return {

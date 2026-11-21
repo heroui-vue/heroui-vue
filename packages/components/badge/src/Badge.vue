@@ -5,6 +5,7 @@ const props = withDefaults(defineProps<UseBadgeProps>(), {
   showOutline: true,
 });
 defineSlots<Record<UseBadgeSlot, any>>();
+defineOptions({ inheritAttrs: false });
 
 const { as, baseProps, badgeProps, contentSlot } = useBadge(props);
 </script>

@@ -8,6 +8,7 @@ import {
   toRefsWithDefault,
   compact,
   cloneValidVnode,
+  mergeClassProps,
 } from "@heroui-vue/shared";
 import Avatar from "./Avatar.vue";
 import { avatarGroup, cn } from "@heroui/theme";
@@ -64,7 +65,8 @@ export function useAvatarGroup(
     as: "div",
     max: 5,
   });
-  const { class: className } = tryUseAttrs("class");
+  const attrs = tryUseAttrs();
+  const { class: className } = attrs;
   const { default: defaultSlot, renderCount } = tryUseSlots<UseAvatarGroupSlot[]>(
     "default",
     "renderCount",
@@ -127,12 +129,13 @@ export function useAvatarGroup(
   // avatarGroupProps
   watchEffect(() => {
     const { classNames } = toReactive(props);
-    avatarGroupProps.value = {
+    const baseProps: UseAvatarGroupReturn["avatarGroupProps"] = {
       role: "group",
       class: slots.value.base({
         class: cn(classNames?.base, className),
       }),
     };
+    avatarGroupProps.value = mergeClassProps(baseProps, attrs) as any;
   });
   // avatarGroupCountProps
   watchEffect(() => {
