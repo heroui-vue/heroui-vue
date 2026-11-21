@@ -250,6 +250,9 @@ importers:
       '@heroui-vue/badge':
         specifier: workspace:*
         version: link:../packages/components/badge
+      '@heroui-vue/button':
+        specifier: workspace:*
+        version: link:../packages/components/button
       '@heroui-vue/chip':
         specifier: workspace:*
         version: link:../packages/components/chip

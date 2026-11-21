@@ -8,6 +8,7 @@ import {
   useSlots,
   useAttrs,
   inject,
+  mergeProps,
 } from "vue";
 import { isEmpty } from "@heroui/shared-utils";
 import { cn } from "@heroui/theme";
@@ -111,9 +112,10 @@ export function tryUseSlots<T extends string[], R = Record<T[number], Slot | und
 /**
  * Safe `useAttrs`
  */
-export function tryUseAttrs<T extends string[], R = Record<T[number], string | undefined>>(
-  ...attrNames: [...T]
-): R {
+export function tryUseAttrs<
+  T extends string[],
+  R = Record<T[number] extends never ? string : T[number], string | undefined>,
+>(...attrNames: [...T]): R {
   const instance = getCurrentInstance();
   const result = {} as any;
   if (!instance) {
@@ -123,7 +125,7 @@ export function tryUseAttrs<T extends string[], R = Record<T[number], string | u
   for (const name of attrNames) {
     result[name] = attrs?.[name];
   }
-  return result;
+  return attrNames?.length ? result : (attrs as R);
 }
 
 /**
@@ -167,20 +169,6 @@ export function flattenVNodes(vnodes: VNode | VNode[] | undefined | null): VNode
   return flatVnodes;
 }
 
-/**
- * @deprecated use `cloneValidVnode` instead
- */
-export function cloneSlot(
-  slot: Slot | undefined | null,
-  ...cloneNode: Parameters<typeof cloneValidVnode> extends [infer _, ...infer R] ? R : never
-): () => ReturnType<typeof cloneValidVnode> {
-  if (!slot) {
-    return () => null;
-  } else {
-    return () => cloneValidVnode(slot(), ...cloneNode);
-  }
-}
-
 export function cloneValidVnode(
   vnodes: VNode | VNode[] | undefined,
   ...cloneNode: Parameters<typeof cloneVNode> extends [infer _, ...infer R] ? R : never
@@ -212,3 +200,14 @@ export function cloneValidVnode(
 
   return clonedVnodes;
 }
+
+export const mergeClassProps: typeof mergeProps = (...args) => {
+  const classNames = new Set<string>();
+  const props: any[] = [];
+  for (const prop of args) {
+    const { class: className, ...propWithoutClass } = prop;
+    (className as string)?.split(" ").forEach((cls) => classNames.add(cls));
+    props.push(propWithoutClass);
+  }
+  return mergeProps(...props, { class: cn(...Array.from(classNames)) });
+};

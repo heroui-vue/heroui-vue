@@ -11,12 +11,13 @@
     "test:chip": "pnpm -w build:chip -l silent && vitest run components/chip",
     "test:badge": "pnpm -w build:badge -l silent && vitest run components/badge",
     "test:shared": "pnpm -w build:shared -l silent && vitest run shared",
-    "test:link": "pnpm -w build:link -l silent && vitest run components/link"
+    "test:link": "pnpm -w build:link -l silent && pnpm -w build:button -l silent && vitest run components/link"
   },
   "dependencies": {
     "@heroui-vue/alert": "workspace:*",
     "@heroui-vue/avatar": "workspace:*",
     "@heroui-vue/badge": "workspace:*",
+    "@heroui-vue/button": "workspace:*",
     "@heroui-vue/chip": "workspace:*",
     "@heroui-vue/icon": "workspace:*",
     "@heroui-vue/link": "workspace:*",

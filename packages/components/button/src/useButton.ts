@@ -1,14 +1,11 @@
-import { computed } from "vue";
+import { ref, watchEffect } from "vue";
 import { button } from "@heroui/theme";
-import { useFocus, useMousePressed, useElementHover } from "@vueuse/core";
-import { useRipple, tryUseAttrs } from "@heroui-vue/shared";
-import type { ButtonVariantProps as _ButtonVariantProps } from "@heroui/theme";
-import type { HeroUIVueBaseProps, BaseProps, ToComputedRefs } from "@heroui-vue/shared";
-import type { Ref, Reactive } from "vue";
+import { useFocus, useMousePressed, useElementHover, toReactive } from "@vueuse/core";
+import { toRefsWithDefault, useRipple, tryUseAttrs, mergeClassProps } from "@heroui-vue/shared";
+import type { ButtonVariantProps } from "@heroui/theme";
+import type { HeroUIVueBaseProps, BaseProps } from "@heroui-vue/shared";
+import type { Ref, Reactive, ToRefs } from "vue";
 
-namespace HeroUIButton {
-  export type VariantProps = _ButtonVariantProps;
-}
 namespace Props {
   export interface Option extends HeroUIVueBaseProps {
     disableRipple?: boolean;
@@ -16,16 +13,15 @@ namespace Props {
     isLoading?: boolean;
   }
   export interface Variant {
-    variant?: HeroUIButton.VariantProps["variant"];
-    size?: HeroUIButton.VariantProps["size"];
-    color?: HeroUIButton.VariantProps["color"];
-    radius?: HeroUIButton.VariantProps["radius"];
+    variant?: ButtonVariantProps["variant"];
+    size?: ButtonVariantProps["size"];
+    color?: ButtonVariantProps["color"];
+    radius?: ButtonVariantProps["radius"];
     fullWidth?: boolean;
     isDisabled?: boolean;
     isIconOnly?: boolean;
     disableAnimation?: boolean;
   }
-  export interface Aria {}
 }
 namespace Return {
   export interface Slot {
@@ -39,6 +35,7 @@ namespace Return {
     };
   }
   export interface Option {
+    as: HeroUIVueBaseProps["as"];
     styles: string;
     isLoading: Props.Option["isLoading"];
     spinnerPlacement: Props.Option["spinnerPlacement"];
@@ -48,72 +45,102 @@ namespace Return {
   }
 }
 
-export type UseButtonProps = Props.Option & Props.Variant & Props.Aria;
+export type UseButtonProps = Props.Option & Props.Variant;
 export type UseButtonReturn = Return.Option & Return.Slot;
 
 export function useButton(
   originalProps: Reactive<UseButtonProps>,
-  buttonRef: Ref<HTMLButtonElement | undefined | null>,
-): ToComputedRefs<UseButtonReturn> {
-  const { focused } = useFocus(buttonRef);
-  const { pressed } = useMousePressed({ target: buttonRef });
-  const hovered = useElementHover(buttonRef);
-  const { class: className } = tryUseAttrs("class");
+  buttonRef?: Ref<HTMLButtonElement | undefined | null>,
+): ToRefs<UseButtonReturn> {
+  const props = toRefsWithDefault(toReactive(originalProps) as UseButtonProps, {
+    as: "button",
+    size: "md",
+    color: "default",
+    variant: "solid",
+    spinnerPlacement: "start",
+    isLoading: false,
+    isIconOnly: false,
+    isDisabled: false,
+    fullWidth: false,
+  });
+  const { focused: isFocused } = useFocus(buttonRef);
+  const { pressed: isPressed } = useMousePressed({ target: buttonRef });
+  const isHovered = useElementHover(buttonRef);
+  const attrs = tryUseAttrs();
+  const { class: className } = attrs;
 
-  const disableRipple = computed(() => {
-    const { disableRipple, disableAnimation } = originalProps;
-    return disableRipple || disableAnimation;
-  });
-  const isDisabled = computed(() => {
-    const { isDisabled, isLoading } = originalProps;
-    return isDisabled || isLoading;
-  });
-  const hooksProps = computed(() => {
-    return {
-      "data-focus": focused.value,
-      "data-pressed": pressed.value,
-      "data-hover": hovered.value,
-      /* Not supported yet */
-      "data-focus-visible": false,
-    };
-  });
-  const buttonSlots = computed<Return.Slot>(() => {
-    const { isLoading, fullWidth, radius, size, color, variant, disableAnimation, isIconOnly } =
-      originalProps;
+  const disableRipple = ref() as Ref<Return.Option["disableRipple"]>;
+  const styles = ref() as Ref<Return.Option["styles"]>;
+  const spinnerSize = ref() as Ref<Return.Option["spinnerSize"]>;
+  const buttonProps = ref() as Ref<Return.Slot["buttonProps"]>;
 
-    const isInGroup = false;
-    const disabled = !!isDisabled.value;
-    const styles = button({
+  // disableRipple
+  watchEffect(() => {
+    const { disableRipple: disableRippleProp, disableAnimation } = toReactive(props);
+    disableRipple.value = Boolean(disableRippleProp) || Boolean(disableAnimation);
+  });
+  // styles
+  watchEffect(() => {
+    const {
+      isDisabled: isDisabledProp,
+      isLoading,
       size,
       color,
       variant,
       radius,
       fullWidth,
-      isDisabled: disabled,
-      isInGroup,
+      disableAnimation,
+      isIconOnly,
+    } = toReactive(props);
+    const isDisabled = isDisabledProp || isLoading;
+    styles.value = button({
+      size,
+      color,
+      variant,
+      radius,
+      fullWidth,
+      isDisabled,
+      // TODO
+      isInGroup: false,
       disableAnimation,
       isIconOnly,
       className,
     });
-
-    const buttonProps: Return.Slot["buttonProps"] = {
-      ...hooksProps.value,
-      "data-disabled": disabled,
-      "data-loading": !!isLoading,
-      class: styles,
+  });
+  // spinnerSize
+  watchEffect(() => {
+    const { size } = toReactive(props);
+    const sizeMap: Record<string, Props.Variant["size"]> = {
+      sm: "sm",
+      md: "sm",
+      lg: "md",
     };
-    return { buttonProps };
+    spinnerSize.value = sizeMap[size];
+  });
+  // buttonProps
+  watchEffect(() => {
+    const { isDisabled: isDisabledProp, isLoading } = toReactive(props);
+    const isDisabled = isDisabledProp || isLoading;
+    const ps: UseButtonReturn["buttonProps"] = {
+      "data-disabled": !!isDisabled,
+      "data-focus": isFocused.value,
+      "data-pressed": isPressed.value,
+      // TODO
+      "data-focus-visible": false,
+      "data-hover": isHovered.value,
+      "data-loading": !!isLoading,
+      class: styles.value,
+    };
+    buttonProps.value = mergeClassProps(ps, attrs) as any;
   });
 
-  useRipple(buttonRef, { disabled: disableRipple as Ref });
+  useRipple(buttonRef, { disabled: disableRipple });
 
   return {
-    buttonProps: computed(() => buttonSlots.value.buttonProps),
-    styles: computed(() => buttonSlots.value.buttonProps.class as string),
-    isLoading: computed(() => !!originalProps.isLoading),
-    spinnerPlacement: computed(() => originalProps.spinnerPlacement),
-    spinnerSize: computed(() => originalProps.size),
-    disableRipple: computed(() => !!disableRipple.value),
-    isIconOnly: computed(() => !!originalProps.isIconOnly),
+    ...props,
+    disableRipple,
+    styles,
+    spinnerSize,
+    buttonProps,
   };
 }

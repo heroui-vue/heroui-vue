@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { cloneValidVnode, cloneSlot, isValidVNode, tryUseSlots } from "@heroui-vue/shared";
+import { cloneValidVnode, isValidVNode, tryUseSlots } from "@heroui-vue/shared";
 import { h, defineComponent, createCommentVNode, createTextVNode, Fragment } from "vue";
 import { renderToString } from "vue/server-renderer";
 
@@ -55,23 +55,6 @@ describe("cloneValidVnode", async () => {
       ),
     ).toContain(ADDED_CLASS);
   });
-});
-
-test("cloneSlot", async () => {
-  const CONTENT = "This content slot";
-  const child = defineComponent({
-    setup() {
-      const { content } = tryUseSlots("content");
-      return cloneSlot(content);
-    },
-  });
-  expect(
-    await renderToString(
-      h(child, null, {
-        content: () => CONTENT,
-      }),
-    ),
-  ).toContain(CONTENT);
 });
 
 test("tryUseSlots", async () => {
