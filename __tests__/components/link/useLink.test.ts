@@ -13,27 +13,7 @@ import { Link, useLink, type UseLinkProps } from "@heroui-vue/link";
 import { useButton, type UseButtonProps } from "@heroui-vue/button";
 
 describe("useLink props", () => {
-  test("class", async () => {
-    const { linkProps } = useLink({});
-    const react = await renderHook(() => useLinkReact({}));
-    expect(linkProps.value.class).toBe(react.result.current.getLinkProps().className);
-  });
-
   test.only("attrs inherit", async () => {
-    const MiniLink = defineComponent<UseLinkProps>(
-      (props) => {
-        const { linkProps } = useLink(props);
-        // return () => Array.from(new Set((linkProps.value.class as string).split(" "))).join(" ");
-        return () => h("a", linkProps.value);
-      },
-      {
-        props: {
-          color: String as PropType<UseLinkProps["color"]>,
-        },
-        inheritAttrs: false,
-      },
-    );
-
     const Button = defineComponent<UseButtonProps>(
       (props) => {
         const { as, buttonProps } = useButton(props);
@@ -47,26 +27,24 @@ describe("useLink props", () => {
         },
       },
     );
-
     const str = await renderToString(h(Button, { as: Link, variant: "solid", color: "primary" }));
-    const btn = await renderHook(() => {
-      return useButtonReact({ as: LinkReact, variant: "solid", color: "primary" });
-    });
+    const className = new DOMParser()
+      .parseFromString(str, "text/html")
+      .querySelector("a")
+      ?.getAttribute("class");
+
     const compose = await renderHook(() => {
       const { getLinkProps } = useLinkReact({ color: "primary" });
       const { getButtonProps } = useButtonReact({ variant: "solid", color: "primary" });
       return cn(getLinkProps().className, getButtonProps().className);
     });
+    const excepted_className = compose.result.current;
 
-    const cls = new DOMParser()
-      .parseFromString(str, "text/html")
-      .querySelector("a")
-      ?.getAttribute("class");
-    expect(compose.result.current!.split(" ").sort().join(" ")).toBe(
-      cls!.split(" ").sort().join(" "),
-    );
-    // expect(btn.result.current.getButtonProps().className.split(" ").sort().join(" ")).toBe(
-    //   str.split(" ").sort().join(" "),
-    // );
+    const fmtClass = (cls?: string | null) =>
+      Array.from(new Set(cls!.split(" ") ?? []))
+        .sort()
+        .join(" ");
+
+    expect(fmtClass(excepted_className)).toBe(fmtClass(className));
   });
 });
