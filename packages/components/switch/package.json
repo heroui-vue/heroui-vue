@@ -42,6 +42,7 @@
     "@heroui-vue/icon": "workspace:*",
     "@heroui-vue/shared": "workspace:*",
     "@heroui/theme": "catalog:prod",
+    "@vueuse/core": "catalog:prod",
     "unplugin-vue": "catalog:prod",
     "vue": "catalog:prod"
   },

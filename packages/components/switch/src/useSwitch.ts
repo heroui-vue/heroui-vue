@@ -1,17 +1,17 @@
-import {
-  computed,
-  getCurrentInstance,
-  onMounted,
-  onScopeDispose,
-  ref,
-  toValue,
-  useId,
-  watch,
-} from "vue";
+import { ref, watchEffect, useId, h } from "vue";
+import { toReactive, useToggle, useElementHover, useMousePressed, useFocus } from "@vueuse/core";
 import { toggle } from "@heroui/theme";
-import type { HTMLAttributes, InputHTMLAttributes, MaybeRef, Ref } from "vue";
+import {
+  toRefsWithDefault,
+  mergeClassProps,
+  tryUseAttrs,
+  tryUseSlots,
+  mapPropsVariants,
+} from "@heroui-vue/shared";
+import { cn } from "@heroui/theme";
+import type { MaybeRef, Ref, ToRefs, VNode, EmitsToProps } from "vue";
 import type { SlotsToClasses, ToggleSlots, ToggleVariantProps } from "@heroui/theme";
-import type { HeroUIVueBaseProps, ToComputedRefs } from "@heroui-vue/shared";
+import type { HeroUIVueBaseProps, BaseProps } from "@heroui-vue/shared";
 
 export interface SwitchThumbIconProps {
   width: string;
@@ -23,27 +23,16 @@ export interface SwitchThumbIconProps {
 
 namespace Props {
   export interface Option extends HeroUIVueBaseProps {
-    id?: string;
-    name?: string;
-    value?: string;
-    form?: string;
-    /** Controlled selection, compatible with HeroUI. */
-    isSelected?: boolean;
-    /** Vue's default v-model binding. */
-    modelValue?: boolean;
-    defaultSelected?: boolean;
-    isReadOnly?: boolean;
-    isRequired?: boolean;
-    autoFocus?: boolean;
-    tabIndex?: number;
-    "aria-label"?: string;
-    "aria-labelledby"?: string;
-    "aria-describedby"?: string;
+    isDisabled?: boolean;
     classNames?: SlotsToClasses<ToggleSlots>;
-    onChange?: (event: Event) => void;
-    onValueChange?: (isSelected: boolean) => void;
-    "onUpdate:isSelected"?: (isSelected: boolean) => void;
-    "onUpdate:modelValue"?: (isSelected: boolean) => void;
+    isReadOnly?: boolean;
+    autoFocus?: boolean;
+    defaultSelected?: boolean;
+    isSelected?: boolean;
+    value?: string;
+    excludeFromTabOrder?: boolean;
+    name?: string;
+    form?: string;
   }
   export interface Variant {
     size?: ToggleVariantProps["size"];
@@ -57,253 +46,263 @@ namespace Return {
   export interface Option {
     as: NonNullable<HeroUIVueBaseProps["as"]>;
     slots: ReturnType<typeof toggle>;
-    isSelected: boolean;
-    isDisabled: boolean;
-    isReadOnly: boolean;
     isHovered: boolean;
+    isSelected: boolean;
     isPressed: boolean;
     isFocused: boolean;
-    isFocusVisible: boolean;
+    // TODO
+    // isFocusVisible: boolean;
+    isDisabled: boolean;
   }
   export interface Slot {
-    baseProps: HTMLAttributes & Record<`data-${string}`, boolean | undefined>;
-    inputProps: InputHTMLAttributes;
-    wrapperProps: HTMLAttributes;
-    thumbProps: HTMLAttributes;
-    labelProps: HTMLAttributes;
-    thumbIconProps: Omit<SwitchThumbIconProps, "isSelected">;
-    startContentProps: HTMLAttributes & { width: string; height: string };
-    endContentProps: HTMLAttributes & { width: string; height: string };
+    baseProps: BaseProps & {
+      "data-disabled": boolean;
+      "data-selected": boolean;
+      "data-readonly": boolean;
+      "data-focus": boolean;
+      "data-focus-visible": boolean;
+      "data-hover": boolean;
+      "data-pressed": boolean;
+    };
+    wrapperProps: BaseProps & {
+      "aria-hidden": true;
+    };
+    inputProps: BaseProps & {
+      id: string;
+    };
+    labelProps: BaseProps & {
+      id: string;
+    };
+    thumbProps: BaseProps;
+    thumbIconProps: BaseProps & {
+      width: string;
+      height: string;
+      isSelected: boolean;
+    };
+    startContentProps: BaseProps & { width: string; height: string };
+    endContentProps: BaseProps & { width: string; height: string };
+    startContent: () => VNode | VNode[] | null | undefined;
+    endContent: () => VNode | VNode[] | null | undefined;
+    thumbIcon: () => VNode | VNode[] | null | undefined;
+    label: () => VNode | VNode[] | null | undefined;
   }
 }
 
+export type On = {
+  [K in keyof UseSwitchEmit as `on${Capitalize<K>}`]?: (...args: UseSwitchEmit[K]) => any;
+};
+
 export type UseSwitchProps = Props.Option & Props.Variant;
-export type SwitchProps = UseSwitchProps;
 export type UseSwitchReturn = Return.Option & Return.Slot;
-export type UseSwitchSlot = "default" | "thumbIcon" | "startContent" | "endContent";
+export type UseSwitchSlot = "default" | "label" | "thumbIcon" | "startContent" | "endContent";
+export type UseSwitchEmit = {
+  change: [Event];
+  valueChange: [boolean];
+};
+export type UseSwitchOption = On;
 
 export function useSwitch(
-  originalProps: MaybeRef<UseSwitchProps> = {},
+  originalProps: MaybeRef<UseSwitchProps>,
   inputRef?: Ref<HTMLInputElement | null | undefined>,
-): ToComputedRefs<UseSwitchReturn> {
-  const props = computed(() => toValue(originalProps));
-  const id = useId();
-  const labelId = `${id}-label`;
-  const internalSelected = ref(!!props.value.defaultSelected);
-  const isSelected = computed(
-    () => props.value.isSelected ?? props.value.modelValue ?? internalSelected.value,
+  options?: UseSwitchOption,
+): ToRefs<UseSwitchReturn> {
+  type WithDedault =
+    | "as"
+    | "value"
+    | "isReadOnly"
+    | "autoFocus"
+    | "disableAnimation"
+    | "defaultSelected";
+  const { onChange = () => {}, onValueChange = () => {} } = options || {};
+  const props = toRefsWithDefault<UseSwitchProps, WithDedault>(
+    toReactive(originalProps) as UseSwitchProps,
+    {
+      as: "label",
+      value: "",
+      isReadOnly: false,
+      autoFocus: false,
+      disableAnimation: false,
+      defaultSelected: false,
+    },
   );
-  const isDisabled = computed(() => !!props.value.isDisabled);
-  const isReadOnly = computed(() => !!props.value.isReadOnly);
-  const interactionDisabled = computed(() => isDisabled.value || isReadOnly.value);
-  const isHovered = ref(false);
-  const isPressed = ref(false);
-  const isFocused = ref(false);
-  const isFocusVisible = ref(false);
-  const componentSlots = getCurrentInstance()?.slots;
-  let removePressListeners = () => {};
-  let removeFormListener = () => {};
-  let activePointer: number | undefined;
+  const labelId = useId();
+  const [isSelected, toggleState] = useToggle(props.defaultSelected.value);
+  const isHovered = useElementHover(inputRef);
+  const { focused: isFocused } = useFocus(inputRef);
+  const { pressed: isPressed } = useMousePressed({ target: inputRef });
+  const { startContent, endContent, thumbIcon, label } = tryUseSlots<UseSwitchSlot[]>(
+    "startContent",
+    "endContent",
+    "thumbIcon",
+    "label",
+  );
+  const attrs = tryUseAttrs();
+  const { class: className, id } = attrs;
 
-  function setSelected(selected: boolean) {
-    if (interactionDisabled.value || selected === isSelected.value) return;
-    if (props.value.isSelected === undefined && props.value.modelValue === undefined) {
-      internalSelected.value = selected;
-    }
-    props.value["onUpdate:isSelected"]?.(selected);
-    props.value["onUpdate:modelValue"]?.(selected);
-    props.value.onValueChange?.(selected);
-  }
+  const isDisabled = ref() as Ref<Return.Option["isDisabled"]>;
+  const switchSlots = ref() as Ref<Return.Option["slots"]>;
+  const baseProps = ref() as Ref<Return.Slot["baseProps"]>;
+  const wrapperProps = ref() as Ref<Return.Slot["wrapperProps"]>;
+  const inputProps = ref() as Ref<Return.Slot["inputProps"]>;
+  const labelProps = ref() as Ref<Return.Slot["labelProps"]>;
+  const thumbProps = ref() as Ref<Return.Slot["thumbProps"]>;
+  const thumbIconProps = ref() as Ref<Return.Slot["thumbIconProps"]>;
+  const startContentProps = ref() as Ref<Return.Slot["startContentProps"]>;
+  const endContentProps = ref() as Ref<Return.Slot["endContentProps"]>;
+  const startContentSlot = ref() as Ref<Return.Slot["startContent"]>;
+  const endContentSlot = ref() as Ref<Return.Slot["endContent"]>;
+  const thumbIconSlot = ref() as Ref<Return.Slot["thumbIcon"]>;
+  const labelSlot = ref() as Ref<Return.Slot["label"]>;
 
-  function onChange(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (interactionDisabled.value) {
-      input.checked = isSelected.value;
-      return;
-    }
-    props.value.onChange?.(event);
-    setSelected(input.checked);
-    // Restore controlled state if the parent chooses not to accept the change.
-    input.checked = isSelected.value;
-  }
-
-  function endPress() {
-    isPressed.value = false;
-    activePointer = undefined;
-    removePressListeners();
-  }
-
-  function onPointerDown(event: PointerEvent) {
-    if (interactionDisabled.value || event.button !== 0 || !event.isPrimary) return;
-    endPress();
-    activePointer = event.pointerId;
-    isPressed.value = true;
-    isFocusVisible.value = false;
-    const doc = (event.currentTarget as HTMLElement).ownerDocument;
-    const finish = (up: PointerEvent) => {
-      if (up.pointerId === event.pointerId) endPress();
-    };
-    doc.addEventListener("pointerup", finish);
-    doc.addEventListener("pointercancel", finish);
-    removePressListeners = () => {
-      doc.removeEventListener("pointerup", finish);
-      doc.removeEventListener("pointercancel", finish);
-    };
-  }
-
-  watch(interactionDisabled, (disabled) => {
-    if (disabled) {
-      endPress();
-      isHovered.value = false;
+  watchEffect(() => {
+    if (inputRef?.value) {
+      const isInputRefChecked = (inputRef.value as HTMLInputElement).checked;
+      isSelected.value = isInputRefChecked;
+      inputRef?.value.addEventListener("change", (e) => {
+        onChange?.(e);
+        // This will sync to change the `isSelected` value
+        toggleState();
+        onValueChange?.(isSelected.value);
+      });
     }
   });
-
-  if (getCurrentInstance()) {
-    onMounted(() => {
-      const input = inputRef?.value;
-      if (!input) return;
-      const reset = (event: Event) => {
-        queueMicrotask(() => {
-          if (event.defaultPrevented) return;
-          if (props.value.isSelected === undefined && props.value.modelValue === undefined) {
-            internalSelected.value = !!props.value.defaultSelected;
-          }
-          input.checked = isSelected.value;
-        });
-      };
-      const form = input.form;
-      form?.addEventListener("reset", reset);
-      removeFormListener = () => form?.removeEventListener("reset", reset);
-      if (props.value.autoFocus && !isDisabled.value) input.focus();
+  // isDisabled
+  watchEffect(() => {
+    const { isDisabled: isDisabledProps, isReadOnly } = toReactive(props);
+    isDisabled.value = isDisabledProps || isReadOnly;
+  });
+  // slots
+  watchEffect(() => {
+    const { disableAnimation } = toReactive(props);
+    const [, variantProps] = mapPropsVariants(toReactive(originalProps), toggle.variantKeys);
+    switchSlots.value = toggle({
+      ...variantProps,
+      disableAnimation,
     });
-    onScopeDispose(() => {
-      endPress();
-      removeFormListener();
-    });
-  }
-
-  const slots = computed(() =>
-    toggle({
-      size: props.value.size,
-      color: props.value.color,
-      isDisabled: isDisabled.value,
-      disableAnimation: props.value.disableAnimation ?? false,
-    }),
-  );
-
-  const baseProps = computed<Return.Slot["baseProps"]>(() => ({
-    class: slots.value.base({ class: [props.value.classNames?.base, props.value.class] }),
-    "data-disabled": isDisabled.value || undefined,
-    "data-selected": isSelected.value || undefined,
-    "data-readonly": isReadOnly.value || undefined,
-    "data-focus": isFocused.value || undefined,
-    "data-focus-visible": (isFocused.value && isFocusVisible.value) || undefined,
-    "data-hover": (!isDisabled.value && isHovered.value) || undefined,
-    "data-pressed": (!interactionDisabled.value && isPressed.value) || undefined,
-    onPointerenter: (event: PointerEvent) => {
-      if (event.pointerType !== "touch" && !isDisabled.value) isHovered.value = true;
-      if (event.pointerId === activePointer && !interactionDisabled.value) isPressed.value = true;
-    },
-    onPointerleave: () => {
-      isHovered.value = false;
-      isPressed.value = false;
-    },
-    onPointerdown: onPointerDown,
-    onClick: (event: MouseEvent) => {
-      if (interactionDisabled.value) {
-        event.preventDefault();
-        return;
-      }
-      const target = event.target as HTMLElement;
-      if ((props.value.as ?? "label") === "label" || target === inputRef?.value) return;
-      if (target.closest("a,button,input,select,textarea,[contenteditable=true]")) return;
-      inputRef?.value?.click();
-      inputRef?.value?.focus();
-    },
-  }));
-
-  const inputProps = computed<InputHTMLAttributes>(() => ({
-    id: props.value.id ?? id,
-    type: "checkbox",
-    role: "switch",
-    checked: isSelected.value,
-    disabled: isDisabled.value,
-    readonly: isReadOnly.value,
-    required: props.value.isRequired,
-    name: props.value.name,
-    value: props.value.value ?? "",
-    form: props.value.form,
-    tabindex: props.value.tabIndex,
-    "aria-checked": isSelected.value,
-    "aria-readonly": isReadOnly.value || undefined,
-    "aria-label": props.value["aria-label"],
-    "aria-labelledby":
-      props.value["aria-labelledby"] ??
-      (!props.value["aria-label"] && componentSlots?.default ? labelId : undefined),
-    "aria-describedby": props.value["aria-describedby"],
-    class: slots.value.hiddenInput({ class: props.value.classNames?.hiddenInput }),
-    onChange,
-    onClick: (event: MouseEvent) => {
-      if (interactionDisabled.value) event.preventDefault();
-    },
-    onFocus: (event: FocusEvent) => {
-      isFocused.value = true;
-      isFocusVisible.value = (event.target as HTMLElement).matches(":focus-visible");
-    },
-    onBlur: () => {
-      isFocused.value = false;
-      isFocusVisible.value = false;
-      endPress();
-    },
-    onKeydown: (event: KeyboardEvent) => {
-      isFocusVisible.value = true;
-      if (event.key !== " ") return;
-      if (interactionDisabled.value) event.preventDefault();
-      else isPressed.value = true;
-    },
-    onKeyup: (event: KeyboardEvent) => {
-      if (event.key === " ") endPress();
-    },
-  }));
+  });
+  // baseProps
+  watchEffect(() => {
+    const { classNames, isReadOnly } = toReactive(props);
+    const baseStyles = cn(classNames?.base, className);
+    const pressed = isDisabled.value ? false : isPressed.value;
+    const base: UseSwitchReturn["baseProps"] = {
+      class: switchSlots.value.base({ class: cn(baseStyles, className) }),
+      "data-disabled": isDisabled.value,
+      "data-selected": isSelected.value,
+      "data-readonly": isReadOnly,
+      "data-focus": isFocused.value,
+      // TODO
+      "data-focus-visible": false,
+      "data-hover": isHovered.value,
+      "data-pressed": pressed,
+    };
+    baseProps.value = mergeClassProps(base, attrs) as any;
+  });
+  // wrapperProps
+  watchEffect(() => {
+    const { classNames } = toReactive(props);
+    wrapperProps.value = {
+      "aria-hidden": true,
+      class: switchSlots.value.wrapper({ class: cn(classNames?.wrapper) }),
+    };
+  });
+  // inputProps
+  watchEffect(() => {
+    const { classNames } = toReactive(props);
+    inputProps.value = {
+      id: id as string,
+      class: switchSlots.value.hiddenInput({ class: classNames?.hiddenInput }),
+    };
+  });
+  // labelProps
+  watchEffect(() => {
+    const { classNames } = toReactive(props);
+    labelProps.value = {
+      id: labelId,
+      class: switchSlots.value.label({ class: cn(classNames?.label) }),
+    };
+  });
+  // thumbProps
+  watchEffect(() => {
+    const { classNames } = toReactive(props);
+    thumbProps.value = {
+      class: switchSlots.value.thumb({ class: cn(classNames?.thumb) }),
+    };
+  });
+  // thumbIconProps
+  watchEffect(() => {
+    const { classNames } = toReactive(props);
+    thumbIconProps.value = {
+      width: "1em",
+      height: "1em",
+      class: switchSlots.value.thumbIcon({ class: cn(classNames?.thumbIcon) }),
+      isSelected: isSelected.value,
+    };
+  });
+  // startContentProps
+  watchEffect(() => {
+    const { classNames } = toReactive(props);
+    startContentProps.value = {
+      width: "1em",
+      height: "1em",
+      ...props,
+      class: switchSlots.value.startContent({ class: cn(classNames?.startContent) }),
+    };
+  });
+  // endContentProps
+  watchEffect(() => {
+    const { classNames } = toReactive(props);
+    endContentProps.value = {
+      width: "1em",
+      height: "1em",
+      ...props,
+      class: switchSlots.value.endContent({ class: cn(classNames?.endContent) }),
+    };
+  });
+  // startContentSlot;
+  watchEffect(() => {
+    startContentSlot.value = () => {
+      return startContent?.(startContentProps.value);
+    };
+  });
+  // endContentSlot
+  watchEffect(() => {
+    endContentSlot.value = () => {
+      return endContent?.(endContentProps.value);
+    };
+  });
+  // thumbIconSlot
+  watchEffect(() => {
+    thumbIconSlot.value = () => {
+      return thumbIcon?.(thumbIconProps.value);
+    };
+  });
+  // labelSlot
+  watchEffect(() => {
+    labelSlot.value = () => {
+      return label ? h("span", labelProps.value, label()) : null;
+    };
+  });
 
   return {
-    as: computed(() => props.value.as ?? "label"),
-    slots,
+    ...props,
+    isHovered,
     isSelected,
+    isPressed,
+    isFocused,
     isDisabled,
-    isReadOnly,
-    isHovered: computed(() => !isDisabled.value && isHovered.value),
-    isPressed: computed(() => !interactionDisabled.value && isPressed.value),
-    isFocused: computed(() => isFocused.value),
-    isFocusVisible: computed(() => isFocused.value && isFocusVisible.value),
+    slots: switchSlots,
     baseProps,
     inputProps,
-    wrapperProps: computed(() => ({
-      "aria-hidden": true,
-      class: slots.value.wrapper({ class: props.value.classNames?.wrapper }),
-    })),
-    thumbProps: computed(() => ({
-      class: slots.value.thumb({ class: props.value.classNames?.thumb }),
-    })),
-    labelProps: computed(() => ({
-      id: labelId,
-      class: slots.value.label({ class: props.value.classNames?.label }),
-    })),
-    thumbIconProps: computed(() => ({
-      width: "1em",
-      height: "1em",
-      "data-checked": isSelected.value,
-      class: slots.value.thumbIcon({ class: props.value.classNames?.thumbIcon }),
-    })),
-    startContentProps: computed(() => ({
-      width: "1em",
-      height: "1em",
-      class: slots.value.startContent({ class: props.value.classNames?.startContent }),
-    })),
-    endContentProps: computed(() => ({
-      width: "1em",
-      height: "1em",
-      class: slots.value.endContent({ class: props.value.classNames?.endContent }),
-    })),
+    labelProps,
+    wrapperProps,
+    thumbProps,
+    thumbIconProps,
+    startContentProps,
+    endContentProps,
+    startContent: startContentSlot,
+    endContent: endContentSlot,
+    thumbIcon: thumbIconSlot,
+    label: labelSlot,
   };
 }
