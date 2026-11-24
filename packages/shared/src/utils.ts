@@ -211,3 +211,5 @@ export const mergeClassProps: typeof mergeProps = (...args) => {
   }
   return mergeProps(...props, { class: cn(...Array.from(classNames)) });
 };
+
+export const toDataAttr = (condition: boolean | undefined) => (condition ? true : undefined);
