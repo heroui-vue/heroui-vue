@@ -4,12 +4,6 @@
 
 Switch represents on and off states, typically for toggling a setting.
 
-::: warning Implementation status
-The Vue version currently provides switch styling and content slots, but its interaction logic is incomplete. The examples below demonstrate appearance, not functional form controls.
-
-The hidden input does not yet have `type="checkbox"` or `role="switch"`, checked-state bindings, or change handlers. `isSelected`, `defaultSelected`, form attributes, and keyboard toggling are not fully wired up. Do not assume the React version's controlled usage or accessibility guarantees apply to this implementation.
-:::
-
 ## Installation
 
 ::: code-group
@@ -46,8 +40,8 @@ import { Switch } from "@heroui-vue/switch";
 </script>
 
 <template>
-  <Switch>
-    <template #label>Enable notifications</template>
+  <Switch defaultSelected>
+    Enable notifications
   </Switch>
 </template>
 :::
@@ -62,8 +56,8 @@ import { Switch } from "@heroui-vue/switch";
 </script>
 
 <template>
-  <Switch isDisabled>
-    <template #label>Disabled switch</template>
+  <Switch isDisabled defaultSelected>
+    Disabled switch
   </Switch>
 </template>
 :::
@@ -77,9 +71,9 @@ import { Switch } from "@heroui-vue/switch";
 
 <template>
   <div class="flex flex-wrap gap-4">
-    <Switch size="sm"><template #label>Small</template></Switch>
-    <Switch size="md"><template #label>Medium</template></Switch>
-    <Switch size="lg"><template #label>Large</template></Switch>
+    <Switch size="sm" defaultSelected>Small</Switch>
+    <Switch size="md" defaultSelected>Medium</Switch>
+    <Switch size="lg" defaultSelected>Large</Switch>
   </div>
 </template>
 :::
@@ -95,12 +89,12 @@ import { Switch } from "@heroui-vue/switch";
 
 <template>
   <div class="flex flex-wrap gap-4">
-    <Switch color="default"><template #label>Default</template></Switch>
-    <Switch color="primary"><template #label>Primary</template></Switch>
-    <Switch color="secondary"><template #label>Secondary</template></Switch>
-    <Switch color="success"><template #label>Success</template></Switch>
-    <Switch color="warning"><template #label>Warning</template></Switch>
-    <Switch color="danger"><template #label>Danger</template></Switch>
+    <Switch color="default" defaultSelected>Default</Switch>
+    <Switch color="primary" defaultSelected>Primary</Switch>
+    <Switch color="secondary" defaultSelected>Secondary</Switch>
+    <Switch color="success" defaultSelected>Success</Switch>
+    <Switch color="warning" defaultSelected>Warning</Switch>
+    <Switch color="danger" defaultSelected>Danger</Switch>
   </div>
 </template>
 :::
@@ -112,19 +106,18 @@ Customize the icon inside the thumb with the `thumbIcon` scoped slot. Bind its s
 :::sfc
 <script setup>
 import { Switch } from "@heroui-vue/switch";
+import { SunIcon, MoonIcon } from "@heroui-vue/icon";
 </script>
 
 <template>
-  <Switch size="lg">
-    <template #thumbIcon="iconProps">
-      <svg v-bind="iconProps" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <circle cx="12" cy="12" r="4" />
-        <path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l2 2m10 10 2 2M5 19l2-2M17 7l2-2" />
-      </svg>
+  <Switch defaultSelected color="secondary" size="lg">
+    <template #thumbIcon="{ isSelected }">
+      <component :is="isSelected ? SunIcon : MoonIcon" size="1em"></component>
     </template>
-    <template #label>Appearance settings</template>
+    Dark mode
   </Switch>
 </template>
+
 :::
 
 ### With Icons
@@ -134,23 +127,39 @@ Use the `startContent` and `endContent` named slots for icons at either end of t
 :::sfc
 <script setup>
 import { Switch } from "@heroui-vue/switch";
+import { SunIcon, MoonIcon } from "@heroui-vue/icon";
 </script>
 
 <template>
-  <Switch size="lg">
-    <template #startContent="iconProps">
-      <svg v-bind="iconProps" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <circle cx="12" cy="12" r="4" />
-        <path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l2 2m10 10 2 2M5 19l2-2M17 7l2-2" />
-      </svg>
+  <Switch defaultSelected color="success" size="lg">
+    <template #startContent>
+      <SunIcon size="1em" />
     </template>
-    <template #endContent="iconProps">
-      <svg v-bind="iconProps" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <path d="M21 13a9 9 0 0 1-10-10 9 9 0 1 0 10 10Z" />
-      </svg>
+    <template #endContent>
+      <MoonIcon size="1em" />
     </template>
-    <template #label>Theme</template>
+    Dark mode
   </Switch>
+</template>
+:::
+
+### Controlled
+
+:::sfc
+<script setup>
+import { ref } from "vue";
+import { Switch } from "@heroui-vue/switch";
+
+const isSelected = ref(true);
+</script>
+
+<template>
+  <div class="flex flex-col gap-2">
+    <Switch v-model="isSelected">
+      Airplane mode
+    </Switch>
+    <p class="text-small text-default-500">Selected: {{ isSelected }}</p>
+  </div>
 </template>
 :::
 
@@ -162,7 +171,7 @@ Use `classNames` to assign Tailwind CSS classes to each part. These style slots 
 - **wrapper**: The track containing the start icon, end icon, and thumb.
 - **hiddenInput**: The internal hidden input.
 - **thumb**: The circular thumb.
-- **label**: The label text container.
+- **default**: The label text container.
 - **startContent**: The icon at the start of the switch.
 - **endContent**: The icon at the end of the switch.
 - **thumbIcon**: The icon inside the thumb.
@@ -172,23 +181,31 @@ Use `classNames` to assign Tailwind CSS classes to each part. These style slots 
 :::sfc
 <script setup>
 import { Switch } from "@heroui-vue/switch";
+import { cn } from "@heroui/theme";
 </script>
 
 <template>
   <Switch
     :classNames="{
-      base: 'inline-flex max-w-md w-full flex-row-reverse justify-between gap-4 rounded-lg bg-content1 p-4 shadow-sm',
-      wrapper: 'mr-0',
-      label: 'text-small',
-      thumb: 'shadow-md',
+      base: cn(
+        'inline-flex flex-row-reverse w-full max-w-md bg-content1 hover:bg-content2 items-center',
+        'justify-between cursor-pointer rounded-lg gap-2 p-4 border-2 border-transparent',
+        'data-[selected=true]:border-primary',
+      ),
+      wrapper: 'p-0 h-4 overflow-visible',
+      thumb: cn(
+        'w-6 h-6 border-2 shadow-lg',
+        'group-data-[hover=true]:border-primary',
+        'group-data-[selected=true]:ms-6',
+        'group-data-[pressed=true]:w-7',
+        'group-data-pressed:group-data-selected:ms-4',
+      ),
     }"
   >
-    <template #label>
-      <div class="flex flex-col gap-1">
-        <span>Marketing emails</span>
-        <span class="text-tiny text-default-400">Receive product updates and promotions.</span>
-      </div>
-    </template>
+    <div class="flex flex-col gap-1">
+      <p class="text-medium">Enable early access</p>
+      <p class="text-tiny text-default-400">Get access to new features before they are released.</p>
+    </div>
   </Switch>
 </template>
 :::
@@ -197,64 +214,26 @@ import { Switch } from "@heroui-vue/switch";
 
 The package also exports `useSwitch` and `UseSwitchProps` for building your own component. The composable provides `baseProps`, `inputProps`, `wrapperProps`, `thumbProps`, `labelProps`, and icon props and render functions.
 
-`useSwitch` shares the same incomplete interaction logic as `Switch`. It does not add state synchronization, form integration, or keyboard support.
+`useSwitch` shares the same interaction logic as `Switch` and provides state synchronization. Form integration and keyboard support are **not yet supported**.
 
 ## Data Attributes
 
-The following attributes are set on the `base` element with boolean values. Use value selectors such as `[data-selected=true]` in custom styles, rather than testing only for attribute presence.
+The following attributes are set on the `base` element.
 
 | Attribute            | Current behavior                                                                |
 | -------------------- | ------------------------------------------------------------------------------- |
 | `data-selected`      | Internal selected state; not fully synchronized with the input or `isSelected`. |
-| `data-pressed`       | Mouse-pressed state of the container; `false` when disabled or read-only.       |
+| `data-pressed`       | Mouse-pressed state of the container.                                           |
 | `data-readonly`      | Reflects `isReadOnly`.                                                          |
 | `data-hover`         | Hover state of the container.                                                   |
 | `data-focus`         | Focus state of the container; does not yet track focus on the inner input.      |
-| `data-focus-visible` | Currently always `false`.                                                       |
-| `data-disabled`      | Enabled when either `isDisabled` or `isReadOnly` is true.                       |
+| `data-focus-visible` | Absent by default.                                                              |
+| `data-disabled`      | Enabled when either `isDisabled` or `isReadOnly` is `true`.                     |
 
 ## Accessibility
 
-Switch semantics, input labeling, keyboard toggling, and focus visibility are not yet complete. The `label` slot renders visible text, but does not imply complete assistive-technology support. Do not use this component in production scenarios that require accessible or functional form interactions until these capabilities are implemented.
+Not yet supported.
 
 ## API
 
-### Switch Props
-
-| Prop               | Type                                                         | Default   | Description                                                                   |
-| ------------------ | ------------------------------------------------------------ | --------- | ----------------------------------------------------------------------------- |
-| `as`               | `string / Component`                                         | `label`   | The outer element or Vue component.                                           |
-| `size`             | `sm / md / lg`                                               | `md`      | The switch size.                                                              |
-| `color`            | `default / primary / secondary / success / warning / danger` | `primary` | The selected-state theme color.                                               |
-| `isDisabled`       | `boolean`                                                    | `—`       | Applies disabled styling; does not yet set the native input's disabled state. |
-| `isReadOnly`       | `boolean`                                                    | `false`   | Sets the read-only marker and disabled styling; not yet bound to the input.   |
-| `disableAnimation` | `boolean`                                                    | `false`   | Disables theme animations.                                                    |
-| `class`            | `string`                                                     | `—`       | Custom classes for the outer container.                                       |
-| `classNames`       | `Partial<Record<ToggleSlots, string>>`                       | `—`       | Custom classes for each style slot.                                           |
-
-The following props are declared in `UseSwitchProps`, but are not yet connected to input behavior:
-
-| Prop                  | Type      | Default | Current limitation                                                                                 |
-| --------------------- | --------- | ------- | -------------------------------------------------------------------------------------------------- |
-| `isSelected`          | `boolean` | `—`     | Controlled selection is not supported yet.                                                         |
-| `defaultSelected`     | `boolean` | `false` | Only initializes internal state; may be overwritten by the input's `checked` value after mounting. |
-| `value`               | `string`  | `''`    | Not yet bound to the input.                                                                        |
-| `name`                | `string`  | `—`     | Not yet bound to the input.                                                                        |
-| `form`                | `string`  | `—`     | Not yet bound to the input.                                                                        |
-| `autoFocus`           | `boolean` | `false` | Autofocus is not implemented yet.                                                                  |
-| `excludeFromTabOrder` | `boolean` | `—`     | Tab-order control is not implemented yet.                                                          |
-
-### Switch Content Slots
-
-| Slot           | Scoped props                       | Description                          |
-| -------------- | ---------------------------------- | ------------------------------------ |
-| `label`        | None                               | The visible label content.           |
-| `thumbIcon`    | `width, height, class, isSelected` | The icon inside the thumb.           |
-| `startContent` | `width, height, class`             | The icon at the start of the switch. |
-| `endContent`   | `width, height, class`             | The icon at the end of the switch.   |
-
-Icon slots receive `width` and `height` values of `1em`. The `thumbIcon` slot does not currently receive `data-checked`; do not rely on that field in the type declaration. Although declared in the slot types, the `default` slot is not currently rendered; use `#label` instead.
-
-### Switch Events and Controlled State
-
-The component does not currently declare `update:isSelected` or `valueChange` events and does not support `v-model:isSelected`. A fallthrough `@change` listener is attached to the outer container, not a complete selection-change API. Since the input does not yet implement switch toggling either, no controlled example is provided here.
+Refer to the component types.
