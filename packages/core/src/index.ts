@@ -4,3 +4,4 @@ export * from "@heroui-vue/chip";
 export * from "@heroui-vue/avatar";
 export * from "@heroui-vue/badge";
 export * from "@heroui-vue/link";
+export * from "@heroui-vue/switch";

@@ -1,0 +1,6 @@
+{
+  "extends": "../../../tsconfig.json",
+  "compilerOptions": {},
+  "include": ["src/**/*", "src/**/*.vue"],
+  "exclude": ["dist", "node_modules"]
+}
