@@ -504,6 +504,24 @@ importers:
         specifier: catalog:prod
         version: 3.5.44(typescript@6.0.3)
 
+  packages/components/tooltip:
+    devDependencies:
+      '@heroui-vue/icon':
+        specifier: workspace:*
+        version: link:../../icon
+      '@heroui-vue/shared':
+        specifier: workspace:*
+        version: link:../../shared
+      '@heroui/theme':
+        specifier: catalog:prod
+        version: 2.4.26(tailwindcss@4.3.3)
+      unplugin-vue:
+        specifier: catalog:prod
+        version: 8.0.1(@types/node@22.20.5)(jiti@2.7.0)(rolldown@1.2.16)(rollup@4.67.3)(vue@3.5.44(typescript@6.0.3))(yaml@2.9.1)
+      vue:
+        specifier: catalog:prod
+        version: 3.5.44(typescript@6.0.3)
+
   packages/core:
     devDependencies:
       '@heroui-vue/alert':
@@ -524,6 +542,9 @@ importers:
       '@heroui-vue/link':
         specifier: workspace:*
         version: link:../components/link
+      '@heroui-vue/tooltip':
+        specifier: workspace:*
+        version: link:../components/tooltip
       '@heroui/theme':
         specifier: catalog:prod
         version: 2.4.26(tailwindcss@4.3.3)
