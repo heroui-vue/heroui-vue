@@ -7,11 +7,19 @@ import {
   tryUseAttrs,
   tryUseSlots,
   mapPropsVariants,
+  toDataAttr,
+  cloneValidVnode,
 } from "@heroui-vue/shared";
 import { cn } from "@heroui/theme";
-import type { MaybeRef, Ref, ToRefs, VNode, EmitsToProps } from "vue";
+import type { MaybeRef, Ref, ToRefs, VNode, EmitsToProps, InputHTMLAttributes } from "vue";
 import type { SlotsToClasses, ToggleSlots, ToggleVariantProps } from "@heroui/theme";
-import type { HeroUIVueBaseProps, BaseProps } from "@heroui-vue/shared";
+import {
+  type HeroUIVueBaseProps,
+  type BaseProps,
+  type Validation,
+  type AriaLabelingProps,
+  type AriaValidationProps,
+} from "@heroui-vue/shared";
 
 export interface SwitchThumbIconProps {
   width: string;
@@ -29,7 +37,7 @@ namespace Props {
     autoFocus?: boolean;
     defaultSelected?: boolean;
     isSelected?: boolean;
-    value?: string;
+    modelValue?: boolean;
     excludeFromTabOrder?: boolean;
     name?: string;
     form?: string;
@@ -56,19 +64,33 @@ namespace Return {
   }
   export interface Slot {
     baseProps: BaseProps & {
-      "data-disabled": boolean;
-      "data-selected": boolean;
-      "data-readonly": boolean;
-      "data-focus": boolean;
-      "data-focus-visible": boolean;
-      "data-hover": boolean;
-      "data-pressed": boolean;
+      "data-disabled"?: boolean;
+      "data-selected"?: boolean;
+      "data-readonly"?: boolean;
+      "data-focus"?: boolean;
+      "data-focus-visible"?: boolean;
+      "data-hover"?: boolean;
+      "data-pressed"?: boolean;
     };
     wrapperProps: BaseProps & {
       "aria-hidden": true;
     };
     inputProps: BaseProps & {
       id: string;
+      checked: boolean;
+      required: boolean;
+      disabled: boolean;
+      name?: string;
+      form?: string;
+      type: "checkbox";
+      "aria-required"?: boolean;
+      "aria-invalid"?: boolean;
+      "aria-errormessage"?: string;
+      "aria-controls"?: string;
+      "aria-readonly"?: boolean;
+      "aria-describedby"?: string;
+      value: boolean;
+      onChange: InputHTMLAttributes["onChange"];
     };
     labelProps: BaseProps & {
       id: string;
@@ -88,57 +110,71 @@ namespace Return {
   }
 }
 
-export type On = {
-  [K in keyof UseSwitchEmit as `on${Capitalize<K>}`]?: (...args: UseSwitchEmit[K]) => any;
+type Events = {
+  change: [event: Event];
+  valueChange: [isSelected: boolean];
+  "update:modelValue": [isSelected: boolean];
 };
 
-export type UseSwitchProps = Props.Option & Props.Variant;
+export type UseSwitchProps = Props.Option &
+  Props.Variant &
+  Validation &
+  AriaLabelingProps &
+  AriaValidationProps & {
+    "aria-controls"?: string;
+  };
 export type UseSwitchReturn = Return.Option & Return.Slot;
-export type UseSwitchSlot = "default" | "label" | "thumbIcon" | "startContent" | "endContent";
-export type UseSwitchEmit = {
-  change: [Event];
-  valueChange: [boolean];
-};
-export type UseSwitchOption = On;
+export type UseSwitchSlot = "default" | "thumbIcon" | "startContent" | "endContent";
+// generate by EventsToEmits<Events>;
+export type UseSwitchEmit = ((e: "change", event: Event) => void) &
+  ((e: "valueChange", isSelected: boolean) => void) &
+  ((e: "update:modelValue", isSelected: boolean) => void);
+export type UseSwitchOptions = EmitsToProps<Events>;
 
 export function useSwitch(
   originalProps: MaybeRef<UseSwitchProps>,
   inputRef?: Ref<HTMLInputElement | null | undefined>,
-  options?: UseSwitchOption,
+  options?: UseSwitchOptions,
 ): ToRefs<UseSwitchReturn> {
-  type WithDedault =
+  const { onChange, onValueChange, "onUpdate:modelValue": onModelValue } = options || {};
+  type Keys<T extends keyof UseSwitchProps> = T;
+  type WithDefault = Keys<
     | "as"
-    | "value"
     | "isReadOnly"
     | "autoFocus"
     | "disableAnimation"
-    | "defaultSelected";
-  const { onChange = () => {}, onValueChange = () => {} } = options || {};
-  const props = toRefsWithDefault<UseSwitchProps, WithDedault>(
+    | "defaultSelected"
+    | "isRequired"
+    | "validationBehavior"
+  >;
+  const props = toRefsWithDefault<UseSwitchProps, WithDefault>(
     toReactive(originalProps) as UseSwitchProps,
     {
       as: "label",
-      value: "",
       isReadOnly: false,
       autoFocus: false,
       disableAnimation: false,
       defaultSelected: false,
+      isRequired: false,
+      validationBehavior: "aria",
     },
   );
   const labelId = useId();
-  const [isSelected, toggleState] = useToggle(props.defaultSelected.value);
   const isHovered = useElementHover(inputRef);
   const { focused: isFocused } = useFocus(inputRef);
   const { pressed: isPressed } = useMousePressed({ target: inputRef });
-  const { startContent, endContent, thumbIcon, label } = tryUseSlots<UseSwitchSlot[]>(
-    "startContent",
-    "endContent",
-    "thumbIcon",
-    "label",
-  );
+  const {
+    startContent,
+    endContent,
+    thumbIcon,
+    default: defaultSlot,
+  } = tryUseSlots<UseSwitchSlot[]>("startContent", "endContent", "thumbIcon", "default");
   const attrs = tryUseAttrs();
   const { class: className, id } = attrs;
 
+  const [isSelected, toggleState] = useToggle(
+    props.modelValue?.value || props.defaultSelected.value,
+  );
   const isDisabled = ref() as Ref<Return.Option["isDisabled"]>;
   const switchSlots = ref() as Ref<Return.Option["slots"]>;
   const baseProps = ref() as Ref<Return.Slot["baseProps"]>;
@@ -156,13 +192,11 @@ export function useSwitch(
 
   watchEffect(() => {
     if (inputRef?.value) {
-      const isInputRefChecked = (inputRef.value as HTMLInputElement).checked;
-      isSelected.value = isInputRefChecked;
-      inputRef?.value.addEventListener("change", (e) => {
-        onChange?.(e);
+      const input = inputRef.value as HTMLInputElement;
+      input.addEventListener("change", () => {
         // This will sync to change the `isSelected` value
         toggleState();
-        onValueChange?.(isSelected.value);
+        input.focus();
       });
     }
   });
@@ -187,14 +221,14 @@ export function useSwitch(
     const pressed = isDisabled.value ? false : isPressed.value;
     const base: UseSwitchReturn["baseProps"] = {
       class: switchSlots.value.base({ class: cn(baseStyles, className) }),
-      "data-disabled": isDisabled.value,
-      "data-selected": isSelected.value,
-      "data-readonly": isReadOnly,
-      "data-focus": isFocused.value,
+      "data-disabled": toDataAttr(isDisabled.value),
+      "data-selected": toDataAttr(isSelected.value),
+      "data-readonly": toDataAttr(isReadOnly),
+      "data-focus": toDataAttr(isFocused.value),
       // TODO
       "data-focus-visible": false,
-      "data-hover": isHovered.value,
-      "data-pressed": pressed,
+      "data-hover": toDataAttr(isHovered.value),
+      "data-pressed": toDataAttr(pressed),
     };
     baseProps.value = mergeClassProps(base, attrs) as any;
   });
@@ -208,8 +242,44 @@ export function useSwitch(
   });
   // inputProps
   watchEffect(() => {
-    const { classNames } = toReactive(props);
+    const {
+      classNames,
+      name,
+      modelValue,
+      form,
+      isReadOnly,
+      isInvalid,
+      isRequired,
+      validationBehavior,
+      "aria-describedby": ariaDescribedby,
+      "aria-errormessage": ariaErrormessage,
+      "aria-controls": ariaControls,
+    } = toReactive(props);
+    const onInputChange: UseSwitchReturn["inputProps"]["onChange"] = (event: Event) => {
+      const target = event.target as HTMLInputElement;
+      const checked = target.checked;
+      onChange?.(event);
+      onValueChange?.(checked);
+      onModelValue?.(checked);
+    };
+    const input: Omit<UseSwitchReturn["inputProps"], "id" | "class"> = {
+      type: "checkbox",
+      name,
+      form,
+      checked: isSelected.value,
+      disabled: isDisabled.value,
+      required: isRequired && validationBehavior === "native",
+      "aria-required": (isRequired && validationBehavior === "aria") || undefined,
+      "aria-invalid": isInvalid || undefined,
+      "aria-errormessage": ariaErrormessage,
+      "aria-controls": ariaControls,
+      "aria-readonly": isReadOnly || undefined,
+      "aria-describedby": ariaDescribedby || undefined,
+      value: modelValue == null ? isSelected.value : modelValue,
+      onChange: onInputChange,
+    };
     inputProps.value = {
+      ...input,
       id: id as string,
       class: switchSlots.value.hiddenInput({ class: classNames?.hiddenInput }),
     };
@@ -245,7 +315,6 @@ export function useSwitch(
     startContentProps.value = {
       width: "1em",
       height: "1em",
-      ...props,
       class: switchSlots.value.startContent({ class: cn(classNames?.startContent) }),
     };
   });
@@ -255,32 +324,32 @@ export function useSwitch(
     endContentProps.value = {
       width: "1em",
       height: "1em",
-      ...props,
       class: switchSlots.value.endContent({ class: cn(classNames?.endContent) }),
     };
   });
   // startContentSlot;
   watchEffect(() => {
     startContentSlot.value = () => {
-      return startContent?.(startContentProps.value);
+      return cloneValidVnode(startContent?.(), startContentProps.value);
     };
   });
   // endContentSlot
   watchEffect(() => {
     endContentSlot.value = () => {
-      return endContent?.(endContentProps.value);
+      return cloneValidVnode(endContent?.(), endContentProps.value);
     };
   });
   // thumbIconSlot
   watchEffect(() => {
+    const { isSelected } = thumbIconProps.value;
     thumbIconSlot.value = () => {
-      return thumbIcon?.(thumbIconProps.value);
+      return cloneValidVnode(thumbIcon?.({ isSelected }), thumbIconProps.value);
     };
   });
   // labelSlot
   watchEffect(() => {
     labelSlot.value = () => {
-      return label ? h("span", labelProps.value, label()) : null;
+      return defaultSlot ? h("span", labelProps.value, defaultSlot()) : null;
     };
   });
 

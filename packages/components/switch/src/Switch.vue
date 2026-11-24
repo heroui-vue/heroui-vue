@@ -7,7 +7,9 @@ defineSlots<Record<UseSwitchSlot, any>>();
 defineOptions({ inheritAttrs: false });
 const emits = defineEmits<UseSwitchEmit>();
 const props = defineProps<UseSwitchProps>();
+
 const baseRef = ref<HTMLInputElement | undefined>();
+
 const {
   as,
   baseProps,
@@ -19,11 +21,14 @@ const {
   endContent,
   label,
 } = useSwitch(props, baseRef, {
-  onChange: (...args: UseSwitchEmit["change"]) => {
+  onChange: (...args) => {
     emits("change", ...args);
   },
-  onValueChange: (...args: UseSwitchEmit["valueChange"]) => {
+  onValueChange: (...args) => {
     emits("valueChange", ...args);
+  },
+  "onUpdate:modelValue": (...args) => {
+    emits("update:modelValue", ...args);
   },
 });
 </script>
