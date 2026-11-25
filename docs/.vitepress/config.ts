@@ -64,7 +64,7 @@ export default defineConfig({
             text: "Playground",
             link: "https://play.heroui.hotdogc.org",
           },
-          { text: "HeroUI", link: "https://v2.heroui.com/?utm_source=v3.heroui.com" },
+          { text: "HeroUI", link: "https://v2.heroui.com" },
         ],
         sidebar: [
           {
@@ -72,11 +72,7 @@ export default defineConfig({
             collapsed: false,
             items: [
               { text: "Introduction", link: "/en/guide/introduction" },
-              { text: "Installation", link: "/en/guide/installation" },
-              {
-                text: "Custom Installation",
-                link: "/en/guide/custom-installation",
-              },
+              { text: "Quick Start", link: "/en/guide/quick-start" },
             ],
           },
           {
@@ -112,7 +108,7 @@ export default defineConfig({
             text: "演练场",
             link: "https://play.heroui.hotdogc.org",
           },
-          { text: "HeroUI", link: "https://v2.heroui.com/?utm_source=v3.heroui.com" },
+          { text: "HeroUI", link: "https://v2.heroui.com" },
         ],
         sidebar: [
           {
@@ -120,8 +116,7 @@ export default defineConfig({
             collapsed: false,
             items: [
               { text: "介绍", link: "/zh/guide/introduction" },
-              { text: "安装", link: "/zh/guide/installation" },
-              { text: "自定义安装", link: "/zh/guide/custom-installation" },
+              { text: "快速开始", link: "/zh/guide/quick-start" },
             ],
           },
           {
@@ -149,7 +144,7 @@ export default defineConfig({
     search: {
       provider: "local",
     },
-    outline: "deep",
+    outline: [2, 3],
     socialLinks: [
       {
         icon: "github",

@@ -19,17 +19,17 @@ hero:
     alt: HeroUI Vue
   tagline: HeroUI风格, 使用Vue3实现
   actions:
+    - theme: alt
+      text: 介绍
+      link: /guide/introduction
     - theme: brand
       text: ⚡ 快速开始
-      link: /guide/installation
-    - theme: alt
-      text: 这是什么?
-      link: /guide/introduction
+      link: /guide/quick-start
 
 features:
   - icon: ✨
     title: 精美且现代化
-    details: 基于HeroUI的主题样式
+    details: 基于HeroUI v2的主题样式
   - icon: 🛠️
     title: 专为Vue打造
     details: 使用Vue3实现

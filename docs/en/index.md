@@ -19,17 +19,17 @@ hero:
     alt: HeroUI Vue
   tagline: HeroUI style, built with Vue 3
   actions:
-    - theme: brand
-      text: ⚡ Get Started
-      link: /en/guide/installation
     - theme: alt
-      text: What is this?
+      text: Introduction
       link: /en/guide/introduction
+    - theme: brand
+      text: ⚡ Quick Start
+      link: /en/guide/quick-start
 
 features:
   - icon: ✨
     title: Beautiful & Modern
-    details: Based on HeroUI theme styles
+    details: Based on HeroUI v2 theme styles
   - icon: 🛠️
     title: Built for Vue
     details: Implemented with Vue 3
