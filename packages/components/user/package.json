@@ -44,7 +44,8 @@
     "@heroui-vue/shared": "workspace:*",
     "@heroui/theme": "catalog:prod",
     "unplugin-vue": "catalog:prod",
-    "vue": "catalog:prod"
+    "vue": "catalog:prod",
+    "@vueuse/core": "catalog:prod"
   },
   "peerDependencies": {
     "@heroui/theme": "catalog:prod",

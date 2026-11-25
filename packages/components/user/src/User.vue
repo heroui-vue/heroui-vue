@@ -1,30 +1,28 @@
 <script setup lang="ts">
-import { mergeProps, ref, useAttrs } from "vue";
+import { ref } from "vue";
 import { Avatar } from "@heroui-vue/avatar";
 import { useUser, type UseUserProps, type UseUserSlot } from "./useUser";
 
 defineOptions({ inheritAttrs: false });
-const props = defineProps<UseUserProps>();
 defineSlots<Record<UseUserSlot, any>>();
-const attrs = useAttrs();
+const props = defineProps<UseUserProps>();
 const userRef = ref<HTMLElement | null>(null);
-const { as, name, description, avatarProps, userProps, wrapperProps, nameProps, descriptionProps } =
-  useUser(props);
-defineExpose({ el: userRef });
+const { as, avatarProps, userProps, wrapperProps, nameProps, descriptionProps } = useUser(
+  props,
+  userRef,
+);
 </script>
 
 <template>
-  <component :is="as" ref="userRef" v-bind="mergeProps(attrs, { ...userProps })">
-    <slot name="avatar" :avatarProps="avatarProps">
-      <Avatar v-bind="avatarProps" />
-    </slot>
+  <component :is="as" ref="userRef" v-bind="userProps">
+    <Avatar v-bind="avatarProps" />
     <div v-bind="wrapperProps">
-      <span v-bind="nameProps"
-        ><slot name="name">{{ name }}</slot></span
-      >
-      <span v-bind="descriptionProps"
-        ><slot name="description">{{ description }}</slot></span
-      >
+      <span v-bind="nameProps">
+        <slot name="name" />
+      </span>
+      <span v-bind="descriptionProps">
+        <slot name="description" />
+      </span>
     </div>
   </component>
 </template>
