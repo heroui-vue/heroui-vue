@@ -18,6 +18,7 @@
     "@heroui-vue/icon": "workspace:*",
     "@heroui-vue/link": "workspace:*",
     "@heroui-vue/switch": "workspace:*",
+    "@heroui-vue/user": "workspace:*",
     "@heroui/theme": "catalog:prod",
     "@tailwindcss/vite": "catalog:prod",
     "@vue/tsconfig": "catalog:prod",

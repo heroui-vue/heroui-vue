@@ -1,0 +1,54 @@
+{
+  "name": "@heroui-vue/user",
+  "version": "1.0.0-beta.1",
+  "keywords": [
+    "heroui",
+    "tailwindcss",
+    "ui framework",
+    "user component",
+    "vue"
+  ],
+  "bugs": {
+    "url": "https://github.com/heroui-vue/heroui-vue/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "hotdog",
+    "email": "hotdogc1017@gmail.com",
+    "url": "https://github.com/hotdogc1017"
+  },
+  "repository": "https://github.com/heroui-vue/heroui-vue",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": "./dist/index.mjs"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "dev": "pnpm build:workspace && tsdown -w",
+    "build": "pnpm build:workspace && pnpm type:check && tsdown --minify",
+    "build:check": "pnpm build:workspace && pnpm type:check && tsdown",
+    "build:workspace": "pnpm -w build:avatar",
+    "type:check": "vue-tsc --noEmit --isolatedDeclarations false",
+    "bump": "pnpm build && bumpp --tag @heroui-vue/user@ --sign"
+  },
+  "devDependencies": {
+    "@heroui-vue/avatar": "workspace:*",
+    "@heroui-vue/icon": "workspace:*",
+    "@heroui-vue/shared": "workspace:*",
+    "@heroui/theme": "catalog:prod",
+    "unplugin-vue": "catalog:prod",
+    "vue": "catalog:prod",
+    "@vueuse/core": "catalog:prod"
+  },
+  "peerDependencies": {
+    "@heroui/theme": "catalog:prod",
+    "vue": "^3.5.0"
+  }
+}

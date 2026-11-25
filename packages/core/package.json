@@ -43,6 +43,7 @@
     "@heroui-vue/button": "workspace:*",
     "@heroui-vue/chip": "workspace:*",
     "@heroui-vue/link": "workspace:*",
+    "@heroui-vue/user": "workspace:*",
     "@heroui-vue/switch": "workspace:*",
     "@heroui/theme": "catalog:prod",
     "vue": "catalog:prod"
