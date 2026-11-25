@@ -8,7 +8,7 @@ const config: UserConfig = defineConfig({
     neverBundle: ["vue", "@heroui/theme"],
   },
   dts: {
-    vue: true,
+    vue: false,
     eager: true,
   },
 });
