@@ -1,6 +1,6 @@
 {
   "name": "@heroui-vue/core",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "keywords": [
     "heroui",
     "tailwindcss",
@@ -44,6 +44,7 @@
     "@heroui-vue/chip": "workspace:*",
     "@heroui-vue/link": "workspace:*",
     "@heroui-vue/user": "workspace:*",
+    "@heroui-vue/switch": "workspace:*",
     "@heroui/theme": "catalog:prod",
     "vue": "catalog:prod"
   }

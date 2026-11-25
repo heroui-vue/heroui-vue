@@ -28,3 +28,4 @@ dist-ssr
 docs/.vitepress/dist
 docs/.vitepress/cache
 __tests__/.vitest
+docs/en/components/example.vue

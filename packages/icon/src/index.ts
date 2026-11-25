@@ -7,3 +7,5 @@ export { default as Camera } from "./Camera.vue";
 export { default as Heart } from "./Heart.vue";
 export { default as Cart } from "./Cart.vue";
 export { default as LinkIcon } from "./Link.vue";
+export { default as MoonIcon } from "./MoonIcon.vue";
+export { default as SunIcon } from "./SunIcon.vue";

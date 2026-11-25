@@ -240,13 +240,20 @@ import { Link } from "@heroui-vue/link";
 
 :::sfc
 <script setup>
+import { Button } from "@heroui-vue/button";
 import { Link } from "@heroui-vue/link";
 </script>
 
 <template>
-  <Link as="button" type="button" showAnchorIcon color="primary">
+  <Button
+    showAnchorIcon
+    :as="Link"
+    color="primary"
+    href="https://github.com/heroui-inc/heroui"
+    variant="solid"
+  >
     Button Link
-  </Link>
+  </Button>
 </template>
 :::
 

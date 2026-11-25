@@ -69,13 +69,12 @@ describe("avatarGroup", () => {
     const document = new DOMParser().parseFromString(html, "text/html");
     return [...document.querySelectorAll("[class]")].map((el) => el.getAttribute("class"));
   };
-  test.only("props", async () => {
+  test.skip("props", async () => {
     const AvatarChildren = () => {
       const src = "https://i.pravatar.cc/150?u=a042581f4e29026024d";
       return Array.from({ length: 6 }).map(() => h(Avatar, { src }));
     };
 
     const str = await renderToString(h(AvatarGroup, null, AvatarChildren));
-    console.log(extractClass(str));
   });
 });

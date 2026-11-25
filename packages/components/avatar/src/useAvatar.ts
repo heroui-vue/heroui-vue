@@ -7,6 +7,7 @@ import {
   tryInject,
   cloneValidVnode,
   toRefsWithDefault,
+  mergeClassProps,
 } from "@heroui-vue/shared";
 import { avatar, cn } from "@heroui/theme";
 import { AvatarIcon } from "@heroui-vue/icon";
@@ -94,7 +95,8 @@ export function useAvatar(
   const { focused } = useFocus(avatarRef);
   const isHovered = useElementHover(avatarRef);
   const { fallback, icon } = tryUseSlots<UseAvatarSlot[]>("fallback", "icon");
-  const { class: className } = tryUseAttrs("class");
+  const attrs = tryUseAttrs();
+  const { class: className } = attrs;
 
   const isImgLoaded = ref() as Ref<Return.Option["isImgLoaded"]>;
   const showFallback = ref() as Ref<Return.Option["showFallback"]>;
@@ -141,16 +143,17 @@ export function useAvatar(
   // avatarProps
   watchEffect(() => {
     const { isFocusable, isDisabled, as, classNames } = toReactive(props);
-    avatarProps.value = {
+    const baseProps = {
       tabIndex: isFocusable || as === "button" ? (0 as const) : (-1 as const),
       "data-hover": isDisabled ? false : isHovered.value,
       "data-focus": focused.value,
       // TODO: should exact value
       "data-focus-visible": false,
       class: slots.value?.base({
-        class: cn(classNames?.base, props.class?.value, className),
+        class: cn(classNames?.base, className),
       }),
     } as Return.Slot["avatarProps"];
+    avatarProps.value = mergeClassProps(baseProps, attrs) as any;
   });
   // imageProps
   watchEffect(() => {

@@ -5,6 +5,7 @@ import type { UseAvatarGroupProps, UseAvatarGroupSlot } from "./useAvatarGroup";
 
 const props = defineProps<UseAvatarGroupProps>();
 defineSlots<Record<UseAvatarGroupSlot, any>>();
+defineOptions({ inheritAttrs: false });
 
 const { as, context, clones, renderCount, avatarGroupProps } = useAvatarGroup(props);
 
